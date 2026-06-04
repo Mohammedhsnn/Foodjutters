@@ -449,7 +449,7 @@
     font-size: clamp(2.5rem, 8vw, 5rem);
     line-height: 1;
     text-transform: uppercase;
-    color: rgb(27 67 100 / 0.06);
+    color: rgb(27 67 100 / 0.022);
     user-select: none;
     animation: hero-whisper 22s ease-in-out infinite;
   }

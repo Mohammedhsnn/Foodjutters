@@ -45,54 +45,64 @@ export default function HomePage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────── */}
-      <section className="hero-wood relative min-h-screen flex items-end justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/30 pointer-events-none" aria-hidden />
+      <section className="hero-wood relative min-h-[100svh] flex flex-col justify-between overflow-hidden">
+        {/* Stronger overlay: softens the wood grain so content pops */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/20 to-white/50 pointer-events-none z-[1]" aria-hidden />
+        {/* Radial vignette behind centre content */}
+        <div className="absolute inset-0 pointer-events-none z-[2]" style={{ background: 'radial-gradient(ellipse 70% 55% at 50% 46%, rgb(244 250 253 / 0.7) 0%, transparent 100%)' }} aria-hidden />
         <HeroAmbience />
 
-        {/* Centered content */}
-        <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="relative z-10 text-center w-full max-w-2xl mx-auto">
+        {/* Main content — sits slightly above true centre */}
+        <div className="relative z-10 flex flex-1 items-center justify-center px-5 sm:px-8 pt-28 sm:pt-32 pb-10">
+          <div className="text-center w-full max-w-xl mx-auto">
             <h1 className="sr-only">FoodJutters — smullen, borrelen & genieten aan het water</h1>
-            <Logo layout="stack" size="hero" className="mb-5 md:mb-7" />
 
-            {/* thin divider */}
-            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5">
-              <div className="h-px w-8 sm:w-12 bg-brand-navy/30" />
-              <p className="label-vintage text-brand-navy/80 text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]">
-                Smullen, borrelen & genieten aan het water
-              </p>
-              <div className="h-px w-8 sm:w-12 bg-brand-navy/30" />
-            </div>
+            {/* Logo mark + wordmark — stacked */}
+            <Logo layout="stack" size="hero" className="mb-7 sm:mb-9 drop-shadow-sm" />
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link href="/menu" className="btn-brand bg-brand-navy text-white hover:bg-brand-blue-dark shadow-lg shadow-brand-navy/25">
-                Bekijk ons menu
+            {/* Tagline — larger, more prominent */}
+            <p className="font-serif text-base sm:text-lg md:text-xl text-brand-navy/85 tracking-[0.04em] leading-relaxed mb-8 sm:mb-10 text-pretty max-w-xs sm:max-w-none mx-auto">
+              Smullen, borrelen &amp; genieten aan het water
+            </p>
+
+            {/* CTAs — clear primary/secondary hierarchy */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Link
+                href="/reserveren"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full shadow-xl shadow-brand-navy/30 hover:bg-primary hover:shadow-primary/30 transition-all duration-200"
+              >
+                Reserveer een tafel
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/reserveren"
-                className="btn-brand bg-white/90 text-brand-navy hover:bg-white border border-brand-navy/15 shadow-sm"
+                href="/menu"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-sm text-brand-navy font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full border border-brand-navy/20 shadow-md hover:bg-white hover:border-brand-navy/40 transition-all duration-200"
               >
-                Reserveer een tafel
+                Bekijk ons menu
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom meta bar */}
-        <div className="relative z-10 w-full pb-6 sm:pb-8 px-4 sm:px-8">
+        {/* Bottom meta bar — readable labels with proper contrast */}
+        <div className="relative z-10 w-full pb-7 sm:pb-9 px-5 sm:px-10">
           <div className="max-w-6xl mx-auto flex items-end justify-between">
-            <div className="hidden sm:flex flex-col gap-0.5">
-              <p className="label-vintage text-brand-navy/50 text-[10px] tracking-[0.22em] uppercase">Geopend</p>
-              <p className="label-vintage text-brand-navy/70 text-xs">Wo – Zo · 12:00 – 22:00</p>
+            {/* Left: opening hours */}
+            <div className="hidden sm:flex flex-col gap-1">
+              <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Geopend</p>
+              <p className="font-serif text-xs text-brand-navy/80 font-medium">Wo – Zo · 12:00 – 22:00</p>
             </div>
-            <div className="mx-auto sm:mx-0 flex flex-col items-center gap-1.5 text-brand-navy/35">
-              <div className="w-px h-7 bg-gradient-to-b from-brand-navy/20 to-transparent" />
-              <span className="label-vintage text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+
+            {/* Centre: scroll indicator */}
+            <div className="mx-auto sm:mx-0 flex flex-col items-center gap-2">
+              <div className="w-px h-8 bg-gradient-to-b from-brand-navy/35 to-transparent" />
+              <span className="font-serif text-[9px] tracking-[0.35em] uppercase text-brand-navy/50">Scroll</span>
             </div>
-            <div className="hidden sm:flex flex-col items-end gap-0.5">
-              <p className="label-vintage text-brand-navy/50 text-[10px] tracking-[0.22em] uppercase">Locatie</p>
-              <p className="label-vintage text-brand-navy/70 text-xs">Scheldeboulevard 7, Terneuzen</p>
+
+            {/* Right: address */}
+            <div className="hidden sm:flex flex-col items-end gap-1 max-w-[200px]">
+              <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Locatie</p>
+              <p className="font-serif text-xs text-brand-navy/80 font-medium text-right">Scheldeboulevard 7, Terneuzen</p>
             </div>
           </div>
         </div>
