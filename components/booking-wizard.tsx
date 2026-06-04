@@ -306,9 +306,30 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
     setErrors({})
   }
 
-  function confirm() {
-    // In production: POST to API here
-    setSubmitted(true)
+  async function confirm() {
+    try {
+      const res = await fetch('/api/reservations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          date: data.date,
+          time: data.time,
+          guests: data.guests,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          notes: data.notes,
+        }),
+      })
+      if (!res.ok) {
+        const err = (await res.json().catch(() => ({}))) as { error?: string }
+        setErrors({ name: err.error ?? 'Reservering mislukt. Probeer het opnieuw.' })
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setErrors({ name: 'Verbinding mislukt. Probeer het later opnieuw.' })
+    }
   }
 
   // ── Success screen ───────────────────────────────────────────

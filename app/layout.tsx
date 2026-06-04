@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import './globals.css'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
-import { FloatingBooking } from '@/components/floating-booking'
+import { SiteChrome } from '@/components/site-chrome'
+import { loadSiteSettings } from '@/lib/cms/settings'
 import { gestard, specialElite, steelworksVintage } from '@/lib/fonts'
 
 const lato = Lato({
@@ -11,6 +10,8 @@ const lato = Lato({
   weight: ['300', '400', '700', '900'],
   variable: '--font-lato',
 })
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'FoodJutters – Restaurant aan het water',
@@ -29,11 +30,13 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const settings = await loadSiteSettings()
+
   return (
     <html
       lang="nl"
@@ -41,10 +44,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
-        <FloatingBooking />
+        <SiteChrome settings={settings}>{children}</SiteChrome>
       </body>
     </html>
   )
