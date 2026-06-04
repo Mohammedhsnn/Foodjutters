@@ -75,7 +75,7 @@ export function Navigation() {
         {/* CTA + hamburger */}
         <div className="flex items-center gap-3">
           <Link
-            href="/contact"
+            href="/reserveren"
             className="hidden md:inline-flex items-center justify-center font-display uppercase tracking-widest text-[11px] px-5 py-2.5 rounded-full transition-all duration-200 bg-brand-navy text-white hover:bg-primary shadow-sm"
           >
             Reserveer
@@ -111,7 +111,7 @@ export function Navigation() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href="/reserveren"
               className="mt-4 mb-3 bg-brand-navy text-white text-sm font-display uppercase tracking-widest px-5 py-3 rounded-full text-center hover:bg-primary transition-colors"
             >
               Reserveer een tafel
