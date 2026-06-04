@@ -12,14 +12,14 @@ export const metadata: Metadata = {
 const HERO_IMG = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0091.JPG-AMp6yqfKtGNflTqhpghBFBhZIZu1SY.jpeg'
 
 const gallery = [
-  { src: HERO_IMG, alt: 'Houten terras van FoodJutters bij zonsondergang', caption: 'Zonsondergang op het terras', span: 'col-span-2 row-span-2' },
-  { src: HERO_IMG, alt: 'Sfeervolle binnenruimte met pendellichten', caption: 'Sfeervolle binnenruimte', span: 'col-span-1 row-span-1' },
-  { src: HERO_IMG, alt: 'Houtgestookte pizza-oven', caption: 'Onze houtoven', span: 'col-span-1 row-span-1' },
-  { src: HERO_IMG, alt: 'Waterfront terras met houten tafels', caption: 'Waterfront terras', span: 'col-span-1 row-span-1' },
-  { src: HERO_IMG, alt: 'Knusse hoek met houtkachel', caption: 'Houtkachel', span: 'col-span-1 row-span-1' },
-  { src: HERO_IMG, alt: 'Panoramisch wateruitzicht', caption: 'Wateruitzicht', span: 'col-span-2 row-span-2' },
-  { src: HERO_IMG, alt: 'Terras met olijfbomen', caption: 'Mediterraan terras', span: 'col-span-1 row-span-1' },
-  { src: HERO_IMG, alt: 'Interieur met kaarsjes', caption: 'Romantische sfeer', span: 'col-span-1 row-span-1' },
+  { src: HERO_IMG, alt: 'Houten terras van FoodJutters bij zonsondergang', caption: 'Zonsondergang op het terras' },
+  { src: HERO_IMG, alt: 'Sfeervolle binnenruimte met pendellichten', caption: 'Sfeervolle binnenruimte' },
+  { src: HERO_IMG, alt: 'Houtgestookte pizza-oven', caption: 'Onze houtoven' },
+  { src: HERO_IMG, alt: 'Waterfront terras met houten tafels', caption: 'Waterfront terras' },
+  { src: HERO_IMG, alt: 'Knusse hoek met houtkachel', caption: 'Houtkachel' },
+  { src: HERO_IMG, alt: 'Panoramisch wateruitzicht', caption: 'Wateruitzicht' },
+  { src: HERO_IMG, alt: 'Terras met olijfbomen', caption: 'Mediterraan terras' },
+  { src: HERO_IMG, alt: 'Interieur met kaarsjes', caption: 'Romantische sfeer' },
 ]
 
 const reviews = [
@@ -66,13 +66,57 @@ export default function ImpressiePage() {
         eyebrow="Sfeer & beleving"
         title="Impressie"
         subtitle="Een blik in onze wereld — het terras bij zonsondergang, de warmte van de houtkachel en het uitzicht over het water."
+        pattern="BELEVING"
+        meta={[
+          { label: 'Terras', value: 'Aan het water' },
+          { label: 'Sfeer', value: 'Knus & gezellig' },
+          { label: 'Uitzicht', value: 'Panoramisch' },
+        ]}
+        ctas={[
+          { href: '/contact', label: 'Reserveer een tafel' },
+          { href: '#impressie-fotos', label: 'Bekijk de fotos', variant: 'secondary' },
+        ]}
       />
 
-      {/* Mosaic gallery */}
-      <section className="py-10 px-6 bg-background">
+      {/* Mosaic gallery
+          Mobile  (< sm) : 2 cols, uniform rows — no span magic
+          Tablet  (sm)   : 3 cols, uniform rows
+          Desktop (md+)  : 4 cols, CSS grid mosaic with spans
+      */}
+      <section id="impressie-fotos" className="py-8 sm:py-10 md:py-12 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-4 gap-3 auto-rows-[180px]">
+
+          {/* Mobile/tablet — simple uniform grid (no span) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:hidden">
             {gallery.map((item, i) => (
+              <div key={i} className="aspect-[4/3] rounded-xl overflow-hidden relative group">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
+                <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  <span className="bg-white/90 text-brand-dark text-[10px] font-medium px-2 py-0.5 rounded-full shadow-sm">
+                    {item.caption}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop — mosaic with col/row spans */}
+          <div className="hidden md:grid grid-cols-4 gap-3 auto-rows-[200px]">
+            {[
+              { ...gallery[0], span: 'col-span-2 row-span-2' },
+              { ...gallery[1], span: 'col-span-1 row-span-1' },
+              { ...gallery[2], span: 'col-span-1 row-span-1' },
+              { ...gallery[3], span: 'col-span-1 row-span-1' },
+              { ...gallery[4], span: 'col-span-1 row-span-1' },
+              { ...gallery[5], span: 'col-span-2 row-span-2' },
+              { ...gallery[6], span: 'col-span-1 row-span-1' },
+              { ...gallery[7], span: 'col-span-1 row-span-1' },
+            ].map((item, i) => (
               <div key={i} className={`${item.span} rounded-xl overflow-hidden relative group`}>
                 <img
                   src={item.src}
@@ -92,35 +136,48 @@ export default function ImpressiePage() {
       </section>
 
       {/* Pull quote */}
-      <section className="py-14 px-6 bg-secondary/30">
+      <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-wood-3 border-y border-primary/10">
         <div className="max-w-2xl mx-auto text-center">
-          <div className="w-8 h-0.5 bg-primary rounded-full mx-auto mb-7" />
-          <blockquote className="heading-display text-2xl text-brand-dark leading-relaxed text-balance">
-            &ldquo;Waar het water fluistert en de geur van de houtoven de lucht vult — dat is{' '}
-            <BrandName className="text-inherit tracking-normal" />.&rdquo;
+          <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
+            <div className="h-px w-10 bg-primary/30" />
+            <span className="text-primary/40 text-3xl font-serif leading-none">&ldquo;</span>
+            <div className="h-px w-10 bg-primary/30" />
+          </div>
+          <blockquote className="heading-typewriter text-lg sm:text-xl md:text-2xl text-brand-dark leading-relaxed text-balance">
+            Waar het water fluistert en de geur van de houtoven de lucht vult — dat is{' '}
+            <BrandName className="text-inherit tracking-normal" />.
           </blockquote>
-          <div className="w-8 h-0.5 bg-primary rounded-full mx-auto mt-7 mb-4" />
-          <p className="text-muted-foreground text-xs tracking-widest">
-            <BrandName className="text-inherit" />, aan het water
-          </p>
+          <div className="flex items-center justify-center gap-4 mt-6 sm:mt-8">
+            <div className="h-px w-10 bg-primary/30" />
+            <p className="label-vintage text-muted-foreground text-[10px] tracking-[0.25em] uppercase">
+              <BrandName className="text-inherit" />, aan het water
+            </p>
+            <div className="h-px w-10 bg-primary/30" />
+          </div>
         </div>
       </section>
 
       {/* Reviews */}
-      <section className="py-14 px-6 bg-background">
+      <section className="py-12 sm:py-14 md:py-16 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10">
-            <p className="label-vintage text-primary mb-2">Ervaringen</p>
-            <h2 className="heading-display text-3xl text-brand-dark text-balance">Wat onze gasten zeggen</h2>
+          <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
+            <div className="flex-1 h-px bg-border" />
+            <div className="text-center shrink-0 px-1">
+              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Ervaringen</p>
+              <h2 className="heading-display text-xl sm:text-2xl md:text-3xl text-brand-dark">Wat onze gasten zeggen</h2>
+            </div>
+            <div className="flex-1 h-px bg-border" />
           </div>
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {reviews.map((review) => (
-              <div key={review.name} className="bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col gap-3">
+              <div key={review.name} className="bg-card border border-border/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3">
                 <StarRating count={review.rating} />
                 <p className="text-foreground/65 leading-relaxed text-sm italic flex-1">
                   &ldquo;{review.text}&rdquo;
                 </p>
-                <p className="font-semibold text-brand-dark text-sm mt-auto">{review.name}</p>
+                <div className="pt-3 border-t border-border/50">
+                  <p className="font-semibold text-brand-dark text-sm">{review.name}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -128,16 +185,21 @@ export default function ImpressiePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 px-6 bg-primary">
+      <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-brand-navy">
         <div className="max-w-2xl mx-auto text-center text-white">
-          <h2 className="heading-display text-3xl mb-3 text-balance">Klaar om het zelf te beleven?</h2>
-          <p className="text-white/80 text-sm leading-relaxed mb-7">
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-10 bg-white/20" />
+            <p className="label-vintage text-white/45 text-[11px] tracking-[0.25em] uppercase">Kom zelf langs</p>
+            <div className="h-px w-10 bg-white/20" />
+          </div>
+          <h2 className="heading-display text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-5 text-balance leading-[0.95]">Klaar om het zelf te beleven?</h2>
+          <p className="text-white/65 text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
             Kom langs en ervaar de sfeer, het uitzicht en de smaken van{' '}
             <BrandName className="text-inherit tracking-normal text-white" variant="light" />.
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-primary font-bold px-8 py-3 rounded-full hover:bg-brand-blue-light transition-colors shadow-lg text-sm"
+            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-8 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-lg shadow-primary/25 text-sm"
           >
             Reserveer uw tafel <ArrowRight size={16} />
           </Link>

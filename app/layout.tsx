@@ -3,6 +3,7 @@ import { Lato } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
+import { FloatingBooking } from '@/components/floating-booking'
 import { gestard, specialElite, steelworksVintage } from '@/lib/fonts'
 
 const lato = Lato({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <Navigation />
         <main>{children}</main>
         <Footer />
+        <FloatingBooking />
       </body>
     </html>
   )

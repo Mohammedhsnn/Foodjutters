@@ -134,37 +134,137 @@
     background-color: rgb(255 255 255 / 0.97);
   }
 
-  /* Klant houttextuur — lichtblauwe sectie-achtergronden */
+  /* ──────────────────────────────────────────────────
+     Klant houttextuur — 6 varianten (lichtblauwe planken)
+     bg-1 = dikke verticale nerf        BG 1.jpg
+     bg-2 = verweerde verticale planken BG 2.jpg
+     bg-3 = horizontale planken knopen  BG 3.jpg
+     bg-4 = medium verticale planken    BG 4.jpg
+     bg-5 = fijne horizontale krassen   BG 5.jpg
+     bg-plank = subtiele zachte planken Houten achtergrond.png
+  ────────────────────────────────────────────────── */
+
+  /* Base helper: zachte subtiele planken */
   .bg-wood-texture {
-    background-color: var(--brand-sky);
-    background-image: var(--bg-wood);
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 38%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 38%, transparent)
+      ),
+      url('/bg-plank.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
 
-  /* Zelfde look als bg-brand-blue-light/35, met hout eronder */
-  .bg-wood-muted {
-    background-color: var(--brand-sky);
-    background-image: linear-gradient(
+  /* Variant 1 — dikke verticale nerf, licht overlay */
+  .bg-wood-1 {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 28%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 28%, transparent)
+      ),
+      url('/bg-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Variant 2 — verweerde verticale planken */
+  .bg-wood-2 {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 32%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 32%, transparent)
+      ),
+      url('/bg-2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Variant 3 — horizontale planken met knopen */
+  .bg-wood-3 {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 30%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 30%, transparent)
+      ),
+      url('/bg-3.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Variant 4 — medium verticale planken */
+  .bg-wood-4 {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
         color-mix(in oklab, var(--brand-blue-light) 35%, transparent),
         color-mix(in oklab, var(--brand-blue-light) 35%, transparent)
       ),
-      var(--bg-wood);
+      url('/bg-4.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
 
-  /* Zelfde look als welcome-gradient, met hout eronder */
+  /* Variant 5 — fijne horizontale krassen */
+  .bg-wood-5 {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 38%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 38%, transparent)
+      ),
+      url('/bg-5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Variant plank — subtiele zachte planken */
+  .bg-wood-plank {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 40%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 40%, transparent)
+      ),
+      url('/bg-plank.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Legacy aliases — behoud bestaande klassen, gebruik nu een van de varianten */
+  .bg-wood-muted {
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 35%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 35%, transparent)
+      ),
+      url('/bg-4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   .bg-wood-welcome {
-    background-color: var(--brand-sky);
-    background-image: linear-gradient(
+    background-color: #a8d8f0;
+    background-image:
+      linear-gradient(
         to bottom,
         color-mix(in oklab, var(--brand-blue-light) 40%, transparent),
-        var(--background)
+        color-mix(in oklab, var(--background) 85%, transparent)
       ),
-      var(--bg-wood);
+      url('/bg-1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -172,19 +272,24 @@
 
   /* Gestural sky / navy surfaces zoals Instagram-posts */
   .brand-surface-sky {
-    background-color: var(--brand-sky);
-    background-image: repeating-linear-gradient(
+    background-color: #a8d8f0;
+    background-image:
+      repeating-linear-gradient(
         90deg,
         transparent 0,
         transparent 3px,
-        rgb(255 255 255 / 0.06) 3px,
-        rgb(255 255 255 / 0.06) 4px
+        rgb(255 255 255 / 0.05) 3px,
+        rgb(255 255 255 / 0.05) 4px
       ),
-      radial-gradient(ellipse at 30% 0%, rgb(255 255 255 / 0.25), transparent 55%),
-      var(--bg-wood);
-    background-size: auto, auto, cover;
-    background-position: center;
-    background-repeat: repeat, no-repeat, no-repeat;
+      radial-gradient(ellipse at 30% 0%, rgb(255 255 255 / 0.22), transparent 55%),
+      linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 22%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 22%, transparent)
+      ),
+      url('/bg-5.jpg');
+    background-size: auto, auto, auto, cover;
+    background-position: center, center, center, center;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
   }
 
   .brand-surface-navy {
@@ -344,7 +449,7 @@
     font-size: clamp(2.5rem, 8vw, 5rem);
     line-height: 1;
     text-transform: uppercase;
-    color: rgb(27 67 100 / 0.06);
+    color: rgb(27 67 100 / 0.022);
     user-select: none;
     animation: hero-whisper 22s ease-in-out infinite;
   }
