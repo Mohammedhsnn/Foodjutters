@@ -16,7 +16,7 @@ const plankItems = [
 /** Social-stijl plank-sectie — volledig gecodeerd (geen post-afbeeldingen) */
 export function PlankShowcase() {
   return (
-    <BrandSurface variant="navy" pattern="PLANK" className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 text-white">
+    <BrandSurface variant="navy" pattern="PLANK" className="py-14 sm:py-16 md:py-20 px-5 sm:px-8 md:px-10 text-white">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
         <div>
           <h2 className="heading-display text-4xl sm:text-5xl md:text-7xl text-white mb-3 sm:mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -45,8 +45,8 @@ export function PlankShowcase() {
         {/* 2×2 card grid — use max-w to cap size on wide single-column layouts */}
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
           <PlankCard variant="sky">
-            <p className="label-vintage text-brand-navy/70 text-[10px] sm:text-xs mb-1.5 sm:mb-2">Wo – zo</p>
-            <p className="heading-typewriter text-base sm:text-2xl text-brand-navy">Kom smullen</p>
+            <p className="label-vintage text-brand-navy/60 text-[10px] sm:text-xs tracking-[0.18em] mb-2 sm:mb-3">Wo – zo</p>
+            <p className="heading-typewriter text-base sm:text-xl md:text-2xl text-brand-navy leading-snug">Kom smullen</p>
           </PlankCard>
 
           <PlankCard variant="board">
@@ -54,24 +54,24 @@ export function PlankShowcase() {
           </PlankCard>
 
           <PlankCard variant="pattern">
-            <p className="label-vintage text-white/55 text-[10px] tracking-[0.18em] uppercase mb-1.5">Aan het water</p>
-            <p className="heading-display text-2xl sm:text-4xl text-white leading-none">Terras</p>
-            <p className="heading-display text-2xl sm:text-4xl text-primary leading-none">& sfeer</p>
+            <p className="label-vintage text-white/55 text-[10px] tracking-[0.18em] uppercase mb-2 sm:mb-3">Aan het water</p>
+            <p className="heading-display text-2xl sm:text-3xl md:text-4xl text-white leading-none">Terras</p>
+            <p className="heading-display text-2xl sm:text-3xl md:text-4xl text-primary leading-none mt-0.5">& sfeer</p>
           </PlankCard>
 
           <PlankCard variant="price">
-            <p className="label-vintage text-white/70 text-[10px] sm:text-xs mb-1">Vanaf</p>
-            <p className="heading-display text-3xl sm:text-5xl text-white">€34</p>
-            <p className="heading-display text-sm sm:text-lg text-primary mt-1">Plank</p>
+            <p className="label-vintage text-white/60 text-[10px] sm:text-xs tracking-[0.18em] mb-2 sm:mb-3">Vanaf</p>
+            <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-white leading-none">€34</p>
+            <p className="heading-display text-sm sm:text-base md:text-lg text-primary mt-2 sm:mt-2.5">Plank</p>
           </PlankCard>
         </div>
       </div>
 
-      <ul className="max-w-6xl mx-auto mt-6 sm:mt-8 flex flex-wrap justify-center gap-2 sm:gap-3">
+      <ul className="max-w-6xl mx-auto mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 sm:gap-2.5">
         {plankItems.map((item) => (
           <li
             key={item}
-            className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs text-white/75 uppercase tracking-wide"
+            className="rounded-full border border-white/20 bg-white/8 px-3.5 sm:px-4 py-1.5 text-[11px] sm:text-xs text-white/75 uppercase tracking-widest"
           >
             {item}
           </li>
@@ -91,7 +91,7 @@ function PlankCard({
   return (
     <div
       className={[
-        'aspect-square rounded-xl border-2 p-3 sm:p-4 flex flex-col justify-center overflow-hidden',
+        'aspect-square rounded-xl border-2 p-4 sm:p-5 md:p-6 flex flex-col justify-center overflow-hidden',
         variant === 'sky' && 'brand-surface-sky border-brand-navy/10 text-brand-navy',
         variant === 'board' && 'bg-[#8b5a2b] border-white/20',
         variant === 'pattern' && 'brand-surface-navy border-white/15',
