@@ -77,11 +77,21 @@ export default function MenuPage() {
       <PageHero
         eyebrow="Onze keuken"
         title="Menu"
-        subtitle="Vers, seizoensgebonden en met liefde bereid. Elk gerecht vertelt het verhaal van onze keuken."
+        subtitle="Vers, seizoensgebonden en met liefde bereid. Van pizza uit de houtoven tot gegrilde specialiteiten."
+        pattern="SMULLEN"
+        meta={[
+          { label: 'Categorieën', value: '5 gerechten' },
+          { label: 'Houtoven', value: "Pizza's" },
+          { label: 'Geopend', value: 'Wo – Zo 12–22' },
+        ]}
+        ctas={[
+          { href: '/contact', label: 'Tafel reserveren' },
+          { href: '#menu-inhoud', label: 'Spring naar menu', variant: 'secondary' },
+        ]}
       />
 
       {/* Allergen note */}
-      <div className="px-6 pt-8 pb-2 bg-wood-1">
+      <div id="menu-inhoud" className="px-6 pt-8 pb-2 bg-wood-1">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 bg-brand-blue-light/50 border border-primary/15 rounded-xl px-5 py-3.5 text-sm text-foreground/65">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden />

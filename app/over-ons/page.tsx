@@ -51,7 +51,16 @@ export default function OverOnsPage() {
       <PageHero
         eyebrow="Ons verhaal"
         title="Over ons"
-        subtitle="Hoe een passie voor goed eten en gastvrijheid uitgroeide tot een uniek waterfront restaurant."
+        subtitle="Hoe een passie voor goed eten en gastvrijheid uitgroeide tot een uniek waterfront restaurant aan de Schelde."
+        meta={[
+          { label: 'Opgericht', value: '2012' },
+          { label: 'Ervaring', value: '10+ jaar' },
+          { label: 'Gastoordeel', value: '5.0 ★' },
+        ]}
+        ctas={[
+          { href: '/menu', label: 'Bekijk ons menu' },
+          { href: '/contact', label: 'Reserveer een tafel', variant: 'secondary' },
+        ]}
       />
 
       {/* ── Story ──────────────────────────────────── */}

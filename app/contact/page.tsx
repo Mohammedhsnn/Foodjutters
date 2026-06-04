@@ -41,10 +41,20 @@ export default function ContactPage() {
         eyebrow="Kom langs"
         title="Contact & Reservering"
         subtitle="Reserveer uw tafel, stel een vraag of plan een groepsarrangement. Wij helpen u graag verder."
+        pattern="WELKOM"
+        meta={[
+          { label: 'Adres', value: 'Parallelweg 1, Lelystad' },
+          { label: 'Geopend', value: 'Wo – Zo · 12–22' },
+          { label: 'Telefoon', value: '+31 (0)320 00 00 00' },
+        ]}
+        ctas={[
+          { href: '#reserveer', label: 'Reserveer een tafel' },
+          { href: 'tel:+31320000000', label: 'Bel ons direct', variant: 'secondary' },
+        ]}
       />
 
       {/* Main content */}
-      <section className="py-12 px-6 bg-wood-plank">
+      <section id="reserveer" className="py-12 px-6 bg-wood-plank">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8">
 
           {/* Left column: info + hours + map */}

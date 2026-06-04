@@ -66,10 +66,20 @@ export default function ImpressiePage() {
         eyebrow="Sfeer & beleving"
         title="Impressie"
         subtitle="Een blik in onze wereld — het terras bij zonsondergang, de warmte van de houtkachel en het uitzicht over het water."
+        pattern="BELEVING"
+        meta={[
+          { label: 'Terras', value: 'Aan het water' },
+          { label: 'Sfeer', value: 'Knus & gezellig' },
+          { label: 'Uitzicht', value: 'Panoramisch' },
+        ]}
+        ctas={[
+          { href: '/contact', label: 'Reserveer een tafel' },
+          { href: '#impressie-fotos', label: 'Bekijk de fotos', variant: 'secondary' },
+        ]}
       />
 
       {/* Mosaic gallery */}
-      <section className="py-10 md:py-12 px-6 bg-background">
+      <section id="impressie-fotos" className="py-10 md:py-12 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-4 gap-3 auto-rows-[190px]">
             {gallery.map((item, i) => (
