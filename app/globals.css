@@ -1,0 +1,487 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Social / brand palette */
+  --background: #f4fafd;
+  --foreground: #1b4364;
+
+  --card: #ffffff;
+  --card-foreground: #1b4364;
+
+  --popover: #ffffff;
+  --popover-foreground: #1b4364;
+
+  --primary: #29abe2;
+  --primary-foreground: #ffffff;
+
+  --secondary: #d8f0fc;
+  --secondary-foreground: #1b4364;
+
+  --muted: #e8f4fb;
+  --muted-foreground: #4a6d8a;
+
+  --accent: #89cff0;
+  --accent-foreground: #1b4364;
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+
+  --border: #c5e3f3;
+  --input: #dceef8;
+  --ring: #29abe2;
+
+  --radius: 0.5rem;
+
+  --brand-sky: #89cff0;
+  --brand-blue: #29abe2;
+  --brand-blue-dark: #1e8fc4;
+  --brand-blue-light: #d8f0fc;
+  --brand-navy: #1b4364;
+  --brand-dark: #1b4364;
+  --brand-sand: #e8d4b0;
+
+  --sidebar: #d8f0fc;
+  --sidebar-foreground: #1b4364;
+  --sidebar-primary: #29abe2;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #89cff0;
+  --sidebar-accent-foreground: #1b4364;
+  --sidebar-border: #c5e3f3;
+  --sidebar-ring: #29abe2;
+
+  --bg-wood: url('/bg-wood.png');
+}
+
+@theme inline {
+  --font-sans: var(--font-lato);
+  --font-serif: var(--font-special-elite);
+  --font-display: var(--font-gestard), var(--font-sans);
+  --font-brand: var(--font-steelworks);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-blue-light: var(--brand-blue-light);
+  --color-brand-sand: var(--brand-sand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-sky: var(--brand-sky);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-background scroll-smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-normal;
+  }
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+  .tracking-widest {
+    letter-spacing: 0.18em;
+  }
+}
+
+@layer utilities {
+  .bg-white\/8 {
+    background-color: rgb(255 255 255 / 0.08);
+  }
+  .bg-white\/97 {
+    background-color: rgb(255 255 255 / 0.97);
+  }
+
+  /* Klant houttextuur — lichtblauwe sectie-achtergronden */
+  .bg-wood-texture {
+    background-color: var(--brand-sky);
+    background-image: var(--bg-wood);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Zelfde look als bg-brand-blue-light/35, met hout eronder */
+  .bg-wood-muted {
+    background-color: var(--brand-sky);
+    background-image: linear-gradient(
+        color-mix(in oklab, var(--brand-blue-light) 35%, transparent),
+        color-mix(in oklab, var(--brand-blue-light) 35%, transparent)
+      ),
+      var(--bg-wood);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Zelfde look als welcome-gradient, met hout eronder */
+  .bg-wood-welcome {
+    background-color: var(--brand-sky);
+    background-image: linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--brand-blue-light) 40%, transparent),
+        var(--background)
+      ),
+      var(--bg-wood);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Gestural sky / navy surfaces zoals Instagram-posts */
+  .brand-surface-sky {
+    background-color: var(--brand-sky);
+    background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 3px,
+        rgb(255 255 255 / 0.06) 3px,
+        rgb(255 255 255 / 0.06) 4px
+      ),
+      radial-gradient(ellipse at 30% 0%, rgb(255 255 255 / 0.25), transparent 55%),
+      var(--bg-wood);
+    background-size: auto, auto, cover;
+    background-position: center;
+    background-repeat: repeat, no-repeat, no-repeat;
+  }
+
+  .brand-surface-navy {
+    background-color: var(--brand-navy);
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        transparent 3px,
+        rgb(255 255 255 / 0.04) 3px,
+        rgb(255 255 255 / 0.04) 4px
+      ),
+      radial-gradient(ellipse at 70% 100%, rgb(41 171 226 / 0.15), transparent 50%);
+  }
+
+  .brand-watermark {
+    position: absolute;
+    inset: -15% -10%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 1.25rem 2rem;
+    opacity: 0.11;
+    font-family: var(--font-gestard), sans-serif;
+    font-size: clamp(2.5rem, 9vw, 5.5rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    transform: rotate(-10deg);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .brand-surface-navy .brand-watermark {
+    opacity: 0.07;
+    color: #ffffff;
+  }
+
+  .heading-display {
+    @apply font-display uppercase tracking-tight leading-[0.95];
+  }
+
+  .heading-typewriter {
+    @apply font-serif normal-case tracking-wide leading-tight;
+  }
+
+  .label-vintage {
+    @apply font-serif normal-case tracking-[0.12em] text-sm;
+  }
+
+  /* Steelworks Vintage Demo — geen uppercase/tracking (anders synthetisch/vervormd) */
+  .font-brand {
+    font-family: var(--font-steelworks), 'Steelworks Vintage Demo', serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  /* Hero — officiële houttextuur */
+  .hero-wood {
+    background-color: var(--brand-sky);
+    background-image: var(--bg-wood);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Hero — extra sfeer (los van bestaande hero-inhoud) */
+  .hero-shimmer {
+    position: absolute;
+    inset: -40% -60%;
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      rgb(255 255 255 / 0.35) 50%,
+      transparent 58%
+    );
+    animation: hero-shimmer 9s ease-in-out infinite;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(40px);
+    animation: hero-float 14s ease-in-out infinite;
+  }
+
+  .hero-orb-1 {
+    top: 12%;
+    left: 8%;
+    width: 11rem;
+    height: 11rem;
+    background: rgb(41 171 226 / 0.28);
+    animation-duration: 16s;
+  }
+
+  .hero-orb-2 {
+    top: 22%;
+    right: 10%;
+    width: 9rem;
+    height: 9rem;
+    background: rgb(232 212 176 / 0.45);
+    animation-delay: -4s;
+    animation-duration: 18s;
+  }
+
+  .hero-orb-3 {
+    bottom: 28%;
+    left: 14%;
+    width: 8rem;
+    height: 8rem;
+    background: rgb(137 207 240 / 0.5);
+    animation-delay: -7s;
+  }
+
+  .hero-orb-4 {
+    bottom: 18%;
+    right: 12%;
+    width: 10rem;
+    height: 10rem;
+    background: rgb(41 171 226 / 0.22);
+    animation-delay: -2s;
+    animation-duration: 20s;
+  }
+
+  .hero-sparkle {
+    position: absolute;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.85);
+    box-shadow: 0 0 12px rgb(255 255 255 / 0.6);
+    animation: hero-sparkle 3.5s ease-in-out infinite;
+  }
+
+  .hero-sparkle-1 {
+    top: 18%;
+    left: 22%;
+    animation-delay: 0s;
+  }
+
+  .hero-sparkle-2 {
+    top: 32%;
+    right: 20%;
+    animation-delay: -1.2s;
+  }
+
+  .hero-sparkle-3 {
+    bottom: 36%;
+    left: 38%;
+    animation-delay: -2.4s;
+  }
+
+  .hero-whisper {
+    position: absolute;
+    font-family: var(--font-gestard), sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    color: rgb(27 67 100 / 0.06);
+    user-select: none;
+    animation: hero-whisper 22s ease-in-out infinite;
+  }
+
+  .hero-whisper-1 {
+    top: 14%;
+    right: 6%;
+    --hero-whisper-rotate: -12deg;
+    animation-delay: 0s;
+  }
+
+  .hero-whisper-2 {
+    bottom: 32%;
+    left: 4%;
+    --hero-whisper-rotate: 8deg;
+    animation-delay: -8s;
+  }
+
+  .hero-whisper-3 {
+    top: 48%;
+    right: 18%;
+    --hero-whisper-rotate: -6deg;
+    animation-delay: -14s;
+  }
+
+  .hero-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 7rem;
+    color: rgb(41 171 226 / 0.12);
+    animation: hero-wave-drift 24s linear infinite;
+  }
+
+  .hero-wave-path-a {
+    opacity: 0.9;
+  }
+
+  .hero-wave-path-b {
+    opacity: 0.55;
+    animation: hero-wave-bob 6s ease-in-out infinite;
+  }
+
+  @keyframes hero-shimmer {
+    0%,
+    100% {
+      transform: translateX(-30%) rotate(0deg);
+      opacity: 0;
+    }
+    45% {
+      opacity: 1;
+    }
+    55% {
+      transform: translateX(30%) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(12px, -18px) scale(1.06);
+    }
+  }
+
+  @keyframes hero-sparkle {
+    0%,
+    100% {
+      transform: scale(0.6);
+      opacity: 0.25;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  @keyframes hero-whisper {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--hero-whisper-rotate, -12deg));
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-10px) rotate(var(--hero-whisper-rotate, -12deg));
+      opacity: 0.85;
+    }
+  }
+
+  @keyframes hero-wave-drift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes hero-wave-bob {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-shimmer,
+    .hero-orb,
+    .hero-sparkle,
+    .hero-whisper,
+    .hero-waves,
+    .hero-wave-path-b {
+      animation: none;
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+
+  .btn-brand {
+    @apply inline-flex items-center justify-center gap-2 font-display uppercase tracking-wide text-sm px-8 py-3.5 rounded-full transition-all shadow-md;
+  }
+}
