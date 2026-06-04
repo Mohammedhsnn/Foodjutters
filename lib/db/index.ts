@@ -7,9 +7,13 @@ type Db = NeonHttpDatabase<typeof schema>
 let instance: Db | null = null
 
 function createDb(): Db {
-  const url = process.env.DATABASE_URL
+  const url = process.env.DATABASE_URL?.trim()
   if (!url) {
-    throw new Error('DATABASE_URL is not set. Add it to .env.local')
+    const hint =
+      process.env.VERCEL === '1'
+        ? 'Add DATABASE_URL in Vercel → Project → Settings → Environment Variables (Production, Preview, Development).'
+        : 'Add DATABASE_URL to .env.local (see .env.example).'
+    throw new Error(`DATABASE_URL is not set. ${hint}`)
   }
   return drizzle(neon(url), { schema })
 }
