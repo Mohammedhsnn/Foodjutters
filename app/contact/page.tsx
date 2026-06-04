@@ -43,7 +43,7 @@ export default function ContactPage() {
         subtitle="Reserveer uw tafel, stel een vraag of plan een groepsarrangement. Wij helpen u graag verder."
         pattern="WELKOM"
         meta={[
-          { label: 'Adres', value: 'Parallelweg 1, Lelystad' },
+          { label: 'Adres', value: 'Scheldeboulevard 7, Terneuzen' },
           { label: 'Geopend', value: 'Wo – Zo · 12–22' },
           { label: 'Telefoon', value: '+31 (0)320 00 00 00' },
         ]}
@@ -70,7 +70,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">Adres</p>
-                    <p className="text-sm text-muted-foreground">Parallelweg 1<br />8218 NA Lelystad</p>
+                    <p className="text-sm text-muted-foreground">Scheldeboulevard 7<br />4531 EJ Terneuzen</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3 sm:gap-3.5">
@@ -133,9 +133,9 @@ export default function ContactPage() {
             {/* Map link */}
             <div className="rounded-xl overflow-hidden border border-border shadow-sm h-32 sm:h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
               <MapPin size={24} className="text-primary sm:size-7" />
-              <p className="text-sm text-foreground/60 font-medium text-center px-4">Parallelweg 1, Lelystad</p>
+              <p className="text-sm text-foreground/60 font-medium text-center px-4">Scheldeboulevard 7, Terneuzen</p>
               <a
-                href="https://maps.google.com/?q=Parallelweg+1+Lelystad"
+                href="https://maps.google.com/?q=Scheldeboulevard+7+Terneuzen"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary text-xs font-semibold hover:underline"

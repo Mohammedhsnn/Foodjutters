@@ -67,7 +67,7 @@ export function Footer() {
             <ul className="flex flex-col gap-3.5">
               <li className="flex items-start gap-3 text-sm text-white/55">
                 <MapPin size={14} className="text-primary mt-0.5 shrink-0" />
-                <span>Parallelweg 1, Lelystad<br />8218 NA, Nederland</span>
+                <span>Scheldeboulevard 7<br />4531 EJ Terneuzen</span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/55">
                 <Phone size={14} className="text-primary shrink-0" />

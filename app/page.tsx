@@ -93,7 +93,7 @@ export default function HomePage() {
             </div>
             <div className="hidden sm:flex flex-col items-end gap-0.5">
               <p className="label-vintage text-brand-navy/50 text-[10px] tracking-[0.22em] uppercase">Locatie</p>
-              <p className="label-vintage text-brand-navy/70 text-xs">Parallelweg 1, Lelystad</p>
+              <p className="label-vintage text-brand-navy/70 text-xs">Scheldeboulevard 7, Terneuzen</p>
             </div>
           </div>
         </div>

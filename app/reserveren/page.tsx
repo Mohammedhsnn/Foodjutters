@@ -36,7 +36,7 @@ export default function ReserverenPage() {
         meta={[
           { label: 'Geopend', value: 'Wo – Zo' },
           { label: 'Tijden', value: '12:00 – 22:00' },
-          { label: 'Locatie', value: 'Parallelweg 1, Lelystad' },
+          { label: 'Locatie', value: 'Scheldeboulevard 7, Terneuzen' },
         ]}
       />
 
