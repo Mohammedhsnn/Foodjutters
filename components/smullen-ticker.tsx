@@ -2,7 +2,7 @@
 export function SmullenTicker({ className }: { className?: string }) {
   const items = Array.from({ length: 14 }).map((_, i) => (
     <span key={i} className="mx-6 text-brand-navy/25 font-display uppercase text-sm tracking-[0.35em]">
-      Smullen
+      Proef het water
     </span>
   ))
 

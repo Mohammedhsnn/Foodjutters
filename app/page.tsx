@@ -117,7 +117,7 @@ export default function HomePage() {
             <div className="w-1 h-10 bg-primary rounded-full shrink-0" aria-hidden />
             <div>
               <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase mb-0.5">Woensdag t/m zondag</p>
-              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl">Kom smullen</h2>
+              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl">Kom gezellig tafelen</h2>
             </div>
           </div>
           <div className="flex items-center gap-4 sm:gap-5 md:gap-8 pl-5 sm:pl-0">
