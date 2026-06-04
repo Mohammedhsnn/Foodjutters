@@ -17,13 +17,14 @@ const plankItems = [
 export function PlankShowcase() {
   return (
     <BrandSurface variant="navy" pattern="PLANK" className="py-14 sm:py-16 md:py-20 px-5 sm:px-8 md:px-10 text-white">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
-        <div>
-          <h2 className="heading-display text-4xl sm:text-5xl md:text-7xl text-white mb-3 sm:mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
+        {/* Left: heading, description, CTAs */}
+        <div className="flex flex-col gap-5 sm:gap-6">
+          <h2 className="heading-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-none flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <BrandName variant="light" className="text-[0.55em] sm:text-[0.5em]" />
             <span>Plank</span>
           </h2>
-          <p className="text-white/80 text-sm md:text-base leading-relaxed mb-5 sm:mb-6 max-w-md">
+          <p className="text-white/80 text-sm sm:text-base leading-relaxed max-w-md">
             Onze borrelplank vol kaas, charcuterie, hapjes en dips — om te delen aan het water.
           </p>
           <div className="flex flex-wrap gap-3">
@@ -42,8 +43,8 @@ export function PlankShowcase() {
           </div>
         </div>
 
-        {/* 2×2 card grid — use max-w to cap size on wide single-column layouts */}
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
+        {/* Right: 2×2 card grid */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none mx-auto">
           <PlankCard variant="sky">
             <p className="label-vintage text-brand-navy/60 text-[10px] sm:text-xs tracking-[0.18em] mb-2 sm:mb-3">Wo – zo</p>
             <p className="heading-typewriter text-base sm:text-xl md:text-2xl text-brand-navy leading-snug">Kom smullen</p>
@@ -62,16 +63,17 @@ export function PlankShowcase() {
           <PlankCard variant="price">
             <p className="label-vintage text-white/60 text-[10px] sm:text-xs tracking-[0.18em] mb-2 sm:mb-3">Vanaf</p>
             <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-white leading-none">€34</p>
-            <p className="heading-display text-sm sm:text-base md:text-lg text-primary mt-2 sm:mt-2.5">Plank</p>
+            <p className="heading-display text-sm sm:text-base md:text-lg text-primary mt-2 sm:mt-3">Plank</p>
           </PlankCard>
         </div>
       </div>
 
-      <ul className="max-w-6xl mx-auto mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 sm:gap-2.5">
+      {/* Tag pill list */}
+      <ul className="max-w-6xl mx-auto mt-10 sm:mt-12 flex flex-wrap justify-center gap-2 sm:gap-3">
         {plankItems.map((item) => (
           <li
             key={item}
-            className="rounded-full border border-white/20 bg-white/8 px-3.5 sm:px-4 py-1.5 text-[11px] sm:text-xs text-white/75 uppercase tracking-widest"
+            className="rounded-full border border-white/20 bg-white/8 px-4 sm:px-5 py-1.5 sm:py-2 text-[11px] sm:text-xs text-white/75 uppercase tracking-widest"
           >
             {item}
           </li>
@@ -91,7 +93,7 @@ function PlankCard({
   return (
     <div
       className={[
-        'aspect-square rounded-xl border-2 p-4 sm:p-5 md:p-6 flex flex-col justify-center overflow-hidden',
+        'aspect-square rounded-2xl border-2 p-4 sm:p-5 md:p-6 flex flex-col justify-end overflow-hidden',
         variant === 'sky' && 'brand-surface-sky border-brand-navy/10 text-brand-navy',
         variant === 'board' && 'bg-[#8b5a2b] border-white/20',
         variant === 'pattern' && 'brand-surface-navy border-white/15',

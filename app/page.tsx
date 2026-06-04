@@ -111,21 +111,26 @@ export default function HomePage() {
       <SmullenTicker />
 
       {/* ── Opening banner ──────────────────────────── */}
-      <section className="bg-background py-6 sm:py-8 md:py-10 px-4 sm:px-6 text-brand-navy border-b border-border/60">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+      <section className="bg-background py-7 sm:py-9 md:py-11 px-5 sm:px-8 md:px-10 text-brand-navy border-b border-border/60">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-8">
+          {/* Left: label + heading */}
           <div className="flex items-center gap-4 sm:gap-5">
-            <div className="w-1 h-10 bg-primary rounded-full shrink-0" aria-hidden />
-            <div>
-              <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase mb-0.5">Woensdag t/m zondag</p>
+            <div className="w-1 h-12 bg-primary rounded-full shrink-0" aria-hidden />
+            <div className="flex flex-col gap-1">
+              <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase">Woensdag t/m zondag</p>
               <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl">Kom gezellig tafelen</h2>
             </div>
           </div>
-          <div className="flex items-center gap-4 sm:gap-5 md:gap-8 sm:pl-0">
-            <div className="text-center shrink-0">
+          {/* Right: hours + CTA */}
+          <div className="flex items-center gap-5 sm:gap-6 md:gap-8 pl-5 sm:pl-0">
+            <div className="flex flex-col items-center shrink-0">
               <p className="heading-display text-2xl sm:text-4xl md:text-5xl text-primary leading-none">12–22</p>
-              <p className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.18em] mt-1">Openingstijden</p>
+              <p className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.18em] mt-1.5">Openingstijden</p>
             </div>
-            <Link href="/reserveren" className="btn-brand bg-brand-navy text-white hover:bg-primary shrink-0 text-xs sm:text-sm px-4 sm:px-8 py-2.5 sm:py-3.5">
+            <Link
+              href="/reserveren"
+              className="btn-brand bg-brand-navy text-white hover:bg-primary shrink-0 text-xs sm:text-sm px-5 sm:px-8 py-3 sm:py-3.5"
+            >
               Reserveer
             </Link>
           </div>
