@@ -15,7 +15,6 @@ import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
 import { Logo } from '@/components/logo'
 import { PlankShowcase } from '@/components/plank-showcase'
-import { BookingWizard } from '@/components/booking-wizard'
 import { HeroAmbience } from '@/components/hero-ambience'
 import { SmullenTicker } from '@/components/smullen-ticker'
 
@@ -271,48 +270,6 @@ export default function HomePage() {
       </section>
 
       <PlankShowcase />
-
-      {/* ── Booking widget ──────────────────────── */}
-      <section id="reserveer" className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-background border-t border-border/50">
-        <div className="max-w-6xl mx-auto">
-          {/* Section header */}
-          <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
-            <div className="flex-1 h-px bg-border" />
-            <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
-                Direct boeken
-              </p>
-              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl text-brand-navy">
-                Reserveer een tafel
-              </h2>
-            </div>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-
-          <div className="grid lg:grid-cols-[1fr_320px] gap-6 sm:gap-8 items-start">
-            {/* Wizard */}
-            <div className="rounded-2xl border border-border bg-card shadow-sm p-5 sm:p-8">
-              <BookingWizard mode="compact" />
-            </div>
-
-            {/* Side info */}
-            <div className="flex flex-col gap-4">
-              <div className="rounded-2xl bg-primary p-6 text-white">
-                <p className="font-display text-xs uppercase tracking-widest text-white/70 mb-1">Geopend</p>
-                <p className="heading-display text-5xl sm:text-6xl leading-none text-white mb-2">12–22</p>
-                <p className="text-sm text-white/80">Woensdag tot en met zondag</p>
-              </div>
-              <div className="rounded-2xl border border-border bg-card p-5 text-sm text-muted-foreground leading-relaxed">
-                Liever bellen? Bereik ons op{' '}
-                <a href="tel:+31320000000" className="text-primary font-medium hover:underline">
-                  +31 (0)320 00 00 00
-                </a>
-                .
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ── CTA Banner ──────────────────────────── */}
       <BrandSurface variant="sky" pattern="SMULLEN" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-brand-navy">
