@@ -337,9 +337,9 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             { label: 'E-mail', value: data.email },
             ...(data.phone ? [{ label: 'Telefoon', value: data.phone }] : []),
           ].map(({ label, value }) => (
-            <div key={label} className="flex justify-between text-sm gap-4">
+            <div key={label} className="flex justify-between text-sm gap-3 min-w-0">
               <span className="text-muted-foreground shrink-0">{label}</span>
-              <span className="text-brand-navy font-medium text-right">{value}</span>
+              <span className="text-brand-navy font-medium text-right break-all min-w-0">{value}</span>
             </div>
           ))}
         </div>
@@ -427,7 +427,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
         </div>
       )}
 
-      {/* ── Step 2: Details ───────────────────────────────────── */}
+      {/* ── Step 2: Details ─��─────────────────────────────────── */}
       {step === 2 && (
         <div className="flex flex-col gap-5">
           <div>
@@ -511,9 +511,9 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
                 ...(data.phone ? [{ label: 'Telefoon', value: data.phone }] : []),
                 ...(data.notes ? [{ label: 'Bijzonderheden', value: data.notes }] : []),
               ].map(({ label, value }) => (
-                <div key={label} className="flex gap-4 text-sm">
-                  <span className="text-muted-foreground w-28 shrink-0">{label}</span>
-                  <span className="text-brand-navy font-medium">{value}</span>
+                <div key={label} className="flex gap-3 text-sm min-w-0">
+                  <span className="text-muted-foreground w-24 sm:w-28 shrink-0">{label}</span>
+                  <span className="text-brand-navy font-medium break-all min-w-0">{value}</span>
                 </div>
               ))}
             </div>

@@ -68,21 +68,18 @@ export function PageHero({
         {/* Meta chips */}
         {meta && meta.length > 0 && (
           <div className="flex flex-wrap items-center justify-center gap-2 mt-6 sm:mt-8 px-2 sm:px-0">
-            {meta.map((m, i) => (
-              <div key={m.label} className="flex items-center gap-0">
-                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-border shadow-sm">
-                  <span className="label-vintage text-brand-navy/45 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase whitespace-nowrap">
-                    {m.label}
-                  </span>
-                  <div className="w-px h-3 bg-border" aria-hidden />
-                  <span className="label-vintage text-primary text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">
-                    {m.value}
-                  </span>
-                </div>
-                {/* Dot separator between chips — hidden on very small screens to prevent overflow */}
-                {i < meta.length - 1 && (
-                  <div className="hidden sm:block w-1 h-1 rounded-full bg-border mx-1.5" aria-hidden />
-                )}
+            {meta.map((m) => (
+              <div
+                key={m.label}
+                className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-border shadow-sm min-w-0 max-w-[calc(100vw-3rem)]"
+              >
+                <span className="label-vintage text-brand-navy/45 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase whitespace-nowrap shrink-0">
+                  {m.label}
+                </span>
+                <div className="w-px h-3 bg-border shrink-0" aria-hidden />
+                <span className="label-vintage text-primary text-[10px] sm:text-[11px] font-semibold truncate">
+                  {m.value}
+                </span>
               </div>
             ))}
           </div>

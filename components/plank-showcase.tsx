@@ -45,8 +45,8 @@ export function PlankShowcase() {
         {/* 2×2 card grid — use max-w to cap size on wide single-column layouts */}
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
           <PlankCard variant="sky">
-            <p className="label-vintage text-brand-navy/70 text-xs mb-1.5 sm:mb-2">Wo – zo</p>
-            <p className="heading-typewriter text-lg sm:text-2xl text-brand-navy">Kom smullen</p>
+            <p className="label-vintage text-brand-navy/70 text-[10px] sm:text-xs mb-1.5 sm:mb-2">Wo – zo</p>
+            <p className="heading-typewriter text-base sm:text-2xl text-brand-navy">Kom smullen</p>
           </PlankCard>
 
           <PlankCard variant="board">
@@ -54,15 +54,15 @@ export function PlankShowcase() {
           </PlankCard>
 
           <PlankCard variant="pattern">
-            <p className="label-vintage text-white/55 text-[10px] tracking-[0.22em] uppercase mb-2">Aan het water</p>
-            <p className="heading-display text-3xl sm:text-4xl text-white leading-none">Terras</p>
-            <p className="heading-display text-3xl sm:text-4xl text-primary leading-none">& sfeer</p>
+            <p className="label-vintage text-white/55 text-[10px] tracking-[0.18em] uppercase mb-1.5">Aan het water</p>
+            <p className="heading-display text-2xl sm:text-4xl text-white leading-none">Terras</p>
+            <p className="heading-display text-2xl sm:text-4xl text-primary leading-none">& sfeer</p>
           </PlankCard>
 
           <PlankCard variant="price">
-            <p className="label-vintage text-white/70 text-xs mb-1">Vanaf</p>
-            <p className="heading-display text-4xl sm:text-5xl text-white">€34</p>
-            <p className="heading-display text-base sm:text-lg text-primary mt-1">Plank</p>
+            <p className="label-vintage text-white/70 text-[10px] sm:text-xs mb-1">Vanaf</p>
+            <p className="heading-display text-3xl sm:text-5xl text-white">€34</p>
+            <p className="heading-display text-sm sm:text-lg text-primary mt-1">Plank</p>
           </PlankCard>
         </div>
       </div>

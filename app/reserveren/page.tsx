@@ -45,13 +45,13 @@ export default function ReserverenPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-[1fr_380px] gap-8 sm:gap-10 lg:gap-14 items-start">
 
-            {/* Wizard card */}
-            <div className="rounded-2xl border border-border bg-card shadow-sm p-5 sm:p-8 md:p-10">
+            {/* Wizard card — always first visually */}
+            <div className="order-1 rounded-2xl border border-border bg-card shadow-sm p-5 sm:p-8 md:p-10">
               <BookingWizard mode="full" />
             </div>
 
-            {/* Info sidebar */}
-            <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
+            {/* Info sidebar — second on mobile, right column on lg */}
+            <aside className="order-2 flex flex-col gap-5 lg:sticky lg:top-24">
               {/* Opening info cards */}
               {INFO_ITEMS.map(({ icon: Icon, title, body }) => (
                 <div
