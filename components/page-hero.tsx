@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { BrandSurface } from '@/components/brand-surface'
+import { ArrowRight } from 'lucide-react'
 
 interface PageHeroMeta {
   label: string
@@ -17,8 +17,9 @@ interface PageHeroProps {
   eyebrow: string
   title: string
   subtitle: string
+  /** Retained for API compatibility but no longer used as a watermark */
   pattern?: string
-  /** Up to 3 small meta pills rendered below the subtitle */
+  /** Up to 3 small meta chips rendered below the subtitle */
   meta?: PageHeroMeta[]
   /** Up to 2 CTA buttons */
   ctas?: PageHeroCta[]
@@ -28,61 +29,60 @@ export function PageHero({
   eyebrow,
   title,
   subtitle,
-  pattern = 'SMULLEN',
   meta,
   ctas,
 }: PageHeroProps) {
   return (
-    <BrandSurface variant="sky" pattern={pattern} className="relative pt-32 pb-24 px-6 text-brand-navy">
-      {/* Bottom wave transition */}
-      <svg
-        className="absolute bottom-0 left-0 right-0 w-full z-10"
-        viewBox="0 0 1440 56"
-        preserveAspectRatio="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-      >
-        <path
-          d="M0,56 L0,28 C180,56 360,8 540,28 C720,48 900,8 1080,28 C1260,48 1380,20 1440,28 L1440,56 Z"
-          fill="var(--color-background)"
-        />
-      </svg>
+    <div className="relative bg-background overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20 px-6">
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
-        {/* Eyebrow with flanking rules */}
-        <div className="flex items-center justify-center gap-3 mb-5">
-          <div className="h-px w-10 bg-brand-navy/25" />
-          <span className="label-vintage text-brand-navy/60 text-[11px] tracking-[0.28em] uppercase">
+      {/* Subtle top accent bar */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-primary" aria-hidden />
+
+      {/* Very light tinted half-circle — no image, no pattern */}
+      <div
+        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[340px] rounded-full bg-brand-blue-light/40 blur-3xl pointer-events-none"
+        aria-hidden
+      />
+
+      <div className="relative max-w-3xl mx-auto text-center">
+
+        {/* Eyebrow */}
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="h-px w-8 bg-primary/40" aria-hidden />
+          <span className="label-vintage text-primary text-[11px] tracking-[0.3em] uppercase">
             {eyebrow}
           </span>
-          <div className="h-px w-10 bg-brand-navy/25" />
+          <div className="h-px w-8 bg-primary/40" aria-hidden />
         </div>
 
         {/* Title */}
-        <h1 className="heading-display text-5xl md:text-7xl text-balance mb-5 leading-[0.9]">
+        <h1 className="heading-display text-5xl sm:text-6xl md:text-7xl text-brand-navy text-balance leading-[0.9] mb-6">
           {title}
         </h1>
 
         {/* Subtitle */}
-        <p className="text-brand-navy/60 text-base md:text-lg leading-relaxed max-w-lg mx-auto text-pretty mb-0">
+        <p className="text-foreground/60 text-base md:text-lg leading-relaxed max-w-md mx-auto text-pretty">
           {subtitle}
         </p>
 
-        {/* Meta pills */}
+        {/* Meta chips */}
         {meta && meta.length > 0 && (
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mt-7">
-            {meta.map((m) => (
-              <div
-                key={m.label}
-                className="flex items-center gap-2 bg-white/50 border border-brand-navy/12 rounded-full px-4 py-1.5 backdrop-blur-sm"
-              >
-                <span className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.22em] uppercase">
-                  {m.label}
-                </span>
-                <div className="w-px h-3 bg-brand-navy/20" aria-hidden />
-                <span className="label-vintage text-brand-navy/80 text-[11px] font-medium">
-                  {m.value}
-                </span>
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+            {meta.map((m, i) => (
+              <div key={m.label} className="flex items-center gap-0">
+                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border shadow-sm">
+                  <span className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap">
+                    {m.label}
+                  </span>
+                  <div className="w-px h-3 bg-border" aria-hidden />
+                  <span className="label-vintage text-primary text-[11px] font-semibold whitespace-nowrap">
+                    {m.value}
+                  </span>
+                </div>
+                {/* Dot separator between chips */}
+                {i < meta.length - 1 && (
+                  <div className="w-1 h-1 rounded-full bg-border mx-1.5" aria-hidden />
+                )}
               </div>
             ))}
           </div>
@@ -96,7 +96,7 @@ export function PageHero({
                 <Link
                   key={cta.href}
                   href={cta.href}
-                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-7 py-3 rounded-full border border-brand-navy/30 bg-transparent text-brand-navy hover:bg-brand-navy/8 transition-all"
+                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-6 py-2.5 rounded-full border border-brand-navy/25 bg-transparent text-brand-navy/75 hover:border-primary hover:text-primary transition-all duration-200"
                 >
                   {cta.label}
                 </Link>
@@ -104,15 +104,31 @@ export function PageHero({
                 <Link
                   key={cta.href}
                   href={cta.href}
-                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-7 py-3 rounded-full bg-brand-navy text-white hover:bg-primary transition-all shadow-md shadow-brand-navy/20"
+                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-6 py-2.5 rounded-full bg-brand-navy text-white hover:bg-primary transition-all duration-200 shadow-md shadow-brand-navy/20"
                 >
                   {cta.label}
+                  <ArrowRight size={12} aria-hidden />
                 </Link>
               )
             )}
           </div>
         )}
       </div>
-    </BrandSurface>
+
+      {/* Bottom divider — gentle wave in the page background color, no wood */}
+      <svg
+        className="absolute bottom-0 left-0 right-0 w-full"
+        viewBox="0 0 1440 36"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M0,36 L0,18 C240,36 480,4 720,18 C960,32 1200,4 1440,18 L1440,36 Z"
+          fill="var(--color-primary)"
+          fillOpacity="0.07"
+        />
+      </svg>
+    </div>
   )
 }
