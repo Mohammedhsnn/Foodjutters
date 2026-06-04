@@ -54,28 +54,28 @@ export default function ContactPage() {
       />
 
       {/* Main content */}
-      <section id="reserveer" className="py-12 px-6 bg-background">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8">
+      <section id="reserveer" className="py-10 sm:py-12 px-4 sm:px-6 bg-background">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-6 sm:gap-8 items-start">
 
           {/* Left column: info + hours + map */}
-          <aside className="lg:col-span-2 flex flex-col gap-5">
+          <aside className="lg:col-span-2 flex flex-col gap-4 sm:gap-5">
 
             {/* Contact info */}
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
-              <h2 className="heading-display text-xl text-brand-dark mb-5">Contactgegevens</h2>
-              <ul className="flex flex-col gap-4">
-                <li className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <MapPin size={15} className="text-primary" />
+            <div className="bg-card border border-border rounded-xl p-5 sm:p-6 shadow-sm">
+              <h2 className="heading-display text-lg sm:text-xl text-brand-dark mb-4 sm:mb-5">Contactgegevens</h2>
+              <ul className="flex flex-col gap-3.5 sm:gap-4">
+                <li className="flex items-start gap-3 sm:gap-3.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
+                    <MapPin size={14} className="text-primary sm:size-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">Adres</p>
                     <p className="text-sm text-muted-foreground">Parallelweg 1<br />8218 NA Lelystad</p>
                   </div>
                 </li>
-                <li className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <Phone size={15} className="text-primary" />
+                <li className="flex items-start gap-3 sm:gap-3.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
+                    <Phone size={14} className="text-primary sm:size-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">Telefoon</p>
@@ -84,13 +84,13 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </li>
-                <li className="flex items-start gap-3.5">
-                  <div className="w-9 h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <Mail size={15} className="text-primary" />
+                <li className="flex items-start gap-3 sm:gap-3.5">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
+                    <Mail size={14} className="text-primary sm:size-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">E-mail</p>
-                    <a href="mailto:info@foodjutters.nl" className="text-sm text-primary hover:underline">
+                    <a href="mailto:info@foodjutters.nl" className="text-sm text-primary hover:underline break-all">
                       info@foodjutters.nl
                     </a>
                   </div>
@@ -99,12 +99,12 @@ export default function ContactPage() {
             </div>
 
             {/* Opening hours */}
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
-              <div className="flex items-center gap-2.5 mb-5">
-                <div className="w-9 h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                  <Clock size={15} className="text-primary" />
+            <div className="bg-card border border-border rounded-xl p-5 sm:p-6 shadow-sm">
+              <div className="flex items-center gap-2.5 mb-4 sm:mb-5">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
+                  <Clock size={14} className="text-primary sm:size-[15px]" />
                 </div>
-                <h2 className="heading-display text-xl text-brand-dark">Openingstijden</h2>
+                <h2 className="heading-display text-lg sm:text-xl text-brand-dark">Openingstijden</h2>
               </div>
               <ul className="flex flex-col divide-y divide-border/50">
                 {openingHours.map((row) => {
@@ -131,9 +131,9 @@ export default function ContactPage() {
             </div>
 
             {/* Map link */}
-            <div className="rounded-xl overflow-hidden border border-border shadow-sm h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
-              <MapPin size={28} className="text-primary" />
-              <p className="text-sm text-foreground/60 font-medium">Parallelweg 1, Lelystad</p>
+            <div className="rounded-xl overflow-hidden border border-border shadow-sm h-32 sm:h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
+              <MapPin size={24} className="text-primary sm:size-7" />
+              <p className="text-sm text-foreground/60 font-medium text-center px-4">Parallelweg 1, Lelystad</p>
               <a
                 href="https://maps.google.com/?q=Parallelweg+1+Lelystad"
                 target="_blank"
@@ -147,13 +147,13 @@ export default function ContactPage() {
 
           {/* Reservation form */}
           <div className="lg:col-span-3">
-            <div className="bg-card border border-border rounded-xl p-7 shadow-sm h-full">
+            <div className="bg-card border border-border rounded-xl p-5 sm:p-7 shadow-sm">
               {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center h-full py-16 gap-4">
-                  <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
-                    <Check size={24} className="text-white" />
+                <div className="flex flex-col items-center justify-center text-center py-12 sm:py-16 gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center">
+                    <Check size={22} className="text-white sm:size-6" />
                   </div>
-                  <h2 className="heading-display text-2xl text-brand-dark">Bedankt!</h2>
+                  <h2 className="heading-display text-xl sm:text-2xl text-brand-dark">Bedankt!</h2>
                   <p className="text-foreground/60 leading-relaxed max-w-xs text-sm">
                     Uw reserveringsaanvraag is ontvangen. We nemen zo snel mogelijk contact met u op.
                   </p>
@@ -169,12 +169,12 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <>
-                  <h2 className="heading-display text-xl text-brand-dark mb-1">Tafel reserveren</h2>
-                  <p className="text-muted-foreground text-sm mb-6">
+                  <h2 className="heading-display text-lg sm:text-xl text-brand-dark mb-1">Tafel reserveren</h2>
+                  <p className="text-muted-foreground text-sm mb-5 sm:mb-6">
                     Vul het formulier in en wij bevestigen uw reservering zo spoedig mogelijk.
                   </p>
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-                    <div className="grid sm:grid-cols-2 gap-4">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4" noValidate>
+                    <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
                       <div className="flex flex-col gap-1.5">
                         <label htmlFor="name" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
                           Naam <span className="text-primary">*</span>
@@ -197,7 +197,8 @@ export default function ContactPage() {
                         placeholder="+31 6 00 00 00 00" className={inputClass} />
                     </div>
 
-                    <div className="grid sm:grid-cols-3 gap-4">
+                    {/* Date / time / guests — 1 col on xs, 3 cols from sm */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
                       <div className="flex flex-col gap-1.5">
                         <label htmlFor="date" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
                           Datum <span className="text-primary">*</span>

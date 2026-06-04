@@ -33,55 +33,55 @@ export function PageHero({
   ctas,
 }: PageHeroProps) {
   return (
-    <div className="relative bg-background overflow-hidden pt-28 md:pt-32 pb-16 md:pb-20 px-6">
+    <div className="relative bg-background overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
 
       {/* Subtle top accent bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-primary" aria-hidden />
 
       {/* Very light tinted half-circle — no image, no pattern */}
       <div
-        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[700px] h-[340px] rounded-full bg-brand-blue-light/40 blur-3xl pointer-events-none"
+        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[min(700px,120vw)] h-[340px] rounded-full bg-brand-blue-light/40 blur-3xl pointer-events-none"
         aria-hidden
       />
 
       <div className="relative max-w-3xl mx-auto text-center">
 
         {/* Eyebrow */}
-        <div className="flex items-center justify-center gap-3 mb-6">
+        <div className="flex items-center justify-center gap-3 mb-5 sm:mb-6">
           <div className="h-px w-8 bg-primary/40" aria-hidden />
-          <span className="label-vintage text-primary text-[11px] tracking-[0.3em] uppercase">
+          <span className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.28em] sm:tracking-[0.3em] uppercase">
             {eyebrow}
           </span>
           <div className="h-px w-8 bg-primary/40" aria-hidden />
         </div>
 
         {/* Title */}
-        <h1 className="heading-display text-5xl sm:text-6xl md:text-7xl text-brand-navy text-balance leading-[0.9] mb-6">
+        <h1 className="heading-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-brand-navy text-balance leading-[0.9] mb-4 sm:mb-6">
           {title}
         </h1>
 
         {/* Subtitle */}
-        <p className="text-foreground/60 text-base md:text-lg leading-relaxed max-w-md mx-auto text-pretty">
+        <p className="text-foreground/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-sm sm:max-w-md mx-auto text-pretty px-2 sm:px-0">
           {subtitle}
         </p>
 
         {/* Meta chips */}
         {meta && meta.length > 0 && (
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-6 sm:mt-8 px-2 sm:px-0">
             {meta.map((m, i) => (
               <div key={m.label} className="flex items-center gap-0">
-                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-border shadow-sm">
-                  <span className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.2em] uppercase whitespace-nowrap">
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-border shadow-sm">
+                  <span className="label-vintage text-brand-navy/45 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase whitespace-nowrap">
                     {m.label}
                   </span>
                   <div className="w-px h-3 bg-border" aria-hidden />
-                  <span className="label-vintage text-primary text-[11px] font-semibold whitespace-nowrap">
+                  <span className="label-vintage text-primary text-[10px] sm:text-[11px] font-semibold whitespace-nowrap">
                     {m.value}
                   </span>
                 </div>
-                {/* Dot separator between chips */}
+                {/* Dot separator between chips — hidden on very small screens to prevent overflow */}
                 {i < meta.length - 1 && (
-                  <div className="w-1 h-1 rounded-full bg-border mx-1.5" aria-hidden />
+                  <div className="hidden sm:block w-1 h-1 rounded-full bg-border mx-1.5" aria-hidden />
                 )}
               </div>
             ))}
@@ -90,13 +90,13 @@ export function PageHero({
 
         {/* CTA buttons */}
         {ctas && ctas.length > 0 && (
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
+          <div className="flex flex-col xs:flex-row sm:flex-row items-stretch xs:items-center sm:items-center justify-center gap-2.5 sm:gap-3 mt-6 sm:mt-8 px-4 sm:px-0">
             {ctas.map((cta) =>
               cta.variant === 'secondary' ? (
                 <Link
                   key={cta.href}
                   href={cta.href}
-                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-6 py-2.5 rounded-full border border-brand-navy/25 bg-transparent text-brand-navy/75 hover:border-primary hover:text-primary transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-5 sm:px-6 py-2.5 rounded-full border border-brand-navy/25 bg-transparent text-brand-navy/75 hover:border-primary hover:text-primary transition-all duration-200"
                 >
                   {cta.label}
                 </Link>
@@ -104,7 +104,7 @@ export function PageHero({
                 <Link
                   key={cta.href}
                   href={cta.href}
-                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-6 py-2.5 rounded-full bg-brand-navy text-white hover:bg-primary transition-all duration-200 shadow-md shadow-brand-navy/20"
+                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-5 sm:px-6 py-2.5 rounded-full bg-brand-navy text-white hover:bg-primary transition-all duration-200 shadow-md shadow-brand-navy/20"
                 >
                   {cta.label}
                   <ArrowRight size={12} aria-hidden />
@@ -115,7 +115,7 @@ export function PageHero({
         )}
       </div>
 
-      {/* Bottom divider — gentle wave in the page background color, no wood */}
+      {/* Bottom divider — gentle wave */}
       <svg
         className="absolute bottom-0 left-0 right-0 w-full"
         viewBox="0 0 1440 36"

@@ -49,19 +49,19 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/30 pointer-events-none" aria-hidden />
         <HeroAmbience />
 
-        {/* Centered content — positioned at 38% from top for a slightly high center of gravity */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative z-10 text-center px-6 max-w-2xl mx-auto">
+        {/* Centered content */}
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="relative z-10 text-center w-full max-w-2xl mx-auto">
             <h1 className="sr-only">FoodJutters — smullen, borrelen & genieten aan het water</h1>
-            <Logo layout="stack" size="hero" className="mb-6 md:mb-7" />
+            <Logo layout="stack" size="hero" className="mb-5 md:mb-7" />
 
             {/* thin divider */}
-            <div className="flex items-center justify-center gap-4 mb-5">
-              <div className="h-px w-12 bg-brand-navy/30" />
-              <p className="label-vintage text-brand-navy/80 text-sm md:text-base tracking-[0.18em]">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-5">
+              <div className="h-px w-8 sm:w-12 bg-brand-navy/30" />
+              <p className="label-vintage text-brand-navy/80 text-xs sm:text-sm tracking-[0.14em] sm:tracking-[0.18em]">
                 Smullen, borrelen & genieten aan het water
               </p>
-              <div className="h-px w-12 bg-brand-navy/30" />
+              <div className="h-px w-8 sm:w-12 bg-brand-navy/30" />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -80,7 +80,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom meta bar */}
-        <div className="relative z-10 w-full pb-8 px-8">
+        <div className="relative z-10 w-full pb-6 sm:pb-8 px-4 sm:px-8">
           <div className="max-w-6xl mx-auto flex items-end justify-between">
             <div className="hidden sm:flex flex-col gap-0.5">
               <p className="label-vintage text-brand-navy/50 text-[10px] tracking-[0.22em] uppercase">Geopend</p>
@@ -101,21 +101,21 @@ export default function HomePage() {
       <SmullenTicker />
 
       {/* ── Opening banner ──────────────────────────── */}
-      <section className="bg-background py-8 md:py-10 px-6 text-brand-navy border-b border-border/60">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-6">
-          <div className="flex items-center gap-5">
+      <section className="bg-background py-6 sm:py-8 md:py-10 px-4 sm:px-6 text-brand-navy border-b border-border/60">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+          <div className="flex items-center gap-4 sm:gap-5">
             <div className="w-1 h-10 bg-primary rounded-full shrink-0" aria-hidden />
             <div>
               <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase mb-0.5">Woensdag t/m zondag</p>
-              <h2 className="heading-typewriter text-2xl md:text-3xl">Kom smullen</h2>
+              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl">Kom smullen</h2>
             </div>
           </div>
-          <div className="flex items-center gap-5 sm:gap-8">
+          <div className="flex items-center gap-4 sm:gap-5 md:gap-8 pl-5 sm:pl-0">
             <div className="text-center">
-              <p className="heading-display text-4xl md:text-5xl text-primary leading-none">12–22</p>
+              <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-primary leading-none">12–22</p>
               <p className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.18em] mt-1">Openingstijden</p>
             </div>
-            <Link href="/contact" className="btn-brand bg-brand-navy text-white hover:bg-primary shrink-0">
+            <Link href="/contact" className="btn-brand bg-brand-navy text-white hover:bg-primary shrink-0 text-xs sm:text-sm px-5 sm:px-8 py-2.5 sm:py-3.5">
               Reserveer
             </Link>
           </div>
@@ -123,21 +123,21 @@ export default function HomePage() {
       </section>
 
       {/* ── Welcome ───────────────────────────────── */}
-      <section className="relative py-20 md:py-28 px-6 overflow-hidden bg-background">
+      <section className="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 overflow-hidden bg-background">
         <div className="relative max-w-6xl mx-auto">
 
           {/* Two-column editorial layout: text left, stats right */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-14 md:mb-16">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start mb-12 sm:mb-14 md:mb-16">
             {/* Left: text + pill cards */}
             <div>
               <p className="label-vintage text-primary mb-3 text-[11px] tracking-[0.25em] uppercase">Welkom bij</p>
-              <BrandWordmark size="lg" className="mb-5" />
-              <p className="text-foreground/70 text-base md:text-lg leading-relaxed text-pretty mb-8 max-w-md">
+              <BrandWordmark size="lg" className="mb-4 sm:mb-5" />
+              <p className="text-foreground/70 text-sm sm:text-base md:text-lg leading-relaxed text-pretty mb-6 sm:mb-8 max-w-md">
                 Brasserie aan het water — terras, open keuken en een warme sfeer voor lunch én diner.
               </p>
 
               {/* Feature pills */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2.5 sm:gap-3">
                 {[
                   { icon: Waves, title: 'Aan het water', text: 'Terras met uitzicht over de Schelde' },
                   { icon: Utensils, title: 'Verse keuken', text: 'Seizoensgerechten & houtoven-pizza' },
@@ -147,13 +147,13 @@ export default function HomePage() {
                   return (
                     <div
                       key={item.title}
-                      className="group flex items-center gap-4 rounded-xl border border-border/70 bg-card/80 px-5 py-3.5 shadow-sm transition-all duration-200 hover:border-primary/40 hover:bg-card hover:shadow-md"
+                      className="group flex items-center gap-3 sm:gap-4 rounded-xl border border-border/70 bg-card/80 px-4 sm:px-5 py-3 sm:py-3.5 shadow-sm transition-all duration-200 hover:border-primary/40 hover:bg-card hover:shadow-md"
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-blue-light transition-colors group-hover:bg-primary">
-                        <Icon size={18} className="text-primary transition-colors group-hover:text-white" />
+                      <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg bg-brand-blue-light transition-colors group-hover:bg-primary">
+                        <Icon size={16} className="text-primary transition-colors group-hover:text-white" />
                       </div>
                       <div>
-                        <p className="font-display text-sm text-brand-navy uppercase tracking-wide">{item.title}</p>
+                        <p className="font-display text-xs sm:text-sm text-brand-navy uppercase tracking-wide">{item.title}</p>
                         <p className="text-xs text-muted-foreground leading-snug mt-0.5">{item.text}</p>
                       </div>
                     </div>
@@ -161,10 +161,10 @@ export default function HomePage() {
                 })}
               </div>
 
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-8">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-6 sm:mt-8">
                 <Link
                   href="/menu"
-                  className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
+                  className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
                 >
                   Bekijk het menu <ArrowRight size={16} />
                 </Link>
@@ -178,46 +178,46 @@ export default function HomePage() {
             </div>
 
             {/* Right: bento stats grid */}
-            <div className="grid grid-cols-2 gap-3 md:gap-4">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
               {/* Large primary card */}
-              <div className="col-span-2 flex items-center justify-between rounded-2xl bg-primary p-6 md:p-8 text-white shadow-lg shadow-primary/20">
+              <div className="col-span-2 flex items-center justify-between rounded-2xl bg-primary p-5 sm:p-6 md:p-8 text-white shadow-lg shadow-primary/20">
                 <div>
-                  <p className="heading-display text-6xl md:text-7xl leading-none">10+</p>
-                  <p className="mt-2 text-sm font-medium uppercase tracking-widest text-white/80">
+                  <p className="heading-display text-5xl sm:text-6xl md:text-7xl leading-none">10+</p>
+                  <p className="mt-2 text-xs sm:text-sm font-medium uppercase tracking-widest text-white/80">
                     Jaar aan het water
                   </p>
                 </div>
-                <Waves size={40} className="text-white/20" aria-hidden />
+                <Waves size={32} className="text-white/20 sm:size-10" aria-hidden />
               </div>
 
-              <div className="rounded-2xl border border-border bg-card p-5 flex flex-col gap-2 transition-shadow hover:shadow-md">
-                <Utensils size={18} className="text-primary" aria-hidden />
-                <p className="heading-display text-4xl text-primary">5</p>
+              <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2 transition-shadow hover:shadow-md">
+                <Utensils size={16} className="text-primary sm:size-[18px]" aria-hidden />
+                <p className="heading-display text-3xl sm:text-4xl text-primary">5</p>
                 <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 leading-snug">
                   Menu-<br />categorieën
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-border bg-card p-5 flex flex-col gap-2 transition-shadow hover:shadow-md">
+              <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2 transition-shadow hover:shadow-md">
                 <div className="flex gap-0.5 text-primary" aria-hidden>
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={12} fill="currentColor" />
+                    <Star key={i} size={11} fill="currentColor" className="sm:size-3" />
                   ))}
                 </div>
-                <p className="heading-display text-4xl text-primary">5.0</p>
+                <p className="heading-display text-3xl sm:text-4xl text-primary">5.0</p>
                 <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50">
                   Gastenreviews
                 </p>
               </div>
 
-              <div className="col-span-2 rounded-2xl bg-brand-blue-light/40 p-5 md:p-6 flex items-center justify-between gap-4 border border-primary/15">
+              <div className="col-span-2 rounded-2xl bg-brand-blue-light/40 p-4 sm:p-5 md:p-6 flex items-center justify-between gap-3 sm:gap-4 border border-primary/15">
                 <div>
-                  <p className="heading-display text-4xl text-primary">12–22</p>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 mt-1.5">
+                  <p className="heading-display text-3xl sm:text-4xl text-primary">12–22</p>
+                  <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 mt-1 sm:mt-1.5">
                     Woensdag tot en met Zondag
                   </p>
                 </div>
-                <Infinity size={36} className="text-primary/30 shrink-0" aria-hidden />
+                <Infinity size={28} className="text-primary/30 shrink-0 sm:size-9" aria-hidden />
               </div>
             </div>
           </div>
@@ -225,39 +225,39 @@ export default function HomePage() {
       </section>
 
       {/* ── Highlights ──────────────────────────── */}
-      <section className="py-14 md:py-16 px-6 bg-wood-2 border-y border-primary/10">
+      <section className="py-12 sm:py-14 md:py-16 px-4 sm:px-6 bg-wood-2 border-y border-primary/10">
         <div className="max-w-6xl mx-auto">
           {/* Section header */}
-          <div className="flex items-center gap-5 mb-10">
+          <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
             <div className="flex-1 h-px bg-primary/20" />
-            <div className="text-center shrink-0">
-              <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase mb-1">
+            <div className="text-center shrink-0 px-1">
+              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
                 Waarom <BrandName className="text-primary" />?
               </p>
-              <h2 className="heading-typewriter text-2xl md:text-3xl text-brand-navy">
+              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl text-brand-navy">
                 Een unieke beleving
               </h2>
             </div>
             <div className="flex-1 h-px bg-primary/20" />
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {highlights.map((item, index) => {
               const Icon = item.icon
               return (
                 <div
                   key={item.title}
                   className={[
-                    'group flex flex-col gap-4 rounded-2xl border bg-card p-6 transition-all duration-200',
+                    'group flex flex-col gap-4 rounded-2xl border bg-card p-5 sm:p-6 transition-all duration-200',
                     'hover:border-primary/40 hover:shadow-lg hover:-translate-y-0.5',
                     index === 0 ? 'border-primary/25 bg-primary/4' : 'border-border/80',
                   ].join(' ')}
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue-light transition-colors group-hover:bg-primary">
-                    <Icon size={20} className="text-primary transition-colors group-hover:text-white" />
+                  <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-brand-blue-light transition-colors group-hover:bg-primary">
+                    <Icon size={18} className="text-primary transition-colors group-hover:text-white sm:size-5" />
                   </div>
                   <div>
-                    <h3 className="font-display text-sm text-brand-navy uppercase tracking-wide leading-snug mb-1.5">
+                    <h3 className="font-display text-xs sm:text-sm text-brand-navy uppercase tracking-wide leading-snug mb-1 sm:mb-1.5">
                       {item.title}
                     </h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
@@ -272,15 +272,15 @@ export default function HomePage() {
       <PlankShowcase />
 
       {/* ── CTA Banner ──────────────────────────── */}
-      <BrandSurface variant="sky" pattern="SMULLEN" className="py-20 md:py-24 px-6 text-brand-navy">
+      <BrandSurface variant="sky" pattern="SMULLEN" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-brand-navy">
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-10 bg-brand-navy/25" />
             <p className="label-vintage text-brand-navy/60 text-[11px] tracking-[0.25em] uppercase">Reserveer direct</p>
             <div className="h-px w-10 bg-brand-navy/25" />
           </div>
-          <h2 className="heading-display text-5xl md:text-7xl mb-5 text-balance leading-[0.9]">Open!</h2>
-          <p className="text-brand-navy/70 text-base leading-relaxed mb-8 max-w-sm mx-auto">
+          <h2 className="heading-display text-4xl sm:text-5xl md:text-7xl mb-4 sm:mb-5 text-balance leading-[0.9]">Open!</h2>
+          <p className="text-brand-navy/70 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
             Wo – zo · 12:00 – 22:00 · Terras, plank & sfeer aan de Schelde.
           </p>
           <Link href="/contact" className="btn-brand bg-brand-navy text-white hover:bg-primary shadow-lg shadow-brand-navy/20">
@@ -290,21 +290,21 @@ export default function HomePage() {
       </BrandSurface>
 
       {/* ── Menu preview ────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-background">
+      <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
           {/* Section header with flanking lines */}
-          <div className="flex items-center gap-5 mb-12">
+          <div className="flex items-center gap-3 sm:gap-5 mb-10 sm:mb-12">
             <div className="flex-1 h-px bg-border" />
-            <div className="text-center shrink-0">
-              <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase mb-1">Onze keuken</p>
-              <h2 className="heading-typewriter text-2xl md:text-3xl text-brand-navy">
+            <div className="text-center shrink-0 px-1">
+              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Onze keuken</p>
+              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl text-brand-navy">
                 Een greep uit ons menu
               </h2>
             </div>
             <div className="flex-1 h-px bg-border" />
           </div>
 
-          <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-4">
+          <div className="max-w-4xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {[
               {
                 category: 'Voorgerechten',
@@ -324,7 +324,7 @@ export default function HomePage() {
             ].map((section) => (
               <div
                 key={section.category}
-                className={`rounded-2xl border p-7 flex flex-col ${
+                className={`rounded-2xl border p-5 sm:p-7 flex flex-col ${
                   section.featured
                     ? 'bg-primary border-primary shadow-xl shadow-primary/20 text-white'
                     : 'bg-card border-border/80 shadow-sm hover:shadow-md transition-shadow'
@@ -337,7 +337,7 @@ export default function HomePage() {
                   </span>
                 )}
                 <h3
-                  className={`font-display text-base uppercase tracking-wide mb-5 ${section.featured ? 'text-white' : 'text-brand-navy'}`}
+                  className={`font-display text-sm sm:text-base uppercase tracking-wide mb-4 sm:mb-5 ${section.featured ? 'text-white' : 'text-brand-navy'}`}
                 >
                   {section.category}
                 </h3>
@@ -345,7 +345,7 @@ export default function HomePage() {
                   {section.items.map((item) => (
                     <li
                       key={item}
-                      className={`flex items-center gap-2.5 text-sm py-2.5 border-b last:border-b-0 ${
+                      className={`flex items-center gap-2.5 text-sm py-2 sm:py-2.5 border-b last:border-b-0 ${
                         section.featured
                           ? 'border-white/15 text-white/85'
                           : 'border-border/50 text-foreground/65'
@@ -363,10 +363,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          <div className="text-center mt-8 sm:mt-10">
             <Link
               href="/menu"
-              className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
+              className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
             >
               Bekijk het volledige menu <ArrowRight size={16} />
             </Link>
