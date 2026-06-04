@@ -44,7 +44,7 @@ export default function ContactPage() {
       />
 
       {/* Main content */}
-      <section className="py-12 px-6 bg-background">
+      <section className="py-12 px-6 bg-wood-plank">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8">
 
           {/* Left column: info + hours + map */}
@@ -121,7 +121,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map link */}
-            <div className="rounded-xl overflow-hidden border border-border shadow-sm h-40 bg-wood-texture flex flex-col items-center justify-center gap-2">
+            <div className="rounded-xl overflow-hidden border border-border shadow-sm h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
               <MapPin size={28} className="text-primary" />
               <p className="text-sm text-foreground/60 font-medium">Parallelweg 1, Lelystad</p>
               <a

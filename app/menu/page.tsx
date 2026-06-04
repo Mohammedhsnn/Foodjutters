@@ -81,7 +81,7 @@ export default function MenuPage() {
       />
 
       {/* Allergen note */}
-      <div className="px-6 pt-8 pb-2 bg-background">
+      <div className="px-6 pt-8 pb-2 bg-wood-1">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 bg-brand-blue-light/50 border border-primary/15 rounded-xl px-5 py-3.5 text-sm text-foreground/65">
             <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" aria-hidden />
@@ -93,7 +93,7 @@ export default function MenuPage() {
       </div>
 
       {/* Menu sections */}
-      <section className="py-8 px-6 pb-14 bg-background">
+      <section className="py-8 px-6 pb-14 bg-wood-1">
         <div className="max-w-4xl mx-auto flex flex-col gap-14">
           {menuSections.map((section) => (
             <div key={section.id}>
@@ -130,7 +130,7 @@ export default function MenuPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 md:py-20 px-6 bg-wood-muted border-t border-primary/10">
+      <section className="py-16 md:py-20 px-6 bg-wood-3 border-t border-primary/10">
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-8 bg-primary/30" />

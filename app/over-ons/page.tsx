@@ -55,7 +55,7 @@ export default function OverOnsPage() {
       />
 
       {/* ── Story ──────────────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-background">
+      <section className="py-16 md:py-20 px-6 bg-wood-4">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           {/* Stats block */}
@@ -107,7 +107,7 @@ export default function OverOnsPage() {
       </section>
 
       {/* ── Values ─────────────────────────────────── */}
-      <section className="py-14 md:py-16 px-6 bg-wood-muted border-y border-primary/10">
+      <section className="py-14 md:py-16 px-6 bg-wood-2 border-y border-primary/10">
         <div className="max-w-6xl mx-auto">
           {/* Centered section header */}
           <div className="flex items-center gap-5 mb-10">
@@ -154,7 +154,7 @@ export default function OverOnsPage() {
       </section>
 
       {/* ── Team ───────────────────────────────────── */}
-      <section className="py-14 md:py-16 px-6 bg-background">
+      <section className="py-14 md:py-16 px-6 bg-wood-plank">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-5 mb-10">
             <div className="flex-1 h-px bg-border" />

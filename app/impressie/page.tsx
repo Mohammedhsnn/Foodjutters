@@ -92,7 +92,7 @@ export default function ImpressiePage() {
       </section>
 
       {/* Pull quote */}
-      <section className="py-16 md:py-20 px-6 bg-wood-muted border-y border-primary/10">
+      <section className="py-16 md:py-20 px-6 bg-wood-3 border-y border-primary/10">
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="h-px w-10 bg-primary/30" />
@@ -114,7 +114,7 @@ export default function ImpressiePage() {
       </section>
 
       {/* Reviews */}
-      <section className="py-14 md:py-16 px-6 bg-background">
+      <section className="py-14 md:py-16 px-6 bg-wood-5">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-5 mb-10">
             <div className="flex-1 h-px bg-border" />
