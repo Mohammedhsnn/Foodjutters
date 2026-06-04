@@ -54,8 +54,9 @@ export function PlankShowcase() {
           </PlankCard>
 
           <PlankCard variant="pattern">
-            <p className="heading-display text-2xl sm:text-3xl text-white/90 leading-none">MMM</p>
-            <p className="heading-display text-2xl sm:text-3xl text-white/50 leading-none -mt-1">MMM</p>
+            <p className="label-vintage text-white/55 text-[10px] tracking-[0.22em] uppercase mb-2">Aan het water</p>
+            <p className="heading-display text-3xl sm:text-4xl text-white leading-none">Terras</p>
+            <p className="heading-display text-3xl sm:text-4xl text-primary leading-none">& sfeer</p>
           </PlankCard>
 
           <PlankCard variant="price">
