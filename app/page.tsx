@@ -101,7 +101,7 @@ export default function HomePage() {
       <SmullenTicker />
 
       {/* ── Opening banner ──────────────────────────── */}
-      <section className="bg-wood-5 py-8 md:py-10 px-6 text-brand-navy border-b border-border/60">
+      <section className="bg-background py-8 md:py-10 px-6 text-brand-navy border-b border-border/60">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <div className="w-1 h-10 bg-primary rounded-full shrink-0" aria-hidden />
@@ -123,7 +123,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Welcome ───────────────────────────────── */}
-      <section className="relative py-20 md:py-28 px-6 overflow-hidden bg-wood-welcome">
+      <section className="relative py-20 md:py-28 px-6 overflow-hidden bg-background">
         <div className="relative max-w-6xl mx-auto">
 
           {/* Two-column editorial layout: text left, stats right */}
@@ -210,7 +210,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="col-span-2 rounded-2xl bg-wood-3 p-5 md:p-6 flex items-center justify-between gap-4 border border-primary/15">
+              <div className="col-span-2 rounded-2xl bg-brand-blue-light/40 p-5 md:p-6 flex items-center justify-between gap-4 border border-primary/15">
                 <div>
                   <p className="heading-display text-4xl text-primary">12–22</p>
                   <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 mt-1.5">
@@ -290,7 +290,7 @@ export default function HomePage() {
       </BrandSurface>
 
       {/* ── Menu preview ────────────────────────── */}
-      <section className="py-16 md:py-20 px-6 bg-wood-plank">
+      <section className="py-16 md:py-20 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
           {/* Section header with flanking lines */}
           <div className="flex items-center gap-5 mb-12">

@@ -124,7 +124,7 @@ export default function ImpressiePage() {
       </section>
 
       {/* Reviews */}
-      <section className="py-14 md:py-16 px-6 bg-wood-5">
+      <section className="py-14 md:py-16 px-6 bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-5 mb-10">
             <div className="flex-1 h-px bg-border" />

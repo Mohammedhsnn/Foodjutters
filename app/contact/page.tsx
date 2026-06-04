@@ -54,7 +54,7 @@ export default function ContactPage() {
       />
 
       {/* Main content */}
-      <section id="reserveer" className="py-12 px-6 bg-wood-plank">
+      <section id="reserveer" className="py-12 px-6 bg-background">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-8">
 
           {/* Left column: info + hours + map */}
