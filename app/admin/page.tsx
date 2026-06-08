@@ -1,154 +1,210 @@
 import Link from 'next/link'
-import { ArrowRight, CalendarDays, FileText, UtensilsCrossed } from 'lucide-react'
-import { AdminPageHeader } from '@/components/admin/admin-page-header'
-import { AdminStatCard } from '@/components/admin/admin-stat-card'
-import { Button } from '@/components/ui/button'
 import {
-  getContentPages,
-  getMenuSections,
+  Button,
+  Card,
+  Group,
+  SimpleGrid,
+  Stack,
+  Text,
+  ThemeIcon,
+  Title,
+} from '@mantine/core'
+import {
+  IconArrowRight,
+  IconCalendar,
+  IconFileText,
+  IconToolsKitchen2,
+  tablerProps,
+} from '@/lib/admin/tabler'
+import { AdminHelpBox } from '@/components/admin/admin-help'
+import { AdminPageHeader } from '@/components/admin/admin-page-header'
+import { AdminPanel } from '@/components/admin/admin-panel'
+import { AdminSection } from '@/components/admin/admin-section'
+import { AdminStatCard } from '@/components/admin/admin-stat-card'
+import { AdminEmpty } from '@/components/admin/admin-states'
+import { ReservationStatusBadge } from '@/components/admin/reservation-status-badge'
+import { ReservationStatusLegend } from '@/components/admin/reservation-status-legend'
+import { ADMIN_MODULES, type AdminSection } from '@/lib/admin/page-meta'
+import {
+  getContentPagesSummary,
+  getMenuSectionsSummary,
   getReservations,
 } from '@/lib/admin/store'
-import type { ReservationStatus } from '@/lib/admin/types'
+
+const MODULE_ICONS = {
+  content: IconFileText,
+  menu: IconToolsKitchen2,
+  reservations: IconCalendar,
+} as const
+
+function moduleStat(
+  section: AdminSection,
+  pageCount: number,
+  sectionCount: number,
+  itemCount: number,
+  pending: number,
+  upcoming: number,
+) {
+  switch (section) {
+    case 'content':
+      return `${pageCount} pagina${pageCount === 1 ? '' : '’s'}`
+    case 'menu':
+      return `${sectionCount} categorieën · ${itemCount} gerechten`
+    case 'reservations':
+      return `${pending} open · ${upcoming} komend`
+    default:
+      return ''
+  }
+}
 
 export default async function AdminDashboardPage() {
   const [pages, sections, reservations] = await Promise.all([
-    getContentPages(),
-    getMenuSections(),
+    getContentPagesSummary(),
+    getMenuSectionsSummary(),
     getReservations(),
   ])
 
-  const itemCount = sections.reduce((n, s) => n + s.items.length, 0)
+  const itemCount = sections.reduce((n, s) => n + s.itemCount, 0)
   const pending = reservations.filter((r) => r.status === 'pending').length
   const today = new Date().toISOString().slice(0, 10)
   const upcoming = reservations.filter(
     (r) => r.date >= today && !['cancelled', 'completed', 'no_show'].includes(r.status),
   ).length
 
-  const quickLinks = [
-    {
-      href: '/admin/content',
-      title: 'Contentbeheer',
-      description: `${pages.length} pagina's beheren`,
-      icon: FileText,
-    },
-    {
-      href: '/admin/menu',
-      title: 'Menu beheer',
-      description: `${sections.length} categorieën · ${itemCount} gerechten`,
-      icon: UtensilsCrossed,
-    },
-    {
-      href: '/admin/reservations',
-      title: 'Reserveringen',
-      description: `${pending} openstaand · ${upcoming} komend`,
-      icon: CalendarDays,
-    },
-  ] as const
-
   return (
-    <div className="space-y-8">
+    <Stack gap="xl">
       <AdminPageHeader
         eyebrow="Dashboard"
         title="Overzicht"
-        description="Beheer content, menu en reserveringen vanuit één centrale omgeving."
+        description="Beheer teksten, menu en reserveringen vanuit één plek."
+        help={
+          <AdminHelpBox title="Kort uitgelegd">
+            Kies een onderdeel, pas aan en klik op <strong>Opslaan</strong>. Wijzigingen staan direct op de
+            website.
+          </AdminHelpBox>
+        }
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <AdminStatCard label="Contentpagina's" value={pages.length} icon={FileText} />
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing="md">
         <AdminStatCard
-          label="Menugerechten"
+          label="Pagina’s"
+          value={pages.length}
+          hint="Bewerkbare websitepagina’s"
+          icon={IconFileText}
+        />
+        <AdminStatCard
+          label="Gerechten"
           value={itemCount}
-          hint={`${sections.length} categorieën`}
-          icon={UtensilsCrossed}
+          hint={`${sections.length} menucategorieën`}
+          icon={IconToolsKitchen2}
         />
         <AdminStatCard
           label="Reserveringen"
           value={reservations.length}
-          hint={`${pending} in afwachting`}
-          icon={CalendarDays}
+          hint={`${pending} wachten op bevestiging`}
+          icon={IconCalendar}
         />
-      </div>
+      </SimpleGrid>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        {quickLinks.map(({ href, title, description, icon: Icon }) => (
-          <Link
-            key={href}
-            href={href}
-            className="group rounded-xl border border-border/80 bg-card p-5 shadow-sm hover:border-primary/30 hover:shadow-md transition-all"
-          >
-            <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary mb-4">
-              <Icon className="size-5" />
-            </div>
-            <h2 className="font-semibold text-brand-navy group-hover:text-primary transition-colors">
-              {title}
-            </h2>
-            <p className="text-sm text-muted-foreground mt-1">{description}</p>
-            <span className="inline-flex items-center gap-1 text-xs font-medium text-primary mt-4">
-              Openen <ArrowRight className="size-3.5" />
-            </span>
-          </Link>
-        ))}
-      </section>
-
-      <section className="rounded-xl border border-border/80 bg-card overflow-hidden">
-        <div className="flex items-center justify-between gap-3 border-b border-border/80 px-4 py-3 sm:px-5">
-          <h2 className="font-display text-sm uppercase tracking-wide text-brand-navy">
-            Recente reserveringen
-          </h2>
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/admin/reservations">Alles bekijken</Link>
-          </Button>
-        </div>
-        <ul className="divide-y divide-border/60">
-          {reservations.slice(0, 5).map((r) => (
-            <li key={r.id}>
+      <AdminSection
+        title="Onderdelen"
+        description="Ga direct naar content, menu of reserveringen."
+      >
+        <SimpleGrid cols={{ base: 1, md: 3 }} spacing="md">
+          {ADMIN_MODULES.map(({ href, label, description, actionLabel, section }) => {
+            const Icon = MODULE_ICONS[section as keyof typeof MODULE_ICONS]
+            const stat = moduleStat(section, pages.length, sections.length, itemCount, pending, upcoming)
+            return (
               <Link
-                href={`/admin/reservations/${r.id}`}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 px-4 py-3 sm:px-5 hover:bg-muted/40 transition-colors"
+                key={href}
+                href={href}
+                style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
               >
-                <div className="min-w-0">
-                  <p className="font-medium text-brand-navy truncate">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {r.date} · {r.time} · {r.guests} gasten
-                  </p>
-                </div>
-                <StatusPill status={r.status} />
+                <Card padding="lg" radius="lg" withBorder shadow="sm" className="admin-card-hover h-full">
+                  <ThemeIcon size={40} radius="md" variant="light" color="brand" mb="md">
+                    <Icon {...tablerProps(20)} />
+                  </ThemeIcon>
+                  <Title order={4} c="navy.5" mb={4}>
+                    {label}
+                  </Title>
+                  <Text size="sm" c="dimmed" lh={1.5} mb="sm" lineClamp={2}>
+                    {description}
+                  </Text>
+                  <Text size="xs" c="brand.6" fw={600} mb="md">
+                    {stat}
+                  </Text>
+                  <Group gap={6} c="navy.5">
+                    <Text size="sm" fw={600}>
+                      {actionLabel}
+                    </Text>
+                    <IconArrowRight {...tablerProps(16)} />
+                  </Group>
+                </Card>
               </Link>
-            </li>
-          ))}
-          {reservations.length === 0 ? (
-            <li className="px-5 py-8 text-center text-sm text-muted-foreground">
-              Nog geen reserveringen
-            </li>
-          ) : null}
-        </ul>
-      </section>
-    </div>
-  )
-}
+            )
+          })}
+        </SimpleGrid>
+      </AdminSection>
 
-function StatusPill({ status }: { status: ReservationStatus }) {
-  const styles: Record<ReservationStatus, string> = {
-    pending: 'bg-amber-100 text-amber-900',
-    confirmed: 'bg-primary/15 text-brand-navy',
-    seated: 'bg-brand-blue-light text-brand-navy',
-    completed: 'bg-muted text-muted-foreground',
-    cancelled: 'bg-destructive/10 text-destructive',
-    no_show: 'bg-destructive/10 text-destructive',
-  }
-  const labels: Record<ReservationStatus, string> = {
-    pending: 'In afwachting',
-    confirmed: 'Bevestigd',
-    seated: 'Aan tafel',
-    completed: 'Afgerond',
-    cancelled: 'Geannuleerd',
-    no_show: 'No-show',
-  }
-  return (
-    <span
-      className={`inline-flex shrink-0 self-start sm:self-center rounded-full px-2.5 py-0.5 text-xs font-medium ${styles[status]}`}
-    >
-      {labels[status]}
-    </span>
+      <AdminPanel
+        title="Recente reserveringen"
+        description="Laatste aanvragen uit uw database"
+        actions={
+          <Link href="/admin/reservations" style={{ textDecoration: 'none' }}>
+            <Button variant="light" color="brand" size="compact-sm">
+              Alles bekijken
+            </Button>
+          </Link>
+        }
+      >
+        {reservations.length === 0 ? (
+          <AdminEmpty
+            compact
+            title="Nog geen reserveringen"
+            description="Zodra gasten via de website reserveren, verschijnen ze hier."
+            action={
+              <Link href="/admin/reservations/new" style={{ textDecoration: 'none' }}>
+                <Button color="navy" size="sm">
+                  Handmatig toevoegen
+                </Button>
+              </Link>
+            }
+          />
+        ) : (
+          <>
+            <Stack gap={0}>
+              {reservations.slice(0, 5).map((r) => (
+                <Link
+                  key={r.id}
+                  href={`/admin/reservations/${r.id}`}
+                  style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    display: 'block',
+                    borderBottom: '1px solid #e8f4fb',
+                  }}
+                  className="admin-table-row"
+                >
+                  <Group justify="space-between" wrap="wrap" gap="sm" px="md" py="sm">
+                    <Stack gap={2} style={{ flex: 1, minWidth: 0 }}>
+                      <Text fw={600} c="navy.5" truncate>
+                        {r.name}
+                      </Text>
+                      <Text size="xs" c="dimmed">
+                        {r.date} · {r.time} · {r.guests} gasten
+                      </Text>
+                    </Stack>
+                    <ReservationStatusBadge status={r.status} />
+                  </Group>
+                </Link>
+              ))}
+            </Stack>
+            <Group px="md" py="sm" style={{ borderTop: '1px solid #e8f4fb', background: '#fafcfe' }}>
+              <ReservationStatusLegend />
+            </Group>
+          </>
+        )}
+      </AdminPanel>
+    </Stack>
   )
 }

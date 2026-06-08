@@ -5,7 +5,7 @@ import { blockJson, blockValue } from '@/lib/cms/blocks'
 import { resolveIcon } from '@/lib/cms/icons'
 import { loadSiteSettings } from '@/lib/cms/settings'
 import { getContentPage } from '@/lib/db/repository'
-import { Utensils } from 'lucide-react'
+import { IconToolsKitchen2 } from '@/lib/site/icons'
 
 export const metadata: Metadata = {
   title: 'Reserveren – FoodJutters',
@@ -52,7 +52,7 @@ export default async function ReserverenPage() {
 
             <aside className="flex flex-col gap-5 lg:sticky lg:top-24">
               {infoItems.map(({ icon, title, body }) => {
-                const Icon = resolveIcon(icon, Utensils)
+                const Icon = resolveIcon(icon, IconToolsKitchen2)
                 return (
                   <div
                     key={title}

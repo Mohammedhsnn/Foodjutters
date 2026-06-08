@@ -1,16 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Save } from 'lucide-react'
-import { toast } from 'sonner'
+import { Button, Group, Stack } from '@mantine/core'
+import { adminNotify } from '@/lib/admin/icons'
+import { AdminBackButton } from '@/components/admin/admin-back-button'
+import { AdminHelpBox } from '@/components/admin/admin-help'
 import { AdminPageHeader } from '@/components/admin/admin-page-header'
 import { ReservationForm } from '@/components/admin/reservation-form'
 import { adminFetch, ApiError } from '@/lib/admin/api'
 import type { Reservation } from '@/lib/admin/types'
 import { newReservationId } from '@/lib/admin/ids'
-import { Button } from '@/components/ui/button'
 
 function emptyReservation(): Reservation {
   const now = new Date().toISOString()
@@ -39,7 +39,7 @@ export default function AdminReservationNewPage() {
 
   async function handleCreate() {
     if (!reservation.name.trim()) {
-      toast.error('Naam is verplicht')
+      adminNotify.error('Naam is verplicht')
       return
     }
     setSaving(true)
@@ -48,43 +48,43 @@ export default function AdminReservationNewPage() {
         '/api/admin/reservations',
         { method: 'POST', body: JSON.stringify(reservation) },
       )
-      toast.success('Reservering aangemaakt')
+      adminNotify.success('Aangemaakt', 'De reservering staat nu in uw overzicht')
       router.push(`/admin/reservations/${data.reservation.id}`)
     } catch (e) {
-      toast.error(e instanceof ApiError ? e.message : 'Aanmaken mislukt')
+      adminNotify.error('Fout', e instanceof ApiError ? e.message : 'Aanmaken mislukt')
     } finally {
       setSaving(false)
     }
   }
 
   return (
-    <div className="space-y-6 pb-8">
-      <Button variant="ghost" size="sm" asChild>
-        <Link href="/admin/reservations">
-          <ArrowLeft className="size-4" /> Terug naar overzicht
-        </Link>
-      </Button>
+    <Stack gap="lg" pb="xl">
+      <AdminBackButton href="/admin/reservations" label="Terug naar overzicht" />
 
       <AdminPageHeader
         eyebrow="Reserveringen"
         title="Nieuwe reservering"
-        description="Voeg handmatig een reservering toe (telefoon, walk-in of groep)."
+        description="Gebruik dit voor telefonische boekingen of walk-ins. Vul de gegevens in en klik op opslaan."
         actions={
-          <Button onClick={handleCreate} disabled={saving} className="rounded-full">
-            <Save className="size-4" />
-            {saving ? 'Aanmaken…' : 'Aanmaken'}
+          <Button onClick={handleCreate} loading={saving} color="navy">
+            Reservering aanmaken
           </Button>
+        }
+        help={
+          <AdminHelpBox title="Wanneer gebruikt u dit?">
+            Als een gast belt of langskomt zonder via de website te reserveren. Na het aanmaken kunt u de status
+            beheren zoals bij andere reserveringen.
+          </AdminHelpBox>
         }
       />
 
       <ReservationForm value={reservation} onChange={setReservation} />
 
-      <div className="flex justify-end">
-        <Button onClick={handleCreate} disabled={saving} className="rounded-full">
-          <Save className="size-4" />
+      <Group justify="flex-end">
+        <Button onClick={handleCreate} loading={saving} color="navy">
           Reservering aanmaken
         </Button>
-      </div>
-    </div>
+      </Group>
+    </Stack>
   )
 }

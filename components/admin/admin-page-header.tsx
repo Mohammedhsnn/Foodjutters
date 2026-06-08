@@ -1,43 +1,43 @@
-import { cn } from '@/lib/utils'
+import { Box, Group, Stack, Text, Title } from '@mantine/core'
 
 export function AdminPageHeader({
   eyebrow,
   title,
   description,
+  help,
   actions,
-  className,
 }: {
   eyebrow?: string
   title: string
   description?: string
+  help?: React.ReactNode
   actions?: React.ReactNode
-  className?: string
 }) {
   return (
-    <div
-      className={cn(
-        'flex flex-col gap-4 border-b border-border/80 pb-6 sm:flex-row sm:items-end sm:justify-between',
-        className,
-      )}
-    >
-      <div className="min-w-0 space-y-1">
-        {eyebrow ? (
-          <p className="label-vintage text-primary text-[11px] tracking-[0.2em] uppercase">
-            {eyebrow}
-          </p>
+    <Box className="admin-page-header">
+      <Group justify="space-between" align="flex-start" wrap="wrap" gap="md">
+        <Stack gap={6} maw="100%" style={{ flex: 1, minWidth: 0 }}>
+          {eyebrow ? (
+            <Text size="xs" tt="uppercase" fw={600} c="brand.5" style={{ letterSpacing: '0.12em' }}>
+              {eyebrow}
+            </Text>
+          ) : null}
+          <Title order={1} c="navy.5">
+            {title}
+          </Title>
+          {description ? (
+            <Text size="sm" c="dimmed" maw={600} lh={1.5}>
+              {description}
+            </Text>
+          ) : null}
+        </Stack>
+        {actions ? (
+          <Group gap="sm" wrap="wrap" justify="flex-end" style={{ flexShrink: 0 }}>
+            {actions}
+          </Group>
         ) : null}
-        <h1 className="heading-display text-2xl sm:text-3xl text-brand-navy truncate">
-          {title}
-        </h1>
-        {description ? (
-          <p className="text-sm text-muted-foreground max-w-2xl leading-relaxed">
-            {description}
-          </p>
-        ) : null}
-      </div>
-      {actions ? (
-        <div className="flex flex-wrap items-center gap-2 shrink-0">{actions}</div>
-      ) : null}
-    </div>
+      </Group>
+      {help ? <Box mt="md">{help}</Box> : null}
+    </Box>
   )
 }

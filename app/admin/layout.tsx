@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { Toaster } from '@/components/ui/sonner'
 import { AdminShell } from '@/components/admin/admin-shell'
+import { MantineAdminProvider } from '@/components/admin/mantine-admin-provider'
 
 export const metadata: Metadata = {
   title: 'Admin – FoodJutters',
@@ -13,9 +13,8 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
+    <MantineAdminProvider>
       <AdminShell>{children}</AdminShell>
-      <Toaster position="top-right" richColors closeButton />
-    </>
+    </MantineAdminProvider>
   )
 }

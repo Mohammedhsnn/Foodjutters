@@ -1,4 +1,4 @@
-import type { ContentPage, MenuSection, Reservation } from './types'
+import type { ContentPage, MenuSection } from './types'
 
 function now() {
   return new Date().toISOString()
@@ -241,79 +241,11 @@ export const SEED_MENU: MenuSection[] = [
   },
 ]
 
-function daysFromNow(days: number) {
-  const d = new Date()
-  d.setDate(d.getDate() + days)
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, '0')
-  const day = String(d.getDate()).padStart(2, '0')
-  return `${y}-${m}-${day}`
-}
-
-export const SEED_RESERVATIONS: Reservation[] = [
-  {
-    id: 'res_001',
-    date: daysFromNow(2),
-    time: '18:30',
-    guests: '4',
-    name: 'Anna de Vries',
-    email: 'anna@example.nl',
-    phone: '06 12345678',
-    notes: 'Terras indien mogelijk',
-    status: 'confirmed',
-    createdAt: now(),
-    updatedAt: now(),
-  },
-  {
-    id: 'res_002',
-    date: daysFromNow(3),
-    time: '19:00',
-    guests: '2',
-    name: 'Pieter Jansen',
-    email: 'pieter@example.nl',
-    phone: '06 87654321',
-    notes: '',
-    status: 'pending',
-    createdAt: now(),
-    updatedAt: now(),
-  },
-  {
-    id: 'res_003',
-    date: daysFromNow(5),
-    time: '20:00',
-    guests: '8+',
-    name: 'Groep Maritime BV',
-    email: 'events@maritime.nl',
-    phone: '010 555 0101',
-    notes: 'Verjaardagsdiner, allergie noten',
-    status: 'confirmed',
-    createdAt: now(),
-    updatedAt: now(),
-  },
-  {
-    id: 'res_004',
-    date: daysFromNow(-1),
-    time: '17:30',
-    guests: '3',
-    name: 'Sofie Bakker',
-    email: 'sofie@example.nl',
-    phone: '06 11223344',
-    notes: 'Kinderstoel nodig',
-    status: 'completed',
-    createdAt: now(),
-    updatedAt: now(),
-  },
-  {
-    id: 'res_005',
-    date: daysFromNow(7),
-    time: '12:30',
-    guests: '6',
-    name: 'Mark van Dijk',
-    email: 'mark@example.nl',
-    phone: '06 99887766',
-    notes: '',
-    status: 'pending',
-    createdAt: now(),
-    updatedAt: now(),
-  },
-]
+/** Legacy demo IDs inserted by earlier seeds — safe to remove via `pnpm db:clear-demo-reservations` */
+export const LEGACY_DEMO_RESERVATION_IDS = [
+  'res_001',
+  'res_002',
+  'res_003',
+  'res_004',
+  'res_005',
+] as const

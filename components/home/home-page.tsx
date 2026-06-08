@@ -1,12 +1,14 @@
 import Link from 'next/link'
 import {
-  ArrowRight,
-  Utensils,
-  Waves,
-  Star,
-  Infinity,
-  Sunset,
-} from 'lucide-react'
+  IconArrowRight,
+  IconInfinity,
+  IconStar,
+  IconStarFilled,
+  IconSunset2,
+  IconToolsKitchen2,
+  IconWaveSine,
+  tablerProps,
+} from '@/lib/site/icons'
 import { BrandName } from '@/components/brand-name'
 import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
@@ -73,7 +75,7 @@ export function HomePage({
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full shadow-xl shadow-brand-navy/30 hover:bg-primary hover:shadow-primary/30 transition-all duration-200"
               >
                 {blockValue(page, 'cta_primary', 'Reserveer een tafel')}
-                <ArrowRight className="w-4 h-4" />
+                <IconArrowRight {...tablerProps(16)} />
               </Link>
               <Link
                 href="/menu"
@@ -90,10 +92,6 @@ export function HomePage({
             <div className="hidden sm:flex flex-col gap-1">
               <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Geopend</p>
               <p className="font-serif text-xs text-brand-navy/80 font-medium">{settings.hoursDisplay}</p>
-            </div>
-            <div className="mx-auto sm:mx-0 flex flex-col items-center gap-2">
-              <div className="w-px h-8 bg-gradient-to-b from-brand-navy/35 to-transparent" />
-              <span className="font-serif text-[9px] tracking-[0.35em] uppercase text-brand-navy/50">Scroll</span>
             </div>
             <div className="hidden sm:flex flex-col items-end gap-1 max-w-[200px]">
               <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Locatie</p>
@@ -145,7 +143,7 @@ export function HomePage({
               </p>
               <div className="flex flex-col gap-2.5 sm:gap-3">
                 {features.map((item) => {
-                  const Icon = resolveIcon(item.icon, Waves)
+                  const Icon = resolveIcon(item.icon, IconWaveSine)
                   return (
                     <div
                       key={item.title}
@@ -169,13 +167,13 @@ export function HomePage({
                   href="/menu"
                   className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
                 >
-                  Bekijk het menu <ArrowRight size={16} />
+                  Bekijk het menu <IconArrowRight {...tablerProps(16)} />
                 </Link>
                 <Link
                   href="/over-ons"
                   className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all"
                 >
-                  Ontdek ons verhaal <ArrowRight size={16} />
+                  Ontdek ons verhaal <IconArrowRight {...tablerProps(16)} />
                 </Link>
               </div>
             </div>
@@ -190,10 +188,10 @@ export function HomePage({
                     Jaar aan het water
                   </p>
                 </div>
-                <Waves size={32} className="text-white/20 sm:size-10" aria-hidden />
+                <IconWaveSine {...tablerProps(32)} className="text-white/20 sm:w-10 sm:h-10" aria-hidden />
               </div>
               <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2">
-                <Utensils size={16} className="text-primary sm:size-[18px]" aria-hidden />
+                <IconToolsKitchen2 {...tablerProps(16)} className="text-primary sm:w-[18px] sm:h-[18px]" aria-hidden />
                 <p className="heading-display text-3xl sm:text-4xl text-primary">{blockValue(page, 'stats_categories', String(categoryCount))}</p>
                 <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 leading-snug">
                   Menu-<br />
@@ -203,7 +201,7 @@ export function HomePage({
               <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2">
                 <div className="flex gap-0.5 text-primary" aria-hidden>
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={11} fill="currentColor" className="sm:size-3" />
+                    <IconStarFilled key={i} {...tablerProps(11)} className="text-primary sm:w-3 sm:h-3" />
                   ))}
                 </div>
                 <p className="heading-display text-3xl sm:text-4xl text-primary">{blockValue(page, 'stats_rating', '5.0')}</p>
@@ -216,7 +214,7 @@ export function HomePage({
                     {settings.hoursDisplay}
                   </p>
                 </div>
-                <Infinity size={28} className="text-primary/30 shrink-0 sm:size-9" aria-hidden />
+                <IconInfinity {...tablerProps(28)} className="text-primary/30 shrink-0 sm:w-9 sm:h-9" aria-hidden />
               </div>
             </div>
           </div>
@@ -237,7 +235,7 @@ export function HomePage({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {highlights.map((item, index) => {
-              const Icon = resolveIcon(item.icon, Sunset)
+              const Icon = resolveIcon(item.icon, IconSunset2)
               return (
                 <div
                   key={item.title}
@@ -274,7 +272,7 @@ export function HomePage({
             {blockValue(page, 'cta_banner_text', settings.hoursDisplay)}
           </p>
           <Link href="/reserveren" className="btn-brand bg-brand-navy text-white hover:bg-primary shadow-lg shadow-brand-navy/20">
-            Maak een reservering <ArrowRight size={16} />
+            Maak een reservering <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </BrandSurface>
@@ -338,7 +336,7 @@ export function HomePage({
               href="/menu"
               className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
             >
-              Bekijk het volledige menu <ArrowRight size={16} />
+              Bekijk het volledige menu <IconArrowRight {...tablerProps(16)} />
             </Link>
           </div>
         </div>

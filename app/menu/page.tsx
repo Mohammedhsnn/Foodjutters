@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import { blockValue } from '@/lib/cms/blocks'
 import { getContentPage, getMenuSections } from '@/lib/db/repository'
@@ -134,7 +134,7 @@ export default async function MenuPage() {
             href="/reserveren"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
           >
-            Maak een reservering <ArrowRight size={16} />
+            Maak een reservering <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </section>

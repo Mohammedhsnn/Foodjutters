@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { IconMenu2, IconX, tablerProps } from '@/lib/site/icons'
 import { cn } from '@/lib/utils'
 import { Logo } from '@/components/logo'
 
@@ -89,7 +89,7 @@ export function Navigation() {
             aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            {menuOpen ? <IconX {...tablerProps(20)} /> : <IconMenu2 {...tablerProps(20)} />}
           </button>
         </div>
       </div>

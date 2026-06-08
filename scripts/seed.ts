@@ -9,10 +9,9 @@ import {
   contentPages,
   menuItems,
   menuSections,
-  reservations,
   siteSettings,
 } from '../lib/db/schema'
-import { SEED_CONTENT, SEED_MENU, SEED_RESERVATIONS } from '../lib/admin/seed'
+import { SEED_CONTENT, SEED_MENU } from '../lib/admin/seed'
 import { SEED_EXTRA_BLOCKS } from '../lib/admin/seed-extra'
 import { SEED_SITE_SETTINGS } from '../lib/admin/seed-site'
 import type { ContentPage } from '../lib/admin/types'
@@ -32,7 +31,7 @@ function mergePages(): ContentPage[] {
 async function seed() {
   console.log('Seeding Neon database…')
 
-  await db.delete(reservations)
+  // Reserveringen worden niet geseed — die komen alleen binnen via de website of het admin-paneel.
   await db.delete(menuItems)
   await db.delete(menuSections)
   await db.delete(contentBlocks)
@@ -91,27 +90,11 @@ async function seed() {
     }
   }
 
-  for (const r of SEED_RESERVATIONS) {
-    await db.insert(reservations).values({
-      id: r.id,
-      date: r.date,
-      time: r.time,
-      guests: r.guests,
-      name: r.name,
-      email: r.email,
-      phone: r.phone,
-      notes: r.notes,
-      status: r.status,
-      createdAt: new Date(r.createdAt),
-      updatedAt: new Date(r.updatedAt),
-    })
-  }
-
   console.log('Done:', {
     settings: Object.keys(SEED_SITE_SETTINGS).length,
     pages: pages.length,
     menuSections: SEED_MENU.length,
-    reservations: SEED_RESERVATIONS.length,
+    reservations: 'unchanged (website/admin only)',
   })
 }
 

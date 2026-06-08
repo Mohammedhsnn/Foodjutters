@@ -1,23 +1,18 @@
 'use client'
 
-import type { Reservation, ReservationStatus } from '@/lib/admin/types'
-import { RESERVATION_STATUS_LABELS } from '@/lib/admin/types'
-import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import {
   Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+  Grid,
+  Select,
+  Stack,
+  Text,
+  Textarea,
+  TextInput,
+  Title,
+} from '@mantine/core'
+import { ReservationStatusLegend } from '@/components/admin/reservation-status-legend'
+import type { Reservation, ReservationStatus } from '@/lib/admin/types'
+import { RESERVATION_STATUS_LABELS } from '@/lib/admin/types'
 
 const STATUSES: ReservationStatus[] = [
   'pending',
@@ -47,135 +42,123 @@ export function ReservationForm({ value, onChange }: Props) {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle className="heading-display text-lg text-brand-navy">
-            Reservering
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-2">
-              <Label htmlFor="date">Datum</Label>
-              <Input
-                id="date"
-                type="date"
-                required
-                value={value.date}
-                onChange={(e) => patch({ date: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="time">Tijd</Label>
-              <Select value={value.time} onValueChange={(t) => patch({ time: t })}>
-                <SelectTrigger id="time">
-                  <SelectValue placeholder="Kies tijd" />
-                </SelectTrigger>
-                <SelectContent>
-                  {TIME_SLOTS.map((t) => (
-                    <SelectItem key={t} value={t}>
-                      {t}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="guests">Aantal gasten</Label>
-              <Select value={value.guests} onValueChange={(g) => patch({ guests: g })}>
-                <SelectTrigger id="guests">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {GUEST_OPTIONS.map((g) => (
-                    <SelectItem key={g} value={g}>
-                      {g}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="status">Status</Label>
-              <Select
-                value={value.status}
-                onValueChange={(s) => patch({ status: s as ReservationStatus })}
-              >
-                <SelectTrigger id="status">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {STATUSES.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {RESERVATION_STATUS_LABELS[s]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="notes">Opmerkingen</Label>
+    <Grid gutter="lg">
+      <Grid.Col span={{ base: 12, lg: 6 }}>
+        <Card padding="lg" radius="lg" withBorder shadow="sm" h="100%">
+          <Title order={3} c="navy.5" mb={4}>
+            Datum & tijd
+          </Title>
+          <Text size="sm" c="dimmed" mb="lg">
+            Wanneer komt de gast eten en met hoeveel personen?
+          </Text>
+          <Stack gap="md">
+            <Grid>
+              <Grid.Col span={{ base: 12, sm: 6 }}>
+                <TextInput
+                  label="Datum"
+                  description="De dag waarop de tafel is gereserveerd"
+                  type="date"
+                  required
+                  value={value.date}
+                  onChange={(e) => patch({ date: e.currentTarget.value })}
+                />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, sm: 6 }}>
+                <Select
+                  label="Tijd"
+                  description="Aankomsttijd van de gasten"
+                  data={TIME_SLOTS}
+                  value={value.time}
+                  onChange={(t) => t && patch({ time: t })}
+                  placeholder="Kies een tijd"
+                />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, sm: 6 }}>
+                <Select
+                  label="Aantal gasten"
+                  description="Inclusief kinderen"
+                  data={GUEST_OPTIONS}
+                  value={value.guests}
+                  onChange={(g) => g && patch({ guests: g })}
+                />
+              </Grid.Col>
+              <Grid.Col span={{ base: 12, sm: 6 }}>
+                <Select
+                  label="Status"
+                  description="Waar staat deze reservering in het proces?"
+                  data={STATUSES.map((s) => ({
+                    value: s,
+                    label: RESERVATION_STATUS_LABELS[s],
+                  }))}
+                  value={value.status}
+                  onChange={(s) => s && patch({ status: s as ReservationStatus })}
+                />
+              </Grid.Col>
+            </Grid>
+            <ReservationStatusLegend />
             <Textarea
-              id="notes"
+              label="Opmerkingen"
+              description="Allergieën, kinderstoel, verjaardag — alles wat het team moet weten"
               rows={4}
               value={value.notes}
-              onChange={(e) => patch({ notes: e.target.value })}
+              onChange={(e) => patch({ notes: e.currentTarget.value })}
+              placeholder="Bijv. vegetarisch menu, raamplaats gewenst…"
             />
-          </div>
-        </CardContent>
-      </Card>
+          </Stack>
+        </Card>
+      </Grid.Col>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="heading-display text-lg text-brand-navy">Gast</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Naam</Label>
-            <Input
-              id="name"
+      <Grid.Col span={{ base: 12, lg: 6 }}>
+        <Card padding="lg" radius="lg" withBorder shadow="sm" h="100%">
+          <Title order={3} c="navy.5" mb={4}>
+            Contactgegevens gast
+          </Title>
+          <Text size="sm" c="dimmed" mb="lg">
+            Zo kunt u de gast bereiken bij wijzigingen of vragen
+          </Text>
+          <Stack gap="md">
+            <TextInput
+              label="Naam"
+              description="Voor- en achternaam van de contactpersoon"
               required
               value={value.name}
-              onChange={(e) => patch({ name: e.target.value })}
+              onChange={(e) => patch({ name: e.currentTarget.value })}
+              placeholder="Bijv. Jan de Vries"
             />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="email">E-mail</Label>
-            <Input
-              id="email"
+            <TextInput
+              label="E-mail"
+              description="Optioneel — handig voor bevestigingsmails"
               type="email"
               value={value.email}
-              onChange={(e) => patch({ email: e.target.value })}
+              onChange={(e) => patch({ email: e.currentTarget.value })}
+              placeholder="naam@voorbeeld.nl"
             />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="phone">Telefoon</Label>
-            <Input
-              id="phone"
+            <TextInput
+              label="Telefoon"
+              description="Aanbevolen voor telefonische reserveringen"
               type="tel"
               value={value.phone}
-              onChange={(e) => patch({ phone: e.target.value })}
+              onChange={(e) => patch({ phone: e.currentTarget.value })}
+              placeholder="06 12345678"
             />
-          </div>
-          {value.id ? (
-            <p className="text-xs text-muted-foreground pt-2">
-              ID: {value.id}
-              {value.createdAt ? (
-                <>
-                  {' '}
-                  · Aangemaakt{' '}
-                  {new Date(value.createdAt).toLocaleString('nl-NL', {
-                    dateStyle: 'short',
-                    timeStyle: 'short',
-                  })}
-                </>
-              ) : null}
-            </p>
-          ) : null}
-        </CardContent>
-      </Card>
-    </div>
+            {value.id ? (
+              <Text size="xs" c="dimmed" pt="xs">
+                Reserveringsnummer: {value.id}
+                {value.createdAt ? (
+                  <>
+                    {' '}
+                    · Aangemaakt{' '}
+                    {new Date(value.createdAt).toLocaleString('nl-NL', {
+                      dateStyle: 'short',
+                      timeStyle: 'short',
+                    })}
+                  </>
+                ) : null}
+              </Text>
+            ) : null}
+          </Stack>
+        </Card>
+      </Grid.Col>
+    </Grid>
   )
 }

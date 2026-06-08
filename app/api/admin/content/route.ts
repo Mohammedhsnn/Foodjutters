@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { getContentPages } from '@/lib/admin/store'
+import { getContentPagesSummary } from '@/lib/admin/store'
 
 export async function GET() {
-  const pages = await getContentPages()
+  const pages = await getContentPagesSummary()
   return NextResponse.json({ pages })
 }

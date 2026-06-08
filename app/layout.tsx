@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: 'nl_NL',
   },
   icons: {
-    icon: '/logo-mark.png',
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }, { url: '/logo-mark.png', type: 'image/png' }],
     apple: '/logo-mark.png',
   },
 }

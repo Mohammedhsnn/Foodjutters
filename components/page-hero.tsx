@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight } from 'lucide-react'
+import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 
 interface PageHeroMeta {
   label: string
@@ -107,7 +107,7 @@ export function PageHero({
                   className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-widest text-[11px] px-5 sm:px-6 py-2.5 rounded-full bg-brand-navy text-white hover:bg-primary transition-all duration-200 shadow-md shadow-brand-navy/20"
                 >
                   {cta.label}
-                  <ArrowRight size={12} aria-hidden />
+                  <IconArrowRight {...tablerProps(12)} aria-hidden />
                 </Link>
               )
             )}

@@ -11,8 +11,10 @@ import {
 import type {
   ContentBlock,
   ContentPage,
+  ContentPageSummary,
   MenuItem,
   MenuSection,
+  MenuSectionSummary,
   Reservation,
 } from '@/lib/admin/types'
 
@@ -34,18 +36,25 @@ export async function getSiteSetting(key: string, fallback = ''): Promise<string
 
 // ── Content ──────────────────────────────────────────────────────
 
-async function blocksForPage(slug: string): Promise<ContentBlock[]> {
-  const rows = await db
-    .select()
-    .from(contentBlocks)
-    .where(eq(contentBlocks.pageSlug, slug))
-  return rows.map((r) => ({
+function mapBlockRow(r: typeof contentBlocks.$inferSelect): ContentBlock {
+  return {
     id: r.id,
     key: r.key,
     label: r.label,
     type: r.type as ContentBlock['type'],
     value: r.value,
-  }))
+  }
+}
+
+async function allBlocksBySlug(): Promise<Map<string, ContentBlock[]>> {
+  const rows = await db.select().from(contentBlocks)
+  const map = new Map<string, ContentBlock[]>()
+  for (const row of rows) {
+    const list = map.get(row.pageSlug) ?? []
+    list.push(mapBlockRow(row))
+    map.set(row.pageSlug, list)
+  }
+  return map
 }
 
 function rowToContentPage(
@@ -67,11 +76,30 @@ function rowToContentPage(
   }
 }
 
+export async function getContentPagesSummary(): Promise<ContentPageSummary[]> {
+  const pages = await db
+    .select({
+      slug: contentPages.slug,
+      name: contentPages.name,
+      path: contentPages.path,
+      updatedAt: contentPages.updatedAt,
+    })
+    .from(contentPages)
+    .orderBy(asc(contentPages.slug))
+  return pages.map((p) => ({
+    slug: p.slug,
+    name: p.name,
+    path: p.path,
+    updatedAt: p.updatedAt.toISOString(),
+  }))
+}
+
 export async function getContentPages(): Promise<ContentPage[]> {
-  const pages = await db.select().from(contentPages).orderBy(asc(contentPages.slug))
-  return Promise.all(
-    pages.map(async (p) => rowToContentPage(p, await blocksForPage(p.slug))),
-  )
+  const [pages, blockMap] = await Promise.all([
+    db.select().from(contentPages).orderBy(asc(contentPages.slug)),
+    allBlocksBySlug(),
+  ])
+  return pages.map((p) => rowToContentPage(p, blockMap.get(p.slug) ?? []))
 }
 
 export async function getContentPage(slug: string): Promise<ContentPage | null> {
@@ -82,7 +110,11 @@ export async function getContentPage(slug: string): Promise<ContentPage | null> 
     .limit(1)
   const row = rows[0]
   if (!row) return null
-  return rowToContentPage(row, await blocksForPage(slug))
+  const blockRows = await db
+    .select()
+    .from(contentBlocks)
+    .where(eq(contentBlocks.pageSlug, slug))
+  return rowToContentPage(row, blockRows.map(mapBlockRow))
 }
 
 export async function saveContentPage(page: ContentPage): Promise<ContentPage> {
@@ -134,33 +166,64 @@ export async function saveContentPage(page: ContentPage): Promise<ContentPage> {
 
 // ── Menu ─────────────────────────────────────────────────────────
 
-async function itemsForSection(sectionId: string): Promise<MenuItem[]> {
-  const rows = await db
-    .select()
-    .from(menuItems)
-    .where(eq(menuItems.sectionId, sectionId))
-    .orderBy(asc(menuItems.sortOrder))
-  return rows.map((r) => ({
+function mapMenuItemRow(r: typeof menuItems.$inferSelect): MenuItem {
+  return {
     id: r.id,
     name: r.name,
     description: r.description,
     price: r.price,
     available: r.available,
     sortOrder: r.sortOrder,
+  }
+}
+
+async function allMenuItemsBySection(): Promise<Map<string, MenuItem[]>> {
+  const rows = await db.select().from(menuItems).orderBy(asc(menuItems.sortOrder))
+  const map = new Map<string, MenuItem[]>()
+  for (const row of rows) {
+    const list = map.get(row.sectionId) ?? []
+    list.push(mapMenuItemRow(row))
+    map.set(row.sectionId, list)
+  }
+  return map
+}
+
+export async function getMenuSectionsSummary(): Promise<MenuSectionSummary[]> {
+  const [sections, items] = await Promise.all([
+    db.select().from(menuSections).orderBy(asc(menuSections.sortOrder)),
+    db
+      .select({ sectionId: menuItems.sectionId, available: menuItems.available })
+      .from(menuItems),
+  ])
+  const counts = new Map<string, { itemCount: number; availableCount: number }>()
+  for (const item of items) {
+    const current = counts.get(item.sectionId) ?? { itemCount: 0, availableCount: 0 }
+    current.itemCount += 1
+    if (item.available) current.availableCount += 1
+    counts.set(item.sectionId, current)
+  }
+  return sections.map((s) => ({
+    id: s.id,
+    title: s.title,
+    subtitle: s.subtitle,
+    sortOrder: s.sortOrder,
+    itemCount: counts.get(s.id)?.itemCount ?? 0,
+    availableCount: counts.get(s.id)?.availableCount ?? 0,
   }))
 }
 
 export async function getMenuSections(): Promise<MenuSection[]> {
-  const sections = await db.select().from(menuSections).orderBy(asc(menuSections.sortOrder))
-  return Promise.all(
-    sections.map(async (s) => ({
-      id: s.id,
-      title: s.title,
-      subtitle: s.subtitle,
-      sortOrder: s.sortOrder,
-      items: await itemsForSection(s.id),
-    })),
-  )
+  const [sections, itemMap] = await Promise.all([
+    db.select().from(menuSections).orderBy(asc(menuSections.sortOrder)),
+    allMenuItemsBySection(),
+  ])
+  return sections.map((s) => ({
+    id: s.id,
+    title: s.title,
+    subtitle: s.subtitle,
+    sortOrder: s.sortOrder,
+    items: itemMap.get(s.id) ?? [],
+  }))
 }
 
 export async function getMenuSection(id: string): Promise<MenuSection | null> {
@@ -171,12 +234,17 @@ export async function getMenuSection(id: string): Promise<MenuSection | null> {
     .limit(1)
   const row = rows[0]
   if (!row) return null
+  const itemRows = await db
+    .select()
+    .from(menuItems)
+    .where(eq(menuItems.sectionId, id))
+    .orderBy(asc(menuItems.sortOrder))
   return {
     id: row.id,
     title: row.title,
     subtitle: row.subtitle,
     sortOrder: row.sortOrder,
-    items: await itemsForSection(id),
+    items: itemRows.map(mapMenuItemRow),
   }
 }
 

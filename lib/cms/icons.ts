@@ -1,32 +1,33 @@
-import type { LucideIcon } from 'lucide-react'
+import type { TablerIcon } from '@tabler/icons-react'
 import {
-  Calendar,
-  Clock,
-  Flame,
-  Heart,
-  Leaf,
-  Star,
-  Sunset,
-  Users,
-  Utensils,
-  Waves,
-  Sparkles,
-} from 'lucide-react'
+  IconCalendar,
+  IconClock,
+  IconFlame,
+  IconHeart,
+  IconLeaf,
+  IconSparkles,
+  IconStar,
+  IconSunset2,
+  IconToolsKitchen2,
+  IconUsers,
+  IconWaveSine,
+} from '@tabler/icons-react'
 
-const ICON_MAP: Record<string, LucideIcon> = {
-  Sunset,
-  Utensils,
-  Flame,
-  Users,
-  Waves,
-  Sparkles,
-  Heart,
-  Leaf,
-  Star,
-  Calendar,
-  Clock,
+/** CMS-iconnamen (zonder Icon-prefix) → Tabler */
+const ICON_MAP: Record<string, TablerIcon> = {
+  Sunset: IconSunset2,
+  Utensils: IconToolsKitchen2,
+  Flame: IconFlame,
+  Users: IconUsers,
+  Waves: IconWaveSine,
+  Sparkles: IconSparkles,
+  Heart: IconHeart,
+  Leaf: IconLeaf,
+  Star: IconStar,
+  Calendar: IconCalendar,
+  Clock: IconClock,
 }
 
-export function resolveIcon(name: string, fallback: LucideIcon = Utensils): LucideIcon {
+export function resolveIcon(name: string, fallback: TablerIcon = IconToolsKitchen2): TablerIcon {
   return ICON_MAP[name] ?? fallback
 }

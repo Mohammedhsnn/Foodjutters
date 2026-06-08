@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server'
 import type { MenuSection } from '@/lib/admin/types'
 import {
-  getMenuSections,
+  getMenuSectionsSummary,
   newMenuSectionId,
   saveMenuSection,
 } from '@/lib/admin/store'
 
 export async function GET() {
-  const sections = await getMenuSections()
+  const sections = await getMenuSectionsSummary()
   return NextResponse.json({ sections })
 }
 

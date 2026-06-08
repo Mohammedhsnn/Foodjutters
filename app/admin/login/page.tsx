@@ -2,12 +2,20 @@
 
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Lock } from 'lucide-react'
-import { toast } from 'sonner'
+import {
+  Box,
+  Button,
+  Center,
+  List,
+  Paper,
+  PasswordInput,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core'
+import { IconLock, TablerIconSection, adminNotify } from '@/lib/admin/icons'
+import { ADMIN_MODULES } from '@/lib/admin/page-meta'
 import { Logo } from '@/components/logo'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { adminFetch, ApiError } from '@/lib/admin/api'
 
 function LoginForm() {
@@ -24,58 +32,70 @@ function LoginForm() {
         method: 'POST',
         body: JSON.stringify({ password }),
       })
-      toast.success('Welkom terug')
+      adminNotify.success('Welkom terug', 'U bent ingelogd')
       const from = searchParams.get('from') || '/admin'
       router.push(from.startsWith('/admin') ? from : '/admin')
       router.refresh()
     } catch (err) {
       const msg = err instanceof ApiError ? err.message : 'Inloggen mislukt'
-      toast.error(msg)
+      adminNotify.error('Inloggen mislukt', msg)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-svh flex flex-col items-center justify-center px-4 py-12 bg-wood-4">
-      <div className="w-full max-w-md rounded-2xl border border-border/80 bg-card/95 backdrop-blur-sm shadow-lg p-6 sm:p-8">
-        <div className="flex flex-col items-center text-center mb-8">
-          <Logo layout="stack" size="md" className="mb-4" />
-          <p className="label-vintage text-primary text-[11px] tracking-[0.2em] uppercase mb-2">
+    <Center mih="100svh" px="md" py="xl" className="admin-login-bg">
+      <Paper radius="lg" shadow="md" p={{ base: 'lg', sm: 'xl' }} w="100%" maw={420} withBorder>
+        <Box
+          className="admin-header-accent"
+          mb="lg"
+          style={{ marginTop: -8, marginInline: -8, borderRadius: '12px 12px 0 0' }}
+        />
+        <Stack align="center" gap="xs" mb="lg">
+          <Logo layout="stack" size="md" />
+          <Text size="xs" tt="uppercase" fw={600} c="brand.5" style={{ letterSpacing: '0.14em' }}>
             Beheeromgeving
-          </p>
-          <h1 className="heading-display text-2xl text-brand-navy">Admin login</h1>
-          <p className="text-sm text-muted-foreground mt-2">
+          </Text>
+          <Title order={2} c="navy.5" ta="center">
+            Inloggen
+          </Title>
+          <Text size="sm" c="dimmed" ta="center" maw={320} lh={1.5}>
             Log in om content, menu en reserveringen te beheren.
-          </p>
-        </div>
+          </Text>
+        </Stack>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="password">Wachtwoord</Label>
-            <div className="relative">
-              <Lock
-                className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground"
-                aria-hidden
-              />
-              <Input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="pl-9"
-                placeholder="••••••••"
-              />
-            </div>
-          </div>
-          <Button type="submit" className="w-full rounded-full" disabled={loading}>
-            {loading ? 'Bezig…' : 'Inloggen'}
-          </Button>
+        <form onSubmit={handleSubmit}>
+          <Stack gap="md">
+            <PasswordInput
+              label="Wachtwoord"
+              required
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
+              placeholder="••••••••"
+              leftSection={<TablerIconSection icon={IconLock} size={16} />}
+            />
+            <Button type="submit" fullWidth loading={loading} color="navy" size="md">
+              Inloggen
+            </Button>
+          </Stack>
         </form>
-      </div>
-    </div>
+
+        <Stack gap="xs" mt="xl" pt="md" style={{ borderTop: '1px solid #e8f4fb' }}>
+          <Text size="xs" fw={600} c="navy.5" tt="uppercase" style={{ letterSpacing: '0.06em' }}>
+            In dit paneel
+          </Text>
+          <List size="sm" c="dimmed" spacing={4}>
+            {ADMIN_MODULES.map((item) => (
+              <List.Item key={item.href}>
+                <strong>{item.label}</strong> — {item.hint}
+              </List.Item>
+            ))}
+          </List>
+        </Stack>
+      </Paper>
+    </Center>
   )
 }
 
@@ -83,9 +103,11 @@ export default function AdminLoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-svh flex items-center justify-center text-muted-foreground text-sm">
-          Laden…
-        </div>
+        <Center mih="100svh">
+          <Text size="sm" c="dimmed">
+            Laden…
+          </Text>
+        </Center>
       }
     >
       <LoginForm />

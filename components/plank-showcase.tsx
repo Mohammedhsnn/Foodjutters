@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Instagram } from 'lucide-react'
+import { IconBrandInstagram, tablerProps } from '@/lib/site/icons'
 import { BrandName } from '@/components/brand-name'
 import { BrandSurface } from '@/components/brand-surface'
 
@@ -36,7 +36,7 @@ export function PlankShowcase() {
               rel="noopener noreferrer"
               className="btn-brand bg-white/10 text-white hover:bg-white/20 border border-white/20"
             >
-              <Instagram size={16} />
+              <IconBrandInstagram {...tablerProps(16)} />
               Volg ons
             </a>
           </div>

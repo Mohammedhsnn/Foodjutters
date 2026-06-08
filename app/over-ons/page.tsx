@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BrandName } from '@/components/brand-name'
-import { ArrowRight, Heart } from 'lucide-react'
+import { IconArrowRight, IconHeart, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import { blockJson, blockValue } from '@/lib/cms/blocks'
 import { resolveIcon } from '@/lib/cms/icons'
@@ -81,7 +81,7 @@ export default async function OverOnsPage() {
               href="/menu"
               className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
             >
-              Ontdek ons menu <ArrowRight size={16} />
+              Ontdek ons menu <IconArrowRight {...tablerProps(16)} />
             </Link>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default async function OverOnsPage() {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
             {values.map((v, i) => {
-              const Icon = resolveIcon(v.icon, Heart)
+              const Icon = resolveIcon(v.icon, IconHeart)
               return (
                 <div
                   key={v.title}
@@ -197,7 +197,7 @@ export default async function OverOnsPage() {
             href="/contact"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-8 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-lg shadow-primary/25 text-sm"
           >
-            Bekijk routebeschrijving <ArrowRight size={16} />
+            Bekijk routebeschrijving <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </section>

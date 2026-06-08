@@ -1,40 +1,38 @@
-import type { LucideIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Card, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import type { TablerIcon } from '@tabler/icons-react'
+import { tablerProps } from '@/lib/admin/tabler'
 
 export function AdminStatCard({
   label,
   value,
   hint,
   icon: Icon,
-  className,
 }: {
   label: string
   value: string | number
   hint?: string
-  icon: LucideIcon
-  className?: string
+  icon: TablerIcon
 }) {
   return (
-    <div
-      className={cn(
-        'rounded-xl border border-border/80 bg-card p-4 sm:p-5 shadow-sm',
-        className,
-      )}
-    >
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+    <Card padding="lg" radius="lg" withBorder shadow="sm" className="h-full">
+      <Group justify="space-between" align="flex-start" wrap="nowrap">
+        <Stack gap={6}>
+          <Text size="xs" tt="uppercase" fw={600} c="dimmed" style={{ letterSpacing: '0.06em' }}>
             {label}
-          </p>
-          <p className="mt-1 text-2xl font-semibold tabular-nums text-brand-navy">{value}</p>
+          </Text>
+          <Text size="xl" fw={700} c="navy.5" className="admin-stat-value">
+            {value}
+          </Text>
           {hint ? (
-            <p className="mt-1 text-xs text-muted-foreground truncate">{hint}</p>
+            <Text size="xs" c="dimmed" lineClamp={2} lh={1.4}>
+              {hint}
+            </Text>
           ) : null}
-        </div>
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <Icon className="size-5" aria-hidden />
-        </div>
-      </div>
-    </div>
+        </Stack>
+        <ThemeIcon size={44} radius="md" variant="light" color="brand">
+          <Icon {...tablerProps(22)} />
+        </ThemeIcon>
+      </Group>
+    </Card>
   )
 }

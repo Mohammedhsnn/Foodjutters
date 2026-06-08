@@ -22,6 +22,14 @@ export type ContentPage = {
   updatedAt: string
 }
 
+/** Lightweight row for admin list views */
+export type ContentPageSummary = {
+  slug: string
+  name: string
+  path: string
+  updatedAt: string
+}
+
 export type MenuItem = {
   id: string
   name: string
@@ -37,6 +45,16 @@ export type MenuSection = {
   subtitle: string
   items: MenuItem[]
   sortOrder: number
+}
+
+/** Lightweight row for admin list views */
+export type MenuSectionSummary = {
+  id: string
+  title: string
+  subtitle: string
+  sortOrder: number
+  itemCount: number
+  availableCount: number
 }
 
 export type ReservationStatus =

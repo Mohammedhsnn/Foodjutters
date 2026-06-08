@@ -1,7 +1,21 @@
 'use client'
 
 import { useState, useId } from 'react'
-import { ChevronLeft, ChevronRight, Check, Calendar, Clock, User, Mail, Phone, Users, MessageSquare, CheckCircle } from 'lucide-react'
+import type { TablerIcon } from '@tabler/icons-react'
+import {
+  IconCalendar,
+  IconCheck,
+  IconChevronLeft,
+  IconChevronRight,
+  IconCircleCheck,
+  IconClock,
+  IconMail,
+  IconMessage,
+  IconPhone,
+  IconUser,
+  IconUsers,
+  tablerProps,
+} from '@/lib/site/icons'
 import { cn } from '@/lib/utils'
 
 // ── Types ─────────────────────────────────────────────────────────
@@ -105,7 +119,7 @@ function MiniCalendar({
           className="p-1.5 rounded-lg hover:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           aria-label="Vorige maand"
         >
-          <ChevronLeft size={18} className="text-brand-navy" />
+          <IconChevronLeft {...tablerProps(18)} className="text-brand-navy" />
         </button>
         <p className="font-display uppercase tracking-wide text-sm text-brand-navy">
           {NL_MONTHS[month]} {year}
@@ -117,7 +131,7 @@ function MiniCalendar({
           className="p-1.5 rounded-lg hover:bg-primary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           aria-label="Volgende maand"
         >
-          <ChevronRight size={18} className="text-brand-navy" />
+          <IconChevronRight {...tablerProps(18)} className="text-brand-navy" />
         </button>
       </div>
 
@@ -190,7 +204,7 @@ function StepIndicator({ current, total }: { current: number; total: number }) {
                   !done && !active && 'bg-border text-muted-foreground',
                 )}
               >
-                {done ? <Check size={15} /> : step}
+                {done ? <IconCheck {...tablerProps(15)} /> : step}
               </div>
               <span className={cn(
                 'hidden sm:block text-[11px] font-medium whitespace-nowrap',
@@ -224,14 +238,14 @@ function Field({
   label: string
   required?: boolean
   error?: string
-  icon?: React.ElementType
+  icon?: TablerIcon
   children: React.ReactNode
   id: string
 }) {
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="flex items-center gap-1.5 text-sm font-medium text-brand-navy">
-        {Icon && <Icon size={14} className="text-primary shrink-0" />}
+        {Icon ? <Icon {...tablerProps(14)} className="text-primary shrink-0" /> : null}
         {label}
         {required && <span className="text-primary ml-0.5">*</span>}
       </label>
@@ -337,7 +351,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
     return (
       <div className="flex flex-col items-center text-center py-8 px-4 gap-5">
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-          <CheckCircle size={36} className="text-primary" />
+          <IconCircleCheck {...tablerProps(36)} className="text-primary" />
         </div>
         <div>
           <h3 className="heading-typewriter text-2xl text-brand-navy mb-2">Aanvraag ontvangen!</h3>
@@ -395,7 +409,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
           {data.date && (
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <Clock size={15} className="text-primary shrink-0" />
+                <IconClock {...tablerProps(15)} className="text-primary shrink-0" />
                 <h4 className="text-sm font-medium text-brand-navy">
                   Tijdslot kiezen voor <span className="text-primary">{formatDateNL(data.date)}</span>
                 </h4>
@@ -424,7 +438,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
           {/* Guests */}
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <Users size={15} className="text-primary shrink-0" />
+              <IconUsers {...tablerProps(15)} className="text-primary shrink-0" />
               <h4 className="text-sm font-medium text-brand-navy">Aantal gasten</h4>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -458,7 +472,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             </p>
           </div>
 
-          <Field id={`${uid}-name`} label="Naam" required icon={User} error={errors.name}>
+          <Field id={`${uid}-name`} label="Naam" required icon={IconUser} error={errors.name}>
             <input
               id={`${uid}-name`}
               type="text"
@@ -470,7 +484,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             />
           </Field>
 
-          <Field id={`${uid}-email`} label="E-mailadres" required icon={Mail} error={errors.email}>
+          <Field id={`${uid}-email`} label="E-mailadres" required icon={IconMail} error={errors.email}>
             <input
               id={`${uid}-email`}
               type="email"
@@ -482,7 +496,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             />
           </Field>
 
-          <Field id={`${uid}-phone`} label="Telefoonnummer" icon={Phone} error={errors.phone}>
+          <Field id={`${uid}-phone`} label="Telefoonnummer" icon={IconPhone} error={errors.phone}>
             <input
               id={`${uid}-phone`}
               type="tel"
@@ -494,7 +508,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             />
           </Field>
 
-          <Field id={`${uid}-notes`} label="Bijzonderheden" icon={MessageSquare} error={errors.notes}>
+          <Field id={`${uid}-notes`} label="Bijzonderheden" icon={IconMessage} error={errors.notes}>
             <textarea
               id={`${uid}-notes`}
               rows={3}
@@ -518,7 +532,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
           <div className="rounded-2xl border border-border bg-card overflow-hidden">
             {/* Header row */}
             <div className="bg-primary/8 border-b border-border px-5 py-3 flex items-center gap-2">
-              <Calendar size={15} className="text-primary" />
+              <IconCalendar {...tablerProps(15)} className="text-primary" />
               <span className="text-sm font-semibold text-brand-navy">
                 {formatDateNL(data.date)} · {data.time} · {data.guests} {data.guests === '1' ? 'gast' : 'gasten'}
               </span>
@@ -558,7 +572,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             onClick={back}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card text-brand-navy text-sm font-medium hover:border-primary/40 hover:bg-primary/5 transition-all"
           >
-            <ChevronLeft size={15} /> Vorige
+            <IconChevronLeft {...tablerProps(15)} /> Vorige
           </button>
         )}
         {step < 3 ? (
@@ -567,7 +581,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             onClick={next}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white text-sm font-semibold hover:bg-brand-blue-dark transition-colors shadow-sm"
           >
-            Volgende <ChevronRight size={15} />
+            Volgende <IconChevronRight {...tablerProps(15)} />
           </button>
         ) : (
           <button
@@ -575,7 +589,7 @@ export function BookingWizard({ mode = 'full' }: BookingWizardProps) {
             onClick={confirm}
             className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-brand-navy text-white text-sm font-semibold hover:bg-primary transition-colors shadow-md"
           >
-            <Check size={15} /> Bevestig reservering
+            <IconCheck {...tablerProps(15)} /> Bevestig reservering
           </button>
         )}
       </div>

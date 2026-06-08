@@ -1,27 +1,21 @@
 'use client'
 
-import { AlertCircle, Inbox, Loader2 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/components/ui/empty'
-import { cn } from '@/lib/utils'
+import { Alert, Button, Center, Loader, Stack, Text, ThemeIcon } from '@mantine/core'
+import { IconAlertTriangle, IconInbox, tablerProps } from '@/lib/admin/tabler'
 
 export function AdminLoading({ label = 'Gegevens laden…' }: { label?: string }) {
   return (
-    <div
-      className="flex min-h-[220px] flex-col items-center justify-center gap-3 rounded-xl border border-border/80 bg-card/60 px-6 py-12"
-      role="status"
-      aria-live="polite"
-    >
-      <Loader2 className="size-8 animate-spin text-primary" aria-hidden />
-      <p className="text-sm text-muted-foreground">{label}</p>
-    </div>
+    <Center py={56} px="md">
+      <Stack align="center" gap="md" maw={320}>
+        <Loader color="brand" type="dots" size="md" />
+        <Text size="sm" c="dimmed" ta="center">
+          {label}
+        </Text>
+        <Text size="xs" c="dimmed" ta="center" opacity={0.85}>
+          Een ogenblik geduld — we halen de nieuwste gegevens op.
+        </Text>
+      </Stack>
+    </Center>
   )
 }
 
@@ -29,54 +23,54 @@ export function AdminEmpty({
   title,
   description,
   action,
+  compact,
 }: {
   title: string
   description: string
   action?: React.ReactNode
+  compact?: boolean
 }) {
   return (
-    <Empty className="min-h-[220px] rounded-xl border border-dashed border-border bg-card/40">
-      <EmptyHeader>
-        <EmptyMedia variant="icon">
-          <Inbox className="size-5 text-primary" />
-        </EmptyMedia>
-        <EmptyTitle className="font-display uppercase tracking-wide text-brand-navy">
+    <Center py={compact ? 32 : 56} px="md">
+      <Stack align="center" gap="md" maw={420}>
+        <ThemeIcon size={52} radius="xl" variant="light" color="brand">
+          <IconInbox {...tablerProps(26)} />
+        </ThemeIcon>
+        <Text fw={600} ta="center" c="navy.5" tt="uppercase" style={{ fontFamily: 'var(--font-gestard)' }}>
           {title}
-        </EmptyTitle>
-        <EmptyDescription>{description}</EmptyDescription>
-      </EmptyHeader>
-      {action ? <EmptyContent>{action}</EmptyContent> : null}
-    </Empty>
+        </Text>
+        <Text size="sm" c="dimmed" ta="center" lh={1.55}>
+          {description}
+        </Text>
+        {action}
+      </Stack>
+    </Center>
   )
 }
 
 export function AdminError({
   message,
   onRetry,
-  className,
 }: {
   message: string
   onRetry?: () => void
-  className?: string
 }) {
   return (
-    <div
-      className={cn(
-        'flex min-h-[220px] flex-col items-center justify-center gap-4 rounded-xl border border-destructive/25 bg-destructive/5 px-6 py-10 text-center',
-        className,
-      )}
-      role="alert"
+    <Alert
+      color="red"
+      variant="light"
+      radius="lg"
+      icon={<IconAlertTriangle {...tablerProps(18)} />}
+      title="Er ging iets mis"
     >
-      <AlertCircle className="size-8 text-destructive" aria-hidden />
-      <div className="max-w-md space-y-1">
-        <p className="font-semibold text-brand-navy">Er ging iets mis</p>
-        <p className="text-sm text-muted-foreground">{message}</p>
-      </div>
+      <Text size="sm" mb={onRetry ? 'md' : 0} lh={1.5}>
+        {message}
+      </Text>
       {onRetry ? (
-        <Button variant="outline" size="sm" onClick={onRetry}>
+        <Button variant="light" color="red" size="xs" radius="md" onClick={onRetry}>
           Opnieuw proberen
         </Button>
       ) : null}
-    </div>
+    </Alert>
   )
 }

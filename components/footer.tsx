@@ -1,5 +1,12 @@
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Instagram, Facebook } from 'lucide-react'
+import {
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconMail,
+  IconMapPin,
+  IconPhone,
+  tablerProps,
+} from '@/lib/site/icons'
 import { BrandName } from '@/components/brand-name'
 import { Logo } from '@/components/logo'
 import type { SiteSettingsProps } from '@/components/site-chrome'
@@ -26,7 +33,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
                 aria-label="FoodJutters op Instagram"
                 className="w-9 h-9 rounded-full bg-white/8 hover:bg-primary flex items-center justify-center transition-colors"
               >
-                <Instagram size={16} />
+                <IconBrandInstagram {...tablerProps(16)} />
               </a>
               <a
                 href={settings.facebookUrl}
@@ -35,7 +42,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
                 aria-label="FoodJutters op Facebook"
                 className="w-9 h-9 rounded-full bg-white/8 hover:bg-primary flex items-center justify-center transition-colors"
               >
-                <Facebook size={16} />
+                <IconBrandFacebook {...tablerProps(16)} />
               </a>
             </div>
           </div>
@@ -63,7 +70,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
             <h3 className="font-display text-sm text-primary mb-4 uppercase tracking-wide">Contact</h3>
             <ul className="flex flex-col gap-3.5">
               <li className="flex items-start gap-3 text-sm text-white/55">
-                <MapPin size={14} className="text-primary mt-0.5 shrink-0" />
+                <IconMapPin {...tablerProps(14)} className="text-primary mt-0.5 shrink-0" />
                 <span>
                   {settings.addressLine1}
                   <br />
@@ -71,13 +78,13 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
                 </span>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/55">
-                <Phone size={14} className="text-primary shrink-0" />
+                <IconPhone {...tablerProps(14)} className="text-primary shrink-0" />
                 <a href={`tel:${settings.phoneTel}`} className="hover:text-primary transition-colors">
                   {settings.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm text-white/55">
-                <Mail size={14} className="text-primary shrink-0" />
+                <IconMail {...tablerProps(14)} className="text-primary shrink-0" />
                 <a href={`mailto:${settings.email}`} className="hover:text-primary transition-colors break-all">
                   {settings.email}
                 </a>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BrandName } from '@/components/brand-name'
-import { ArrowRight } from 'lucide-react'
+import { IconArrowRight, IconStar, IconStarFilled, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import { blockJson, blockValue } from '@/lib/cms/blocks'
 import { getContentPage } from '@/lib/db/repository'
@@ -18,18 +18,13 @@ type Review = { name: string; rating: number; text: string }
 function StarRating({ count }: { count: number }) {
   return (
     <div className="flex gap-0.5" aria-label={`${count} sterren`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <svg
-          key={i}
-          viewBox="0 0 20 20"
-          fill={i < count ? 'currentColor' : 'none'}
-          stroke="currentColor"
-          strokeWidth={i < count ? 0 : 1.5}
-          className={`w-3.5 h-3.5 ${i < count ? 'text-primary' : 'text-border'}`}
-        >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
+      {Array.from({ length: 5 }).map((_, i) =>
+        i < count ? (
+          <IconStarFilled key={i} {...tablerProps(14)} className="text-primary" />
+        ) : (
+          <IconStar key={i} {...tablerProps(14)} className="text-border" />
+        ),
+      )}
     </div>
   )
 }
@@ -172,7 +167,7 @@ export default async function ImpressiePage() {
             href="/reserveren"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-8 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-lg shadow-primary/25 text-sm"
           >
-            Reserveer uw tafel <ArrowRight size={16} />
+            Reserveer uw tafel <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </section>

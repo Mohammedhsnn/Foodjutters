@@ -1,7 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock, Send, Check } from 'lucide-react'
+import {
+  IconCheck,
+  IconClock,
+  IconMail,
+  IconMapPin,
+  IconPhone,
+  IconSend,
+  tablerProps,
+} from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import type { ContentPage } from '@/lib/admin/types'
 import type { SiteSettingsProps } from '@/components/site-chrome'
@@ -106,7 +114,7 @@ export function ContactForm({
               <ul className="flex flex-col gap-3.5 sm:gap-4">
                 <li className="flex items-start gap-3 sm:gap-3.5">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <MapPin size={14} className="text-primary sm:size-[15px]" />
+                    <IconMapPin {...tablerProps(14)} className="text-primary sm:w-[15px] sm:h-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">Adres</p>
@@ -119,7 +127,7 @@ export function ContactForm({
                 </li>
                 <li className="flex items-center gap-3 sm:gap-3.5">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <Phone size={14} className="text-primary sm:size-[15px]" />
+                    <IconPhone {...tablerProps(14)} className="text-primary sm:w-[15px] sm:h-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">Telefoon</p>
@@ -130,7 +138,7 @@ export function ContactForm({
                 </li>
                 <li className="flex items-center gap-3 sm:gap-3.5">
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                    <Mail size={14} className="text-primary sm:size-[15px]" />
+                    <IconMail {...tablerProps(14)} className="text-primary sm:w-[15px] sm:h-[15px]" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-brand-dark mb-0.5 uppercase tracking-wide">E-mail</p>
@@ -145,7 +153,7 @@ export function ContactForm({
             <div className="bg-card border border-border rounded-xl p-5 sm:p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 sm:mb-5">
                 <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-brand-blue-light flex items-center justify-center shrink-0">
-                  <Clock size={14} className="text-primary sm:size-[15px]" />
+                  <IconClock {...tablerProps(14)} className="text-primary sm:w-[15px] sm:h-[15px]" />
                 </div>
                 <h2 className="heading-display text-lg sm:text-xl text-brand-dark">Openingstijden</h2>
               </div>
@@ -173,7 +181,7 @@ export function ContactForm({
             </div>
 
             <div className="rounded-xl overflow-hidden border border-border shadow-sm h-32 sm:h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
-              <MapPin size={24} className="text-primary sm:size-7" />
+              <IconMapPin {...tablerProps(24)} className="text-primary sm:w-7 sm:h-7" />
               <p className="text-sm text-foreground/60 font-medium text-center px-4">{settings.addressShort}</p>
               <a
                 href={settings.mapsUrl}
@@ -191,7 +199,7 @@ export function ContactForm({
               {submitted ? (
                 <div className="flex flex-col items-center justify-center text-center py-12 sm:py-16 gap-4">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center">
-                    <Check size={22} className="text-white sm:size-6" />
+                    <IconCheck {...tablerProps(22)} className="text-white sm:w-6 sm:h-6" />
                   </div>
                   <h2 className="heading-display text-xl sm:text-2xl text-brand-dark">Bedankt!</h2>
                   <p className="text-foreground/60 leading-relaxed max-w-xs text-sm">
@@ -344,7 +352,7 @@ export function ContactForm({
                       disabled={loading}
                       className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-brand-blue-dark text-white font-semibold py-3 rounded-lg transition-colors shadow-sm text-sm mt-1 disabled:opacity-60"
                     >
-                      <Send size={15} />
+                      <IconSend {...tablerProps(15)} />
                       {loading ? 'Verzenden…' : 'Reservering aanvragen'}
                     </button>
                   </form>

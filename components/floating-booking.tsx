@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, CalendarDays } from 'lucide-react'
+import { IconCalendar, IconX, tablerProps } from '@/lib/site/icons'
 import { cn } from '@/lib/utils'
 import { BookingWizard } from '@/components/booking-wizard'
 
@@ -46,7 +46,7 @@ export function FloatingBooking() {
           open && 'opacity-0 pointer-events-none scale-90',
         )}
       >
-        <CalendarDays size={18} />
+        <IconCalendar {...tablerProps(18)} />
         <span className="font-display uppercase tracking-widest text-[11px]">Reserveer</span>
       </button>
 
@@ -103,7 +103,7 @@ export function FloatingBooking() {
             aria-label="Sluiten"
             className="flex items-center justify-center w-9 h-9 rounded-full border border-border bg-card hover:bg-primary/5 hover:border-primary/30 transition-colors shrink-0"
           >
-            <X size={16} className="text-brand-navy" />
+            <IconX {...tablerProps(16)} className="text-brand-navy" />
           </button>
         </div>
 
