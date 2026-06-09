@@ -1,11 +1,7 @@
 import Link from 'next/link'
 import {
   IconArrowRight,
-  IconInfinity,
-  IconStar,
-  IconStarFilled,
   IconSunset2,
-  IconToolsKitchen2,
   IconWaveSine,
   tablerProps,
 } from '@/lib/site/icons'
@@ -14,6 +10,7 @@ import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
 import { Logo } from '@/components/logo'
 import { PlankShowcase } from '@/components/plank-showcase'
+import { WelcomeStatsShowcase } from '@/components/home/welcome-stats-showcase'
 import { HeroAmbience } from '@/components/hero-ambience'
 import { SmullenTicker } from '@/components/smullen-ticker'
 import { blockJson, blockValue } from '@/lib/cms/blocks'
@@ -130,96 +127,56 @@ export function HomePage({
         </div>
       </section>
 
-      <section className="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 overflow-hidden bg-background">
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start mb-12 sm:mb-14 md:mb-16">
-            <div>
-              <p className="label-vintage text-primary mb-3 text-[11px] tracking-[0.25em] uppercase">
-                {blockValue(page, 'welcome_eyebrow', 'Welkom bij')}
-              </p>
-              <BrandWordmark size="lg" className="mb-4 sm:mb-5" />
-              <p className="text-foreground/70 text-sm sm:text-base md:text-lg leading-relaxed text-pretty mb-6 sm:mb-8 max-w-md">
-                {blockValue(page, 'welcome_text', blockValue(page, 'intro', ''))}
-              </p>
-              <div className="flex flex-col gap-2.5 sm:gap-3">
-                {features.map((item) => {
-                  const Icon = resolveIcon(item.icon, IconWaveSine)
-                  return (
-                    <div
-                      key={item.title}
-                      className="group flex items-center gap-3 sm:gap-4 rounded-xl border border-border/70 bg-card/80 px-4 sm:px-5 py-3 sm:py-3.5 shadow-sm transition-all duration-200 hover:border-primary/40 hover:bg-card hover:shadow-md"
-                    >
-                      <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg bg-brand-blue-light transition-colors group-hover:bg-primary">
-                        <Icon size={16} className="text-primary transition-colors group-hover:text-white" />
-                      </div>
-                      <div>
-                        <p className="font-display text-xs sm:text-sm text-brand-navy uppercase tracking-wide">
-                          {item.title}
-                        </p>
-                        <p className="text-xs text-muted-foreground leading-snug mt-0.5">{item.text}</p>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-6 sm:mt-8">
-                <Link
-                  href="/menu"
-                  className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
-                >
-                  Bekijk het menu <IconArrowRight {...tablerProps(16)} />
-                </Link>
-                <Link
-                  href="/over-ons"
-                  className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all"
-                >
-                  Ontdek ons verhaal <IconArrowRight {...tablerProps(16)} />
-                </Link>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4">
-              <div className="col-span-2 flex items-center justify-between rounded-2xl bg-primary p-5 sm:p-6 md:p-8 text-white shadow-lg shadow-primary/20">
+      <WelcomeStatsShowcase
+        years={blockValue(page, 'stats_years', '10+')}
+        categoryCount={categoryCount}
+        rating={blockValue(page, 'stats_rating', '5.0')}
+        hours="12–22"
+        hoursLabel={settings.hoursDisplay}
+      >
+        <p className="label-vintage text-primary mb-3 text-[11px] tracking-[0.25em] uppercase">
+          {blockValue(page, 'welcome_eyebrow', 'Welkom bij')}
+        </p>
+        <BrandWordmark size="lg" className="mb-4 sm:mb-5" />
+        <p className="text-foreground/70 text-sm sm:text-base md:text-lg leading-relaxed text-pretty mb-6 sm:mb-8 max-w-md">
+          {blockValue(page, 'welcome_text', blockValue(page, 'intro', ''))}
+        </p>
+        <div className="flex flex-col gap-2.5 sm:gap-3">
+          {features.map((item) => {
+            const Icon = resolveIcon(item.icon, IconWaveSine)
+            return (
+              <div
+                key={item.title}
+                className="group flex items-center gap-3 sm:gap-4 rounded-xl border border-border/70 bg-card/80 px-4 sm:px-5 py-3 sm:py-3.5 shadow-sm transition-all duration-200 hover:border-primary/40 hover:bg-card hover:shadow-md"
+              >
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg bg-brand-blue-light transition-colors group-hover:bg-primary">
+                  <Icon size={16} className="text-primary transition-colors group-hover:text-white" />
+                </div>
                 <div>
-                  <p className="heading-display text-5xl sm:text-6xl md:text-7xl leading-none">
-                    {blockValue(page, 'stats_years', '10+')}
+                  <p className="font-display text-xs sm:text-sm text-brand-navy uppercase tracking-wide">
+                    {item.title}
                   </p>
-                  <p className="mt-2 text-xs sm:text-sm font-medium uppercase tracking-widest text-white/80">
-                    Jaar aan het water
-                  </p>
+                  <p className="text-xs text-muted-foreground leading-snug mt-0.5">{item.text}</p>
                 </div>
-                <IconWaveSine {...tablerProps(32)} className="text-white/20 sm:w-10 sm:h-10" aria-hidden />
               </div>
-              <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2">
-                <IconToolsKitchen2 {...tablerProps(16)} className="text-primary sm:w-[18px] sm:h-[18px]" aria-hidden />
-                <p className="heading-display text-3xl sm:text-4xl text-primary">{blockValue(page, 'stats_categories', String(categoryCount))}</p>
-                <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 leading-snug">
-                  Menu-<br />
-                  categorieën
-                </p>
-              </div>
-              <div className="rounded-2xl border border-border bg-card p-4 sm:p-5 flex flex-col gap-2">
-                <div className="flex gap-0.5 text-primary" aria-hidden>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <IconStarFilled key={i} {...tablerProps(11)} className="text-primary sm:w-3 sm:h-3" />
-                  ))}
-                </div>
-                <p className="heading-display text-3xl sm:text-4xl text-primary">{blockValue(page, 'stats_rating', '5.0')}</p>
-                <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50">Gastenreviews</p>
-              </div>
-              <div className="col-span-2 rounded-2xl bg-brand-blue-light/40 p-4 sm:p-5 md:p-6 flex items-center justify-between gap-3 border border-primary/15">
-                <div>
-                  <p className="heading-display text-3xl sm:text-4xl text-primary">12–22</p>
-                  <p className="text-[10px] font-medium uppercase tracking-widest text-foreground/50 mt-1">
-                    {settings.hoursDisplay}
-                  </p>
-                </div>
-                <IconInfinity {...tablerProps(28)} className="text-primary/30 shrink-0 sm:w-9 sm:h-9" aria-hidden />
-              </div>
-            </div>
-          </div>
+            )
+          })}
         </div>
-      </section>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-6 sm:mt-8">
+          <Link
+            href="/menu"
+            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
+          >
+            Bekijk het menu <IconArrowRight {...tablerProps(16)} />
+          </Link>
+          <Link
+            href="/over-ons"
+            className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all"
+          >
+            Ontdek ons verhaal <IconArrowRight {...tablerProps(16)} />
+          </Link>
+        </div>
+      </WelcomeStatsShowcase>
 
       <section className="py-12 sm:py-14 md:py-16 px-4 sm:px-6 bg-wood-2 border-y border-primary/10">
         <div className="max-w-6xl mx-auto">

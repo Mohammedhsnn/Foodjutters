@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { IconBrandInstagram, tablerProps } from '@/lib/site/icons'
 import { BrandName } from '@/components/brand-name'
@@ -43,14 +44,24 @@ export function PlankShowcase() {
         </div>
 
         {/* 2×2 card grid — use max-w to cap size on wide single-column layouts */}
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full overflow-visible">
           <PlankCard variant="sky">
             <p className="label-vintage text-brand-navy/70 text-xs mb-1.5 sm:mb-2">Wo – zo</p>
             <p className="heading-typewriter text-lg sm:text-2xl text-brand-navy">Kom smullen</p>
           </PlankCard>
 
-          <PlankCard variant="board">
-            <BorrelplankGraphic />
+          <PlankCard variant="photo">
+            <div className="absolute inset-[-20%] sm:inset-[-24%] md:inset-[-28%]">
+              <Image
+                src="/tapas-plank.png"
+                alt="FoodJutters borrelplank met kaas, charcuterie en hapjes"
+                fill
+                sizes="(max-width: 640px) 55vw, (max-width: 1024px) 320px, 380px"
+                className="object-contain"
+                priority
+                unoptimized
+              />
+            </div>
           </PlankCard>
 
           <PlankCard variant="pattern">
@@ -85,37 +96,27 @@ function PlankCard({
   variant,
   children,
 }: {
-  variant: 'sky' | 'board' | 'pattern' | 'price'
+  variant: 'sky' | 'photo' | 'pattern' | 'price'
   children: ReactNode
 }) {
+  if (variant === 'photo') {
+    return (
+      <div className="relative z-20 aspect-square overflow-visible">
+        {children}
+      </div>
+    )
+  }
+
   return (
     <div
       className={[
-        'aspect-square rounded-xl border-2 p-3 sm:p-4 flex flex-col justify-center overflow-hidden',
+        'relative z-0 aspect-square rounded-xl border-2 overflow-hidden p-3 sm:p-4 flex flex-col justify-center',
         variant === 'sky' && 'brand-surface-sky border-brand-navy/10 text-brand-navy',
-        variant === 'board' && 'bg-[#8b5a2b] border-white/20',
         variant === 'pattern' && 'brand-surface-navy border-white/15',
         variant === 'price' && 'bg-brand-navy border-primary/40 shadow-lg shadow-primary/20',
       ].join(' ')}
     >
       {children}
-    </div>
-  )
-}
-
-function BorrelplankGraphic() {
-  return (
-    <div className="relative w-full h-full flex items-center justify-center" aria-hidden>
-      <div className="absolute inset-2 rounded-full border-4 border-[#6d4528] bg-[#a0714b] shadow-inner" />
-      <div className="relative grid grid-cols-3 gap-1 sm:gap-1.5 p-4 sm:p-6">
-        {['#f4d03f', '#c0392b', '#27ae60', '#e67e22', '#ecf0f1', '#8e44ad'].map((color, i) => (
-          <span
-            key={i}
-            className="block h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 rounded-full border border-black/10"
-            style={{ backgroundColor: color }}
-          />
-        ))}
-      </div>
     </div>
   )
 }
