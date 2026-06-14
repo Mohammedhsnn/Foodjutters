@@ -56,7 +56,7 @@ export function PageHero({
         </div>
 
         {/* Title */}
-        <h1 className="heading-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-brand-navy text-balance leading-[0.9] mb-4 sm:mb-6">
+        <h1 className="heading-display text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl text-brand-navy text-balance leading-[0.9] mb-4 sm:mb-6">
           {title}
         </h1>
 

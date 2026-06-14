@@ -34,9 +34,18 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
       { icon: 'Flame', title: 'Knus & sfeervol', description: 'Houtkachel en sfeervol licht.' },
       { icon: 'Users', title: 'Ruimte voor iedereen', description: 'Van duo tot groepsreservering.' },
     ]),
-    { id: 'home-stats-years', key: 'stats_years', label: 'Stat jaren', type: 'text', value: '10+' },
-    { id: 'home-stats-cat', key: 'stats_categories', label: 'Stat categorieën', type: 'text', value: '5' },
-    { id: 'home-stats-rating', key: 'stats_rating', label: 'Stat rating', type: 'text', value: '5.0' },
+    { id: 'home-story-eyebrow', key: 'welcome_story_eyebrow', label: 'Welkom — verhaal eyebrow', type: 'text', value: 'Ons verhaal' },
+    { id: 'home-story-title', key: 'welcome_story_title', label: 'Welkom — verhaal titel', type: 'text', value: 'Een droom aan het water' },
+    {
+      id: 'home-story-text',
+      key: 'welcome_story_text',
+      label: 'Welkom — verhaal tekst',
+      type: 'textarea',
+      value:
+        'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer.\n\nWat begon als een bescheiden terrasrestaurant groeide uit tot een geliefde plek aan de Schelde — met houten terras, houtoven en een warme, gastvrije sfeer.',
+    },
+    { id: 'home-story-image', key: 'welcome_story_image', label: 'Welkom — verhaal afbeelding URL', type: 'text', value: HERO_IMG },
+    { id: 'home-story-image-alt', key: 'welcome_story_image_alt', label: 'Welkom — afbeelding alt-tekst', type: 'text', value: 'Terras van FoodJutters aan het water bij zonsondergang' },
     { id: 'home-cta-banner-title', key: 'cta_banner_title', label: 'CTA banner titel', type: 'text', value: 'Open!' },
     { id: 'home-cta-banner-text', key: 'cta_banner_text', label: 'CTA banner tekst', type: 'textarea', value: 'Wo – zo · 12:00 – 22:00 · Terras, plank & sfeer aan de Schelde.' },
     { id: 'home-menu-preview-title', key: 'menu_preview_title', label: 'Menu preview titel', type: 'text', value: 'Een greep uit ons menu' },
@@ -87,9 +96,9 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
     },
   ],
   contact: [
-    { id: 'contact-form-title', key: 'form_title', label: 'Formulier titel', type: 'text', value: 'Tafel reserveren' },
-    { id: 'contact-form-desc', key: 'form_description', label: 'Formulier beschrijving', type: 'textarea', value: 'Vul het formulier in en wij bevestigen uw reservering zo spoedig mogelijk.' },
-    { id: 'contact-success', key: 'form_success', label: 'Succesbericht', type: 'textarea', value: 'Uw reserveringsaanvraag is ontvangen. We nemen zo snel mogelijk contact met u op.' },
+    { id: 'contact-form-title', key: 'contact_form_title', label: 'Contactformulier titel', type: 'text', value: 'Contact opnemen' },
+    { id: 'contact-form-desc', key: 'contact_form_description', label: 'Contactformulier beschrijving', type: 'textarea', value: 'Heeft u een vraag, feedback of wilt u iets weten? Vul het formulier in — wij nemen zo snel mogelijk contact met u op.' },
+    { id: 'contact-success', key: 'contact_form_success', label: 'Contactformulier succesbericht', type: 'textarea', value: 'Bedankt voor uw bericht. We nemen zo snel mogelijk contact met u op.' },
   ],
   reserveren: [
     jsonBlock('res-info', 'info_items', 'Info items', [

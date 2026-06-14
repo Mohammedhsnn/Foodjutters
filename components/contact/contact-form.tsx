@@ -13,7 +13,38 @@ import {
 import { PageHero } from '@/components/page-hero'
 import type { ContentPage } from '@/lib/admin/types'
 import type { SiteSettingsProps } from '@/components/site-chrome'
+import { GroupReservationForm } from '@/components/group-reservation-form'
 import { blockValue } from '@/lib/cms/blocks'
+
+const CONTACT_FORM_DEFAULTS = {
+  title: 'Contact opnemen',
+  description:
+    'Heeft u een vraag, feedback of wilt u iets weten? Vul het formulier in — wij nemen zo snel mogelijk contact met u op.',
+  success: 'Bedankt voor uw bericht. We nemen zo snel mogelijk contact met u op.',
+} as const
+
+function isReservationFormCopy(text: string) {
+  return /reserver/i.test(text) || /tafel/i.test(text)
+}
+
+function contactFormTitle(page: ContentPage | null) {
+  const fromCms = blockValue(page, 'contact_form_title', '') || blockValue(page, 'form_title', '')
+  if (!fromCms || isReservationFormCopy(fromCms)) return CONTACT_FORM_DEFAULTS.title
+  return fromCms
+}
+
+function contactFormDescription(page: ContentPage | null) {
+  const fromCms =
+    blockValue(page, 'contact_form_description', '') || blockValue(page, 'form_description', '')
+  if (!fromCms || isReservationFormCopy(fromCms)) return CONTACT_FORM_DEFAULTS.description
+  return fromCms
+}
+
+function contactFormSuccess(page: ContentPage | null) {
+  const fromCms = blockValue(page, 'contact_form_success', '') || blockValue(page, 'form_success', '')
+  if (!fromCms || isReservationFormCopy(fromCms)) return CONTACT_FORM_DEFAULTS.success
+  return fromCms
+}
 
 const dayNames = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag']
 
@@ -32,9 +63,6 @@ export function ContactForm({
     name: '',
     email: '',
     phone: '',
-    date: '',
-    time: '',
-    guests: '2',
     message: '',
   })
   const [submitted, setSubmitted] = useState(false)
@@ -53,17 +81,14 @@ export function ContactForm({
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/reservations', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.name,
           email: form.email,
           phone: form.phone,
-          date: form.date,
-          time: form.time,
-          guests: form.guests,
-          notes: form.message,
+          message: form.message,
         }),
       })
       if (!res.ok) {
@@ -83,10 +108,10 @@ export function ContactForm({
     <>
       <PageHero
         eyebrow={hero?.eyebrow ?? 'Kom langs'}
-        title={hero?.title ?? 'Contact & Reservering'}
+        title={hero?.title ?? 'Contact'}
         subtitle={
           hero?.subtitle ??
-          'Reserveer uw tafel, stel een vraag of plan een groepsarrangement. Wij helpen u graag verder.'
+          'Stel een vraag, geef feedback of vraag een groepsreservering aan voor organisaties en gezelschappen vanaf 10 personen.'
         }
         pattern="WELKOM"
         meta={
@@ -99,12 +124,12 @@ export function ContactForm({
               ]
         }
         ctas={[
-          { href: '#reserveer', label: 'Reserveer een tafel' },
-          { href: `tel:${settings.phoneTel}`, label: 'Bel ons direct', variant: 'secondary' },
+          { href: '#contact', label: 'Contact opnemen' },
+          { href: '#groepsreservering', label: 'Groepsreservering', variant: 'secondary' },
         ]}
       />
 
-      <section id="reserveer" className="py-10 sm:py-12 px-4 sm:px-6 bg-background">
+      <section id="contact" className="py-10 sm:py-12 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-5 gap-6 sm:gap-8 items-start">
           <aside className="lg:col-span-2 flex flex-col gap-4 sm:gap-5">
             <div className="bg-card border border-border rounded-xl p-5 sm:p-6 shadow-sm">
@@ -203,24 +228,16 @@ export function ContactForm({
                   </div>
                   <h2 className="heading-display text-xl sm:text-2xl text-brand-dark">Bedankt!</h2>
                   <p className="text-foreground/60 leading-relaxed max-w-xs text-sm">
-                    {blockValue(
-                      page,
-                      'form_success',
-                      'Uw reserveringsaanvraag is ontvangen. We nemen zo snel mogelijk contact met u op.',
-                    )}
+                    {contactFormSuccess(page)}
                   </p>
                 </div>
               ) : (
                 <>
                   <h2 className="heading-display text-lg sm:text-xl text-brand-dark mb-1">
-                    {blockValue(page, 'form_title', 'Tafel reserveren')}
+                    {contactFormTitle(page)}
                   </h2>
                   <p className="text-muted-foreground text-sm mb-5 sm:mb-6">
-                    {blockValue(
-                      page,
-                      'form_description',
-                      'Vul het formulier in en wij bevestigen uw reservering zo spoedig mogelijk.',
-                    )}
+                    {contactFormDescription(page)}
                   </p>
                   {error ? (
                     <p className="text-sm text-destructive mb-4" role="alert">
@@ -274,76 +291,18 @@ export function ContactForm({
                         className={inputClass}
                       />
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
-                      <div className="flex flex-col gap-1.5">
-                        <label htmlFor="date" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
-                          Datum <span className="text-primary">*</span>
-                        </label>
-                        <input
-                          id="date"
-                          name="date"
-                          type="date"
-                          required
-                          value={form.date}
-                          onChange={handleChange}
-                          className={inputClass}
-                        />
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        <label htmlFor="time" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
-                          Tijdstip <span className="text-primary">*</span>
-                        </label>
-                        <select
-                          id="time"
-                          name="time"
-                          required
-                          value={form.time}
-                          onChange={handleChange}
-                          className={inputClass}
-                        >
-                          <option value="">Kies tijd</option>
-                          {[
-                            '12:00', '12:30', '13:00', '13:30', '14:00', '17:00', '17:30',
-                            '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00',
-                          ].map((t) => (
-                            <option key={t} value={t}>
-                              {t}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                      <div className="flex flex-col gap-1.5">
-                        <label htmlFor="guests" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
-                          Gasten <span className="text-primary">*</span>
-                        </label>
-                        <select
-                          id="guests"
-                          name="guests"
-                          required
-                          value={form.guests}
-                          onChange={handleChange}
-                          className={inputClass}
-                        >
-                          {Array.from({ length: 19 }, (_, i) => i + 2).map((n) => (
-                            <option key={n} value={String(n)}>
-                              {n} personen
-                            </option>
-                          ))}
-                          <option value="20+">20+ personen</option>
-                        </select>
-                      </div>
-                    </div>
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="message" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
-                        Bijzonderheden
+                        Uw bericht <span className="text-primary">*</span>
                       </label>
                       <textarea
                         id="message"
                         name="message"
-                        rows={3}
+                        rows={4}
+                        required
                         value={form.message}
                         onChange={handleChange}
-                        placeholder="Allergieën, dieetwensen, speciale gelegenheid..."
+                        placeholder="Waarmee kunnen we u helpen?"
                         className={`${inputClass} resize-none`}
                       />
                     </div>
@@ -353,12 +312,35 @@ export function ContactForm({
                       className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-brand-blue-dark text-white font-semibold py-3 rounded-lg transition-colors shadow-sm text-sm mt-1 disabled:opacity-60"
                     >
                       <IconSend {...tablerProps(15)} />
-                      {loading ? 'Verzenden…' : 'Reservering aanvragen'}
+                      {loading ? 'Verzenden…' : 'Contact opnemen'}
                     </button>
                   </form>
                 </>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="groepsreservering"
+        className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-wood-3 border-t border-primary/10 scroll-mt-24"
+      >
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8 sm:mb-10">
+            <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-2">
+              Groepen & organisaties
+            </p>
+            <h2 className="section-heading text-brand-dark mb-3">
+              Groepsreservering aanvragen
+            </h2>
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-lg mx-auto">
+              Voor organisaties en gezelschappen vanaf 10 personen. Kleinere groepen zijn welkom zonder
+              reservering — loop gerust binnen.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-border bg-card shadow-sm p-5 sm:p-8 md:p-10">
+            <GroupReservationForm />
           </div>
         </div>
       </section>

@@ -51,8 +51,8 @@ export default async function ImpressiePage() {
         pattern="BELEVING"
         meta={hero?.meta}
         ctas={[
-          { href: '/reserveren', label: 'Reserveer een tafel' },
-          { href: '#impressie-fotos', label: 'Bekijk de fotos', variant: 'secondary' },
+          { href: '#impressie-fotos', label: 'Bekijk de fotos' },
+          { href: '/contact', label: 'Contact', variant: 'secondary' },
         ]}
       />
 
@@ -130,7 +130,7 @@ export default async function ImpressiePage() {
               <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
                 Ervaringen
               </p>
-              <h2 className="heading-display text-xl sm:text-2xl md:text-3xl text-brand-dark">
+              <h2 className="section-heading text-brand-dark">
                 Wat onze gasten zeggen
               </h2>
             </div>
@@ -157,17 +157,17 @@ export default async function ImpressiePage() {
 
       <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-brand-navy">
         <div className="max-w-2xl mx-auto text-center text-white">
-          <h2 className="heading-display text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-5 text-balance leading-[0.95]">
+          <h2 className="section-heading-lg mb-4 sm:mb-5">
             {blockValue(page, 'cta_title', 'Ervaar het zelf')}
           </h2>
           <p className="text-white/65 text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
             {blockValue(page, 'cta_text', '')}
           </p>
           <Link
-            href="/reserveren"
+            href="/contact#groepsreservering"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-8 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-lg shadow-primary/25 text-sm"
           >
-            Reserveer uw tafel <IconArrowRight {...tablerProps(16)} />
+            Groepsreservering aanvragen <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </section>

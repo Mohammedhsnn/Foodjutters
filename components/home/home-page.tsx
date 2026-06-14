@@ -1,100 +1,101 @@
 import Link from 'next/link'
-import {
-  IconArrowRight,
-  IconSunset2,
-  IconWaveSine,
-  tablerProps,
-} from '@/lib/site/icons'
-import { BrandName } from '@/components/brand-name'
+import { IconArrowRight, IconWaveSine, tablerProps } from '@/lib/site/icons'
 import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
 import { Logo } from '@/components/logo'
 import { PlankShowcase } from '@/components/plank-showcase'
-import { WelcomeStatsShowcase } from '@/components/home/welcome-stats-showcase'
+import { WelcomeSection } from '@/components/home/welcome-section'
+import { WhyHighlightsSection } from '@/components/home/why-highlights-section'
 import { HeroAmbience } from '@/components/hero-ambience'
 import { SmullenTicker } from '@/components/smullen-ticker'
 import { blockJson, blockValue } from '@/lib/cms/blocks'
 import { resolveIcon } from '@/lib/cms/icons'
-import type { ContentPage, MenuSection } from '@/lib/admin/types'
+import type { ContentPage } from '@/lib/admin/types'
 import type { SiteSettingsProps } from '@/components/site-chrome'
 type Highlight = { icon: string; title: string; description: string }
 type Feature = { icon: string; title: string; text: string }
 
 export function HomePage({
   page,
-  menuSections,
   settings,
 }: {
   page: ContentPage | null
-  menuSections: MenuSection[]
   settings: SiteSettingsProps
 }) {
   const highlights = blockJson<Highlight[]>(page, 'highlights', [])
   const features = blockJson<Feature[]>(page, 'features', [])
-  const menuPreview = menuSections
-    .filter((s) => s.items.some((i) => i.available))
-    .slice(0, 3)
-    .map((section, index) => ({
-      category: section.title,
-      items: section.items.filter((i) => i.available).slice(0, 3).map((i) => i.name),
-      featured: index === 1,
-    }))
-
-  const categoryCount = menuSections.length
-  const itemCount = menuSections.reduce((n, s) => n + s.items.filter((i) => i.available).length, 0)
 
   return (
     <>
-      <section className="hero-wood relative min-h-[100svh] flex flex-col justify-between overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/55 via-white/20 to-white/50 pointer-events-none z-[1]" aria-hidden />
+      <section className="hero-wood relative flex flex-col overflow-hidden max-sm:h-[100dvh] max-sm:max-h-[100dvh] sm:min-h-[100svh]">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/45 via-transparent to-white/40 pointer-events-none z-[1]" aria-hidden />
         <div
-          className="absolute inset-0 pointer-events-none z-[2]"
+          className="absolute inset-0 pointer-events-none z-[2] max-sm:opacity-90"
           style={{
             background:
-              'radial-gradient(ellipse 70% 55% at 50% 46%, rgb(244 250 253 / 0.7) 0%, transparent 100%)',
+              'radial-gradient(ellipse 90% 70% at 50% 38%, rgb(255 255 255 / 0.55) 0%, transparent 72%)',
           }}
           aria-hidden
         />
         <HeroAmbience />
 
-        <div className="relative z-10 flex flex-1 items-center justify-center px-5 sm:px-8 pt-28 sm:pt-32 pb-10">
-          <div className="text-center w-full max-w-xl mx-auto">
+        <div className="relative z-10 flex flex-1 min-h-0 flex-col max-sm:justify-between sm:justify-center px-5 sm:px-8 pt-[3.75rem] sm:pt-32 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pb-10">
+          <div className="flex flex-1 min-h-0 flex-col items-center justify-center text-center w-full max-w-xl mx-auto">
             <h1 className="sr-only">
               FoodJutters — {blockValue(page, 'tagline', 'smullen, borrelen & genieten aan het water')}
             </h1>
-            <Logo layout="stack" size="hero" className="mb-7 sm:mb-9 drop-shadow-sm" />
-            <p className="font-serif text-base sm:text-lg md:text-xl text-brand-navy/85 tracking-[0.04em] leading-relaxed mb-8 sm:mb-10 text-pretty max-w-xs sm:max-w-none mx-auto">
+            <Logo
+              layout="stack"
+              size="hero"
+              className="mb-6 sm:mb-9 drop-shadow-[0_8px_24px_rgba(15,45,74,0.12)] [&_img]:max-sm:h-[6.75rem] [&_span]:max-sm:text-[3rem]"
+            />
+            <p className="font-serif text-base sm:text-lg md:text-xl text-brand-navy/90 tracking-[0.02em] leading-relaxed mb-8 sm:mb-10 text-pretty max-w-[22ch] sm:max-w-none mx-auto">
               {blockValue(page, 'tagline', 'Smullen, borrelen & genieten aan het water')}
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-[300px] sm:max-w-none mx-auto">
               <Link
-                href="/reserveren"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full shadow-xl shadow-brand-navy/30 hover:bg-primary hover:shadow-primary/30 transition-all duration-200"
+                href="/menu"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-[0.1em] text-sm px-8 py-3.5 sm:py-4 rounded-full shadow-xl shadow-brand-navy/20 hover:bg-primary hover:shadow-primary/25 transition-all duration-200"
               >
-                {blockValue(page, 'cta_primary', 'Reserveer een tafel')}
+                Bekijk ons menu
                 <IconArrowRight {...tablerProps(16)} />
               </Link>
               <Link
-                href="/menu"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-sm text-brand-navy font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full border border-brand-navy/20 shadow-md hover:bg-white hover:border-brand-navy/40 transition-all duration-200"
+                href="/contact"
+                className="hidden sm:inline-flex items-center justify-center gap-2 bg-white/85 backdrop-blur-sm text-brand-navy font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full border border-brand-navy/15 shadow-md hover:bg-white hover:border-brand-navy/35 transition-all duration-200"
               >
-                {blockValue(page, 'cta_secondary', 'Bekijk ons menu')}
+                Contact
               </Link>
             </div>
           </div>
-        </div>
 
-        <div className="relative z-10 w-full pb-7 sm:pb-9 px-5 sm:px-10">
-          <div className="max-w-6xl mx-auto flex items-end justify-between">
-            <div className="hidden sm:flex flex-col gap-1">
-              <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Geopend</p>
-              <p className="font-serif text-xs text-brand-navy/80 font-medium">{settings.hoursDisplay}</p>
-            </div>
-            <div className="hidden sm:flex flex-col items-end gap-1 max-w-[200px]">
-              <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Locatie</p>
-              <p className="font-serif text-xs text-brand-navy/80 font-medium text-right">
-                {blockValue(page, 'location_short', settings.addressShort)}
-              </p>
+          <div className="w-full shrink-0 max-sm:mt-4 sm:mt-0 sm:absolute sm:bottom-0 sm:left-0 sm:right-0 sm:pb-9 sm:px-10">
+            <div className="max-w-6xl mx-auto">
+              <div className="sm:hidden grid grid-cols-2 gap-px rounded-xl bg-brand-navy/8 p-px shadow-sm max-w-sm mx-auto">
+                <div className="rounded-l-[11px] bg-white/75 backdrop-blur-md px-3 py-2.5 text-center">
+                  <p className="font-serif text-[8px] tracking-[0.18em] uppercase text-brand-navy/45 mb-0.5">Geopend</p>
+                  <p className="font-serif text-[11px] text-brand-navy font-medium leading-snug">{settings.hoursDisplay}</p>
+                </div>
+                <div className="rounded-r-[11px] bg-white/75 backdrop-blur-md px-3 py-2.5 text-center">
+                  <p className="font-serif text-[8px] tracking-[0.18em] uppercase text-brand-navy/45 mb-0.5">Locatie</p>
+                  <p className="font-serif text-[11px] text-brand-navy font-medium leading-snug">
+                    {blockValue(page, 'location_short', settings.addressShort)}
+                  </p>
+                </div>
+              </div>
+
+              <div className="hidden sm:flex items-end justify-between">
+                <div className="flex flex-col gap-1">
+                  <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Geopend</p>
+                  <p className="font-serif text-xs text-brand-navy/80 font-medium">{settings.hoursDisplay}</p>
+                </div>
+                <div className="flex flex-col items-end gap-1 max-w-[200px]">
+                  <p className="font-serif text-[10px] tracking-[0.22em] uppercase text-brand-navy/55">Locatie</p>
+                  <p className="font-serif text-xs text-brand-navy/80 font-medium text-right">
+                    {blockValue(page, 'location_short', settings.addressShort)}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,7 +111,7 @@ export function HomePage({
               <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase mb-0.5">
                 {blockValue(page, 'banner_eyebrow', 'Woensdag t/m zondag')}
               </p>
-              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl">
+              <h2 className="section-heading-typewriter">
                 {blockValue(page, 'banner_title', 'Kom gezellig tafelen')}
               </h2>
             </div>
@@ -120,19 +121,28 @@ export function HomePage({
               <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-primary leading-none">12–22</p>
               <p className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.18em] mt-1">Openingstijden</p>
             </div>
-            <Link href="/reserveren" className="btn-brand bg-brand-navy text-white hover:bg-primary shrink-0 text-xs sm:text-sm px-5 sm:px-8 py-2.5 sm:py-3.5">
-              Reserveer
-            </Link>
           </div>
         </div>
       </section>
 
-      <WelcomeStatsShowcase
-        years={blockValue(page, 'stats_years', '10+')}
-        categoryCount={categoryCount}
-        rating={blockValue(page, 'stats_rating', '5.0')}
-        hours="12–22"
-        hoursLabel={settings.hoursDisplay}
+      <WelcomeSection
+        storyEyebrow={blockValue(page, 'welcome_story_eyebrow', 'Ons verhaal')}
+        storyTitle={blockValue(page, 'welcome_story_title', 'Een droom aan het water')}
+        storyText={blockValue(
+          page,
+          'welcome_story_text',
+          'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer.\n\nWat begon als een bescheiden terrasrestaurant groeide uit tot een geliefde plek aan de Schelde — met houten terras, houtoven en een warme, gastvrije sfeer.',
+        )}
+        storyImage={blockValue(
+          page,
+          'welcome_story_image',
+          'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0091.JPG-AMp6yqfKtGnflTqhpghBFBhZIZu1SY.jpeg',
+        )}
+        storyImageAlt={blockValue(
+          page,
+          'welcome_story_image_alt',
+          'Terras van FoodJutters aan het water bij zonsondergang',
+        )}
       >
         <p className="label-vintage text-primary mb-3 text-[11px] tracking-[0.25em] uppercase">
           {blockValue(page, 'welcome_eyebrow', 'Welkom bij')}
@@ -176,128 +186,25 @@ export function HomePage({
             Ontdek ons verhaal <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
-      </WelcomeStatsShowcase>
+      </WelcomeSection>
 
-      <section className="py-12 sm:py-14 md:py-16 px-4 sm:px-6 bg-wood-2 border-y border-primary/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
-            <div className="flex-1 h-px bg-primary/20" />
-            <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
-                Waarom <BrandName className="text-primary" />?
-              </p>
-              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl text-brand-navy">Een unieke beleving</h2>
-            </div>
-            <div className="flex-1 h-px bg-primary/20" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {highlights.map((item, index) => {
-              const Icon = resolveIcon(item.icon, IconSunset2)
-              return (
-                <div
-                  key={item.title}
-                  className={[
-                    'group flex flex-col gap-4 rounded-2xl border bg-card p-5 sm:p-6 transition-all duration-200',
-                    'hover:border-primary/40 hover:shadow-lg hover:-translate-y-0.5',
-                    index === 0 ? 'border-primary/25 bg-primary/4' : 'border-border/80',
-                  ].join(' ')}
-                >
-                  <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-brand-blue-light transition-colors group-hover:bg-primary">
-                    <Icon size={18} className="text-primary transition-colors group-hover:text-white sm:size-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xs sm:text-sm text-brand-navy uppercase tracking-wide leading-snug mb-1 sm:mb-1.5">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+      <WhyHighlightsSection highlights={highlights} />
 
       <PlankShowcase />
 
       <BrandSurface variant="sky" pattern="SMULLEN" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-brand-navy">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="heading-display text-4xl sm:text-5xl md:text-7xl mb-4 sm:mb-5 text-balance leading-[0.9]">
+          <h2 className="section-heading-xl mb-4 sm:mb-5">
             {blockValue(page, 'cta_banner_title', 'Open!')}
           </h2>
           <p className="text-brand-navy/70 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
             {blockValue(page, 'cta_banner_text', settings.hoursDisplay)}
           </p>
-          <Link href="/reserveren" className="btn-brand bg-brand-navy text-white hover:bg-primary shadow-lg shadow-brand-navy/20">
-            Maak een reservering <IconArrowRight {...tablerProps(16)} />
+          <Link href="/contact#groepsreservering" className="btn-brand bg-brand-navy text-white hover:bg-primary shadow-lg shadow-brand-navy/20">
+            Groepsreservering aanvragen <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </BrandSurface>
-
-      <section className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 bg-background">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 sm:gap-5 mb-10 sm:mb-12">
-            <div className="flex-1 h-px bg-border" />
-            <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Onze keuken</p>
-              <h2 className="heading-typewriter text-xl sm:text-2xl md:text-3xl text-brand-navy">
-                {blockValue(page, 'menu_preview_title', 'Een greep uit ons menu')}
-              </h2>
-            </div>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-          <div className="max-w-4xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            {menuPreview.map((section) => (
-              <div
-                key={section.category}
-                className={`rounded-2xl border p-5 sm:p-7 flex flex-col ${
-                  section.featured
-                    ? 'bg-primary border-primary shadow-xl shadow-primary/20 text-white'
-                    : 'bg-card border-border/80 shadow-sm hover:shadow-md transition-shadow'
-                }`}
-              >
-                {section.featured ? (
-                  <span className="inline-block self-start text-[10px] font-display uppercase tracking-widest bg-white/20 text-white px-2.5 py-1 rounded-full mb-3">
-                    Populair
-                  </span>
-                ) : null}
-                <h3
-                  className={`font-display text-sm sm:text-base uppercase tracking-wide mb-4 sm:mb-5 ${section.featured ? 'text-white' : 'text-brand-navy'}`}
-                >
-                  {section.category}
-                </h3>
-                <ul className="flex flex-col flex-1">
-                  {section.items.map((item) => (
-                    <li
-                      key={item}
-                      className={`flex items-center gap-2.5 text-sm py-2 sm:py-2.5 border-b last:border-b-0 ${
-                        section.featured ? 'border-white/15 text-white/85' : 'border-border/50 text-foreground/65'
-                      }`}
-                    >
-                      <span
-                        className={`w-1 h-1 rounded-full shrink-0 ${section.featured ? 'bg-white/50' : 'bg-primary/50'}`}
-                        aria-hidden
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <p className="text-center text-xs text-muted-foreground mt-6 tabular-nums">
-            {itemCount} gerechten in {categoryCount} categorieën
-          </p>
-          <div className="text-center mt-8 sm:mt-10">
-            <Link
-              href="/menu"
-              className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
-            >
-              Bekijk het volledige menu <IconArrowRight {...tablerProps(16)} />
-            </Link>
-          </div>
-        </div>
-      </section>
     </>
   )
 }

@@ -48,8 +48,8 @@ export default async function MenuPage() {
               ]
         }
         ctas={[
-          { href: '/reserveren', label: 'Tafel reserveren' },
-          { href: '#menu-inhoud', label: 'Spring naar menu', variant: 'secondary' },
+          { href: '#menu-inhoud', label: 'Bekijk het menu' },
+          { href: '/contact', label: 'Contact', variant: 'secondary' },
         ]}
       />
 
@@ -76,7 +76,7 @@ export default async function MenuPage() {
               <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-7">
                 <div className="flex-1 h-px bg-border/60" />
                 <div className="text-center px-2 sm:px-3 shrink-0 max-w-[60%]">
-                  <h2 className="heading-display text-xl sm:text-2xl md:text-3xl text-brand-dark leading-tight">
+                  <h2 className="section-heading-menu text-brand-dark">
                     {section.title}
                   </h2>
                   <p className="label-vintage text-muted-foreground text-[10px] tracking-[0.2em] mt-1">
@@ -116,25 +116,25 @@ export default async function MenuPage() {
           <div className="flex items-center justify-center gap-3 mb-5">
             <div className="h-px w-8 bg-primary/30" />
             <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase">
-              Tafel reserveren
+              Groepsreservering
             </p>
             <div className="h-px w-8 bg-primary/30" />
           </div>
-          <h2 className="heading-display text-3xl sm:text-4xl md:text-5xl text-brand-dark mb-4 text-balance leading-[0.95]">
+          <h2 className="section-heading-lg text-brand-dark mb-4">
             {blockValue(page, 'cta_title', 'Zin gekregen?')}
           </h2>
           <p className="text-foreground/60 text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
             {blockValue(
               page,
               'cta_text',
-              'Reserveer uw tafel en laat ons voor u zorgen. Wij staan voor u klaar voor een onvergetelijk diner aan het water.',
+              'Kom langs wanneer het u uitkomt. Voor organisaties of groepen vanaf 10 personen kunt u een reservering aanvragen.',
             )}
           </p>
           <Link
-            href="/reserveren"
+            href="/contact#groepsreservering"
             className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
           >
-            Maak een reservering <IconArrowRight {...tablerProps(16)} />
+            Groepsreservering aanvragen <IconArrowRight {...tablerProps(16)} />
           </Link>
         </div>
       </section>

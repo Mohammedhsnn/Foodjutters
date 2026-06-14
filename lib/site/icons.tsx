@@ -8,6 +8,7 @@ export function tablerProps(size: number, stroke = TABLER_STROKE) {
 export {
   IconArrowLeft,
   IconArrowRight,
+  IconBuilding,
   IconBrandFacebook,
   IconBrandInstagram,
   IconCalendar,

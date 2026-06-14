@@ -40,7 +40,7 @@ export default async function OverOnsPage() {
         meta={hero?.meta}
         ctas={[
           { href: '/menu', label: 'Bekijk ons menu' },
-          { href: '/reserveren', label: 'Reserveer een tafel', variant: 'secondary' },
+          { href: '/contact', label: 'Contact', variant: 'secondary' },
         ]}
       />
 
@@ -71,7 +71,7 @@ export default async function OverOnsPage() {
               <div className="h-px w-8 bg-primary/40" />
               <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase">Hoe het begon</p>
             </div>
-            <h2 className="heading-display text-3xl sm:text-4xl md:text-5xl text-brand-dark leading-[0.95] text-balance mb-4 sm:mb-6">
+            <h2 className="section-heading-lg text-brand-dark mb-4 sm:mb-6">
               {blockValue(page, 'story_title', 'Een droom aan het water')}
             </h2>
             <p className="text-foreground/65 leading-relaxed mb-4 text-sm">{blockValue(page, 'story_p1', '')}</p>
@@ -95,7 +95,7 @@ export default async function OverOnsPage() {
               <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
                 Waar wij voor staan
               </p>
-              <h2 className="heading-display text-2xl sm:text-3xl md:text-4xl text-brand-dark">Onze waarden</h2>
+              <h2 className="section-heading text-brand-dark">Onze waarden</h2>
             </div>
             <div className="flex-1 h-px bg-primary/20" />
           </div>
@@ -140,7 +140,7 @@ export default async function OverOnsPage() {
             <div className="flex-1 h-px bg-border" />
             <div className="text-center shrink-0 px-1">
               <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Ons team</p>
-              <h2 className="heading-display text-2xl sm:text-3xl md:text-4xl text-brand-dark text-balance">
+              <h2 className="section-heading text-brand-dark text-balance">
                 De mensen achter <BrandName className="text-inherit tracking-normal" />
               </h2>
             </div>
@@ -187,7 +187,7 @@ export default async function OverOnsPage() {
             <p className="label-vintage text-white/50 text-[11px] tracking-[0.25em] uppercase">Wij verwelkomen u</p>
             <div className="h-px w-10 bg-white/20" />
           </div>
-          <h2 className="heading-display text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-5 text-balance leading-[0.95]">
+          <h2 className="section-heading-lg mb-4 sm:mb-5">
             {blockValue(page, 'cta_title', 'Kom langs')}
           </h2>
           <p className="text-white/65 text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">

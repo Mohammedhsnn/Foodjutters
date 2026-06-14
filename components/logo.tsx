@@ -14,7 +14,7 @@ const MARK = { width: 159, height: 100 } as const
 const markSize = {
   sm: { stack: 'h-11', row: 'h-9 max-w-[5.5rem]' },
   md: { stack: 'h-12', row: 'h-10 max-w-[6rem]' },
-  hero: { stack: 'h-[5.5rem] sm:h-24 md:h-28', row: 'h-20' },
+  hero: { stack: 'h-[6.25rem] sm:h-24 md:h-28', row: 'h-20' },
 } as const
 
 const wordmarkSize = {
@@ -38,7 +38,9 @@ export function Logo({
     <span
       className={cn(
         'leading-none shrink-0',
-        stacked ? 'inline-flex flex-col items-center gap-1.5' : 'inline-flex items-center gap-2.5',
+        stacked
+          ? 'inline-flex flex-col items-center gap-2 sm:gap-1.5'
+          : 'inline-flex items-center gap-2.5',
         className
       )}
     >

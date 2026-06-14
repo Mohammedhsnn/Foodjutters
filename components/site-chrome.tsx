@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { FloatingBooking } from '@/components/floating-booking'
 import type { loadSiteSettings } from '@/lib/cms/settings'
 
 export type SiteSettingsProps = Awaited<ReturnType<typeof loadSiteSettings>>
@@ -27,7 +26,6 @@ export function SiteChrome({
       <Navigation />
       <main>{children}</main>
       <Footer settings={settings} />
-      <FloatingBooking />
     </>
   )
 }

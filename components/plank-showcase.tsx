@@ -20,7 +20,7 @@ export function PlankShowcase() {
     <BrandSurface variant="navy" pattern="PLANK" className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 text-white">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
         <div>
-          <h2 className="heading-display text-4xl sm:text-5xl md:text-7xl text-white mb-3 sm:mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h2 className="section-heading-xl text-white mb-3 sm:mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <BrandName variant="light" className="text-[0.55em] sm:text-[0.5em]" />
             <span>Plank</span>
           </h2>
