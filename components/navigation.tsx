@@ -44,17 +44,15 @@ export function Navigation() {
 
   const isHome = pathname === '/'
   const atTop = isHome && !scrolled
-  const heroBar = atTop
-  const solidHeader = scrolled || !isHome
+  const mobileHeroBar = atTop
+  const solidHeader = scrolled
 
   return (
     <>
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          heroBar
-            ? 'max-md:pt-[max(0.65rem,env(safe-area-inset-top))] max-md:px-3.5'
-            : 'pt-[max(0px,env(safe-area-inset-top))]',
+          mobileHeroBar && 'max-md:pt-[max(0.65rem,env(safe-area-inset-top))] max-md:px-3.5',
           solidHeader
             ? 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_0_var(--color-border)]'
             : 'bg-transparent',
@@ -62,10 +60,9 @@ export function Navigation() {
       >
         <div
           className={cn(
-            'max-w-6xl mx-auto flex items-center justify-between gap-3 sm:gap-6 transition-all duration-300',
-            heroBar
-              ? 'max-md:px-3.5 max-md:h-12 max-md:rounded-2xl max-md:bg-white/60 max-md:backdrop-blur-xl max-md:shadow-[0_8px_32px_rgba(27,67,100,0.1)] max-md:ring-1 max-md:ring-white/70'
-              : 'px-4 sm:px-8 h-14 sm:h-[68px]',
+            'max-w-6xl mx-auto px-5 sm:px-8 h-14 sm:h-[68px] flex items-center justify-between gap-4 sm:gap-6 transition-all duration-300',
+            mobileHeroBar &&
+              'max-md:px-3.5 max-md:h-12 max-md:rounded-2xl max-md:bg-white/60 max-md:backdrop-blur-xl max-md:shadow-[0_8px_32px_rgba(27,67,100,0.1)] max-md:ring-1 max-md:ring-white/70',
           )}
         >
           <Link
@@ -77,7 +74,7 @@ export function Navigation() {
               size="sm"
               layout="row"
               className={cn(
-                heroBar && 'max-md:[&_img]:h-8 max-md:[&_span]:text-[0.95rem]',
+                mobileHeroBar && 'max-md:[&_img]:h-8 max-md:[&_span]:text-[0.95rem]',
               )}
             />
           </Link>
@@ -111,7 +108,7 @@ export function Navigation() {
             className={cn(
               'md:hidden flex h-9 w-9 items-center justify-center rounded-xl transition-all duration-200',
               'text-brand-navy',
-              heroBar
+              mobileHeroBar
                 ? 'bg-brand-navy/8 hover:bg-brand-navy/12 active:scale-95'
                 : 'bg-white/70 shadow-sm ring-1 ring-brand-navy/10 hover:bg-white/90',
             )}
