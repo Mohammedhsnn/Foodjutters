@@ -1,6 +1,14 @@
+import {
+  DEFAULT_HOURS_DISPLAY,
+  DEFAULT_HOURS_SHORT,
+  DEFAULT_KITCHEN_HOURS,
+  DEFAULT_OPENING_HOURS,
+} from '@/lib/site/hours'
+import { DEFAULT_PHONE, DEFAULT_PHONE_TEL } from '@/lib/site/contact'
+
 export const SEED_SITE_SETTINGS: Record<string, string> = {
-  phone: '+31 (0)320 00 00 00',
-  phone_tel: '+31320000000',
+  phone: DEFAULT_PHONE,
+  phone_tel: DEFAULT_PHONE_TEL,
   email: 'info@foodjutters.nl',
   address_line1: 'Scheldeboulevard 7',
   address_line2: '4531 EJ Terneuzen',
@@ -10,14 +18,9 @@ export const SEED_SITE_SETTINGS: Record<string, string> = {
     'Een uniek waterfront restaurant met een sfeervolle binnenruimte, ruim terras en heerlijke gerechten.',
   instagram_url: 'https://www.instagram.com/foodjutters',
   facebook_url: 'https://www.facebook.com/foodjutters',
-  opening_hours: JSON.stringify([
-    { day: 'Maandag', hours: 'Gesloten' },
-    { day: 'Dinsdag', hours: 'Gesloten' },
-    { day: 'Woensdag', hours: '12:00 – 22:00' },
-    { day: 'Donderdag', hours: '12:00 – 22:00' },
-    { day: 'Vrijdag', hours: '12:00 – 22:00' },
-    { day: 'Zaterdag', hours: '12:00 – 22:00' },
-    { day: 'Zondag', hours: '12:00 – 21:00' },
-  ]),
-  hours_display: 'Wo – Zo · 12:00 – 22:00',
+  opening_hours: JSON.stringify(DEFAULT_OPENING_HOURS),
+  hours_display: DEFAULT_HOURS_DISPLAY,
+  hours_short: DEFAULT_HOURS_SHORT,
+  kitchen_hours: DEFAULT_KITCHEN_HOURS,
+  menu_page_visible: 'false',
 }

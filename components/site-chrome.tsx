@@ -3,9 +3,9 @@
 import { usePathname } from 'next/navigation'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import type { loadSiteSettings } from '@/lib/cms/settings'
+import type { SiteSettingsProps } from '@/lib/cms/settings'
 
-export type SiteSettingsProps = Awaited<ReturnType<typeof loadSiteSettings>>
+export type { SiteSettingsProps } from '@/lib/cms/settings'
 
 export function SiteChrome({
   children,
@@ -23,7 +23,7 @@ export function SiteChrome({
 
   return (
     <>
-      <Navigation />
+      <Navigation settings={settings} />
       <main>{children}</main>
       <Footer settings={settings} />
     </>

@@ -9,10 +9,11 @@ import {
 } from '@/lib/site/icons'
 import { BrandName } from '@/components/brand-name'
 import { Logo } from '@/components/logo'
-import type { SiteSettingsProps } from '@/components/site-chrome'
+import { getPublicNavLinks } from '@/lib/site/nav'
+import type { SiteSettingsProps } from '@/lib/cms/settings'
 
 export function Footer({ settings }: { settings: SiteSettingsProps }) {
-  const openDays = settings.openingHours.filter((r) => r.hours !== 'Gesloten')
+  const navLinks = getPublicNavLinks(settings.menuPageVisible)
 
   return (
     <footer className="brand-surface-navy text-white">
@@ -50,13 +51,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
           <div>
             <h3 className="font-display text-sm text-primary mb-4 uppercase tracking-wide">Navigatie</h3>
             <ul className="flex flex-col gap-2.5">
-              {[
-                { href: '/', label: 'Home' },
-                { href: '/over-ons', label: 'Over ons' },
-                { href: '/menu', label: 'Menu' },
-                { href: '/impressie', label: 'Impressie' },
-                { href: '/contact', label: 'Contact' },
-              ].map((link) => (
+              {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-white/55 hover:text-primary transition-colors text-sm">
                     {link.label}
@@ -94,8 +89,8 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
               <p className="text-[11px] text-white/40 font-medium uppercase tracking-wider mb-1">
                 Openingstijden
               </p>
-              {openDays.length > 0 ? (
-                openDays.map((row) => (
+              {settings.openingHours.length > 0 ? (
+                settings.openingHours.map((row) => (
                   <p key={row.day} className="text-sm text-white/55">
                     {row.day}: {row.hours}
                   </p>
@@ -103,6 +98,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
               ) : (
                 <p className="text-sm text-white/55">{settings.hoursDisplay}</p>
               )}
+              <p className="text-xs text-white/40 mt-2">{settings.kitchenHours}</p>
             </div>
           </div>
         </div>

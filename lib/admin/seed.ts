@@ -20,7 +20,7 @@ export const SEED_CONTENT: ContentPage[] = [
       meta: [
         { label: 'Terras', value: 'Waterfront' },
         { label: 'Keuken', value: 'Houtoven' },
-        { label: 'Geopend', value: 'Wo – Zo' },
+        { label: 'Geopend', value: 'Di – Zo 11–22' },
       ],
     },
     blocks: [
@@ -105,7 +105,7 @@ export const SEED_CONTENT: ContentPage[] = [
       meta: [
         { label: 'Categorieën', value: '5 gerechten' },
         { label: 'Houtoven', value: "Pizza's" },
-        { label: 'Geopend', value: 'Wo – Zo 12–22' },
+        { label: 'Geopend', value: 'Di – Zo 11–22' },
       ],
     },
     blocks: [
@@ -129,7 +129,7 @@ export const SEED_CONTENT: ContentPage[] = [
       title: 'Contact',
       subtitle: 'Vragen, groepsreserveringen of feedback? Wij horen graag van u.',
       meta: [
-        { label: 'Telefoon', value: '+31 10 123 4567' },
+        { label: 'Telefoon', value: '+31 6 13449728' },
         { label: 'E-mail', value: 'info@foodjutters.nl' },
         { label: 'Adres', value: 'Havenkade 12' },
       ],
@@ -140,7 +140,7 @@ export const SEED_CONTENT: ContentPage[] = [
         key: 'opening_hours',
         label: 'Openingstijden',
         type: 'textarea',
-        value: 'Woensdag – zondag: 12:00 – 22:00\nMaandag & dinsdag: gesloten',
+        value: 'Dinsdag – zondag: 11:00 – 22:00\nMaandag: gesloten\nKeuken open tot 20:00',
       },
     ],
     updatedAt: now(),

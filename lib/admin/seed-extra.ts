@@ -1,7 +1,16 @@
 import type { ContentBlock } from './types'
-
-const HERO_IMG =
-  'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0091.JPG-AMp6yqfKtGnflTqhpghBFBhZIZu1SY.jpeg'
+import {
+  HOME_STORY_IMAGE,
+  HOME_STORY_IMAGE_ALT,
+  OVER_ONS_STORY_IMAGE,
+  OVER_ONS_STORY_IMAGE_ALT,
+  SITE_GALLERY,
+} from '@/lib/site/images'
+import {
+  DEFAULT_BANNER_EYEBROW,
+  DEFAULT_CTA_BANNER_TEXT,
+  DEFAULT_HOURS_DISPLAY,
+} from '@/lib/site/hours'
 
 function jsonBlock(
   id: string,
@@ -17,10 +26,10 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
   home: [
     { id: 'home-tagline', key: 'tagline', label: 'Tagline', type: 'text', value: 'Smullen, borrelen & genieten aan het water' },
     { id: 'home-cta2', key: 'cta_secondary', label: 'Secundaire CTA', type: 'text', value: 'Bekijk ons menu' },
-    { id: 'home-hours', key: 'hours_display', label: 'Openingstijden (hero)', type: 'text', value: 'Wo – Zo · 12:00 – 22:00' },
+    { id: 'home-hours', key: 'hours_display', label: 'Openingstijden (hero)', type: 'text', value: DEFAULT_HOURS_DISPLAY },
     { id: 'home-loc', key: 'location_short', label: 'Locatie (hero)', type: 'text', value: 'Scheldeboulevard 7, Terneuzen' },
-    { id: 'home-banner-eyebrow', key: 'banner_eyebrow', label: 'Banner eyebrow', type: 'text', value: 'Woensdag t/m zondag' },
-    { id: 'home-banner-title', key: 'banner_title', label: 'Banner titel', type: 'text', value: 'Kom gezellig tafelen' },
+    { id: 'home-banner-eyebrow', key: 'banner_eyebrow', label: 'Banner eyebrow', type: 'text', value: DEFAULT_BANNER_EYEBROW },
+    { id: 'home-banner-title', key: 'banner_title', label: 'Banner titel', type: 'text', value: 'Kom gezellig binnen' },
     { id: 'home-welcome-eyebrow', key: 'welcome_eyebrow', label: 'Welkom eyebrow', type: 'text', value: 'Welkom bij' },
     { id: 'home-welcome-text', key: 'welcome_text', label: 'Welkom tekst', type: 'textarea', value: 'Brasserie aan het water — terras, open keuken en een warme sfeer voor lunch én diner.' },
     jsonBlock('home-features', 'features', 'Feature pills', [
@@ -44,13 +53,15 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
       value:
         'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer.\n\nWat begon als een bescheiden terrasrestaurant groeide uit tot een geliefde plek aan de Schelde — met houten terras, houtoven en een warme, gastvrije sfeer.',
     },
-    { id: 'home-story-image', key: 'welcome_story_image', label: 'Welkom — verhaal afbeelding URL', type: 'text', value: HERO_IMG },
-    { id: 'home-story-image-alt', key: 'welcome_story_image_alt', label: 'Welkom — afbeelding alt-tekst', type: 'text', value: 'Terras van FoodJutters aan het water bij zonsondergang' },
+    { id: 'home-story-image', key: 'welcome_story_image', label: 'Welkom — verhaal afbeelding URL', type: 'text', value: HOME_STORY_IMAGE },
+    { id: 'home-story-image-alt', key: 'welcome_story_image_alt', label: 'Welkom — afbeelding alt-tekst', type: 'text', value: HOME_STORY_IMAGE_ALT },
     { id: 'home-cta-banner-title', key: 'cta_banner_title', label: 'CTA banner titel', type: 'text', value: 'Open!' },
-    { id: 'home-cta-banner-text', key: 'cta_banner_text', label: 'CTA banner tekst', type: 'textarea', value: 'Wo – zo · 12:00 – 22:00 · Terras, plank & sfeer aan de Schelde.' },
+    { id: 'home-cta-banner-text', key: 'cta_banner_text', label: 'CTA banner tekst', type: 'textarea', value: DEFAULT_CTA_BANNER_TEXT },
     { id: 'home-menu-preview-title', key: 'menu_preview_title', label: 'Menu preview titel', type: 'text', value: 'Een greep uit ons menu' },
   ],
   'over-ons': [
+    { id: 'over-story-image', key: 'story_image', label: 'Verhaal afbeelding URL', type: 'text', value: OVER_ONS_STORY_IMAGE },
+    { id: 'over-story-image-alt', key: 'story_image_alt', label: 'Verhaal afbeelding alt-tekst', type: 'text', value: OVER_ONS_STORY_IMAGE_ALT },
     { id: 'over-story-title', key: 'story_title', label: 'Verhaal titel', type: 'text', value: 'Een droom aan het water' },
     { id: 'over-p1', key: 'story_p1', label: 'Verhaal alinea 1', type: 'textarea', value: 'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water creëren waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer. Met een prachtig uitzicht en een unieke locatie sloeg het idee direct aan.' },
     { id: 'over-p2', key: 'story_p2', label: 'Verhaal alinea 2', type: 'textarea', value: 'Wat begon als een bescheiden terrasrestaurant groeide uit tot een van de meest geliefde eetgelegenheden in de regio. Het houten terras, de houtgestookte pizza-oven en de sfeervolle binnenruimte zijn inmiddels vaste waarden geworden.' },
@@ -59,26 +70,16 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
     { id: 'over-cta-title', key: 'cta_title', label: 'CTA titel', type: 'text', value: 'Kom langs' },
     { id: 'over-cta-text', key: 'cta_text', label: 'CTA tekst', type: 'textarea', value: 'U vindt ons op een unieke locatie aan het water. Kom proeven, genieten en uzelf verliezen in het uitzicht.' },
     jsonBlock('over-values', 'values', 'Waarden', [
-      { icon: 'Heart', title: 'Gastvrijheid', description: 'Elk gast verdient een warme ontvangst en een onvergetelijke avond. Dat is onze belofte.' },
-      { icon: 'Leaf', title: 'Vers & lokaal', description: 'Wij werken met seizoensgebonden producten van lokale leveranciers voor de beste smaken.' },
-      { icon: 'Star', title: 'Beleving', description: 'Van het uitzicht over het water tot de knapperende houtkachel — alles draagt bij aan de sfeer.' },
+      { icon: 'Heart', title: 'Gastvrijheid', description: 'Warme ontvangst — iedereen voelt zich welkom.' },
+      { icon: 'Leaf', title: 'Vers & lokaal', description: 'Seizoensproducten van leveranciers uit de regio.' },
+      { icon: 'Star', title: 'Beleving', description: 'Uitzicht, sfeer en een knus thuisgevoel aan het water.' },
     ]),
-    jsonBlock('over-team', 'team', 'Team', [
-      { name: 'Jurrien de Lutter', role: 'Eigenaar & Gastheer', description: 'Met meer dan 15 jaar horecaervaring weet Jurrien als geen ander hoe hij gasten in de watten legt.' },
-      { name: 'Lisa van der Berg', role: 'Chef-kok', description: "Lisa's passie voor verse, seizoensgebonden ingrediënten is te proeven in elk gerecht dat de keuken verlaat." },
-      { name: 'Marco Stam', role: 'Barman & Barista', description: 'Van een perfecte espresso tot een handgemaakte cocktail — Marco zorgt dat uw drankje altijd klopt.' },
-    ]),
+    { id: 'over-team-image', key: 'team_image', label: 'Teamfoto URL', type: 'text', value: '/images/team-foodjutters.png' },
+    { id: 'over-team-image-alt', key: 'team_image_alt', label: 'Teamfoto alt-tekst', type: 'text', value: 'Het team van FoodJutters' },
   ],
   impressie: [
-    { id: 'imp-hero-img', key: 'hero_image', label: 'Hero afbeelding URL', type: 'text', value: HERO_IMG },
-    jsonBlock('imp-gallery', 'gallery', 'Galerij', [
-      { src: HERO_IMG, alt: 'Houten terras van FoodJutters bij zonsondergang', caption: 'Zonsondergang op het terras' },
-      { src: HERO_IMG, alt: 'Sfeervolle binnenruimte met pendellichten', caption: 'Sfeervolle binnenruimte' },
-      { src: HERO_IMG, alt: 'Houtgestookte pizza-oven', caption: 'Onze houtoven' },
-      { src: HERO_IMG, alt: 'Waterfront terras met houten tafels', caption: 'Waterfront terras' },
-      { src: HERO_IMG, alt: 'Knusse hoek met houtkachel', caption: 'Houtkachel' },
-      { src: HERO_IMG, alt: 'Panoramisch wateruitzicht', caption: 'Wateruitzicht' },
-    ]),
+    { id: 'imp-hero-img', key: 'hero_image', label: 'Hero afbeelding URL', type: 'text', value: SITE_GALLERY[0].src },
+    jsonBlock('imp-gallery', 'gallery', 'Galerij', SITE_GALLERY),
     jsonBlock('imp-reviews', 'reviews', 'Reviews', [
       { name: 'Sophie M.', rating: 5, text: 'Geweldig restaurant! Het uitzicht op het water is adembenemend en de pizza uit de houtoven is echt heerlijk. Komen zeker terug!' },
       { name: 'Thomas B.', rating: 5, text: 'Een verborgen parel. De sfeer is ongelooflijk warm en het personeel is super vriendelijk. Aanrader voor iedereen!' },
@@ -102,8 +103,8 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
   ],
   reserveren: [
     jsonBlock('res-info', 'info_items', 'Info items', [
-      { icon: 'Calendar', title: 'Openingsdagen', body: 'Woensdag t/m zondag' },
-      { icon: 'Clock', title: 'Openingstijden', body: '12:00 – 22:00' },
+      { icon: 'Calendar', title: 'Openingsdagen', body: 'Dinsdag t/m zondag' },
+      { icon: 'Clock', title: 'Openingstijden', body: 'Di – zo 11:00 – 22:00 · Keuken tot 20:00' },
       { icon: 'Utensils', title: 'Groepen', body: 'Grotere gezelschappen? Neem contact op via onze contactpagina.' },
     ]),
     { id: 'res-note', key: 'payment_note_title', label: 'Betaalnotitie titel', type: 'text', value: 'Geen betaling vereist' },

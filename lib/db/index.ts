@@ -6,6 +6,17 @@ type Db = NeonHttpDatabase<typeof schema>
 
 let instance: Db | null = null
 
+function normalizeDatabaseUrl(url: string): string {
+  try {
+    const parsed = new URL(url)
+    // channel_binding can break @neondatabase/serverless HTTP fetch in Next.js dev
+    parsed.searchParams.delete('channel_binding')
+    return parsed.toString()
+  } catch {
+    return url.replace(/([?&])channel_binding=[^&]*(&)?/g, (_, sep, amp) => (amp ? sep : ''))
+  }
+}
+
 function createDb(): Db {
   const url = process.env.DATABASE_URL?.trim()
   if (!url) {
@@ -15,7 +26,7 @@ function createDb(): Db {
         : 'Add DATABASE_URL to .env.local (see .env.example).'
     throw new Error(`DATABASE_URL is not set. ${hint}`)
   }
-  return drizzle(neon(url), { schema })
+  return drizzle(neon(normalizeDatabaseUrl(url)), { schema })
 }
 
 export function getDb(): Db {

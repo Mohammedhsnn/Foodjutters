@@ -1,4 +1,5 @@
 import { asc, desc, eq } from 'drizzle-orm'
+import { SEED_SITE_SETTINGS } from '@/lib/admin/seed-site'
 import { db } from './index'
 import {
   contentBlocks,
@@ -18,20 +19,47 @@ import type {
   Reservation,
 } from '@/lib/admin/types'
 
+function logDbError(label: string, error: unknown) {
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn(`[db] ${label}:`, error instanceof Error ? error.message : error)
+  }
+}
+
 // ── Site settings ────────────────────────────────────────────────
 
 export async function getSiteSettings(): Promise<Record<string, string>> {
-  const rows = await db.select().from(siteSettings)
-  return Object.fromEntries(rows.map((r) => [r.key, r.value]))
+  try {
+    const rows = await db.select().from(siteSettings)
+    if (rows.length === 0) return { ...SEED_SITE_SETTINGS }
+    return Object.fromEntries(rows.map((r) => [r.key, r.value]))
+  } catch (error) {
+    logDbError('getSiteSettings', error)
+    return { ...SEED_SITE_SETTINGS }
+  }
 }
 
 export async function getSiteSetting(key: string, fallback = ''): Promise<string> {
-  const rows = await db
-    .select()
-    .from(siteSettings)
-    .where(eq(siteSettings.key, key))
-    .limit(1)
-  return rows[0]?.value ?? fallback
+  try {
+    const rows = await db
+      .select()
+      .from(siteSettings)
+      .where(eq(siteSettings.key, key))
+      .limit(1)
+    return rows[0]?.value ?? fallback
+  } catch (error) {
+    logDbError('getSiteSetting', error)
+    return SEED_SITE_SETTINGS[key] ?? fallback
+  }
+}
+
+export async function saveSiteSetting(key: string, value: string): Promise<void> {
+  await db
+    .insert(siteSettings)
+    .values({ key, value })
+    .onConflictDoUpdate({
+      target: siteSettings.key,
+      set: { value },
+    })
 }
 
 // ── Content ──────────────────────────────────────────────────────
@@ -103,18 +131,23 @@ export async function getContentPages(): Promise<ContentPage[]> {
 }
 
 export async function getContentPage(slug: string): Promise<ContentPage | null> {
-  const rows = await db
-    .select()
-    .from(contentPages)
-    .where(eq(contentPages.slug, slug))
-    .limit(1)
-  const row = rows[0]
-  if (!row) return null
-  const blockRows = await db
-    .select()
-    .from(contentBlocks)
-    .where(eq(contentBlocks.pageSlug, slug))
-  return rowToContentPage(row, blockRows.map(mapBlockRow))
+  try {
+    const rows = await db
+      .select()
+      .from(contentPages)
+      .where(eq(contentPages.slug, slug))
+      .limit(1)
+    const row = rows[0]
+    if (!row) return null
+    const blockRows = await db
+      .select()
+      .from(contentBlocks)
+      .where(eq(contentBlocks.pageSlug, slug))
+    return rowToContentPage(row, blockRows.map(mapBlockRow))
+  } catch (error) {
+    logDbError(`getContentPage(${slug})`, error)
+    return null
+  }
 }
 
 export async function saveContentPage(page: ContentPage): Promise<ContentPage> {
@@ -213,17 +246,22 @@ export async function getMenuSectionsSummary(): Promise<MenuSectionSummary[]> {
 }
 
 export async function getMenuSections(): Promise<MenuSection[]> {
-  const [sections, itemMap] = await Promise.all([
-    db.select().from(menuSections).orderBy(asc(menuSections.sortOrder)),
-    allMenuItemsBySection(),
-  ])
-  return sections.map((s) => ({
-    id: s.id,
-    title: s.title,
-    subtitle: s.subtitle,
-    sortOrder: s.sortOrder,
-    items: itemMap.get(s.id) ?? [],
-  }))
+  try {
+    const [sections, itemMap] = await Promise.all([
+      db.select().from(menuSections).orderBy(asc(menuSections.sortOrder)),
+      allMenuItemsBySection(),
+    ])
+    return sections.map((s) => ({
+      id: s.id,
+      title: s.title,
+      subtitle: s.subtitle,
+      sortOrder: s.sortOrder,
+      items: itemMap.get(s.id) ?? [],
+    }))
+  } catch (error) {
+    logDbError('getMenuSections', error)
+    return []
+  }
 }
 
 export async function getMenuSection(id: string): Promise<MenuSection | null> {

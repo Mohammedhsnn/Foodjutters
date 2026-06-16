@@ -9,6 +9,7 @@ import {
   Group,
   SimpleGrid,
   Stack,
+  Switch,
   Text,
   TextInput,
   ThemeIcon,
@@ -28,9 +29,17 @@ import { AdminEmpty } from '@/components/admin/admin-states'
 import { adminFetch, ApiError } from '@/lib/admin/api'
 import type { MenuSectionSummary } from '@/lib/admin/types'
 
-export function MenuListClient({ sections }: { sections: MenuSectionSummary[] }) {
+export function MenuListClient({
+  sections,
+  menuPageVisible: initialMenuPageVisible,
+}: {
+  sections: MenuSectionSummary[]
+  menuPageVisible: boolean
+}) {
   const [query, setQuery] = useState('')
   const [creating, setCreating] = useState(false)
+  const [menuPageVisible, setMenuPageVisible] = useState(initialMenuPageVisible)
+  const [savingVisibility, setSavingVisibility] = useState(false)
 
   const filtered = useMemo(() => {
     const q = query.toLowerCase()
@@ -66,8 +75,49 @@ export function MenuListClient({ sections }: { sections: MenuSectionSummary[] })
     }
   }
 
+  async function toggleMenuVisibility(checked: boolean) {
+    const previous = menuPageVisible
+    setMenuPageVisible(checked)
+    setSavingVisibility(true)
+    try {
+      await adminFetch('/api/admin/settings', {
+        method: 'PATCH',
+        body: JSON.stringify({ menuPageVisible: checked }),
+      })
+      adminNotify.success(checked ? 'Menukaart is zichtbaar op de website' : 'Menukaart is verborgen op de website')
+    } catch (e) {
+      setMenuPageVisible(previous)
+      adminNotify.error('Fout', e instanceof ApiError ? e.message : 'Instelling opslaan mislukt')
+    } finally {
+      setSavingVisibility(false)
+    }
+  }
+
   return (
     <Stack gap="lg">
+      <Card padding="lg" radius="lg" withBorder shadow="sm">
+        <Group justify="space-between" align="flex-start" wrap="nowrap" gap="lg">
+          <Stack gap={4} style={{ flex: 1 }}>
+            <Text fw={600} c="navy.5">
+              Menukaart op de website
+            </Text>
+            <Text size="sm" c="dimmed">
+              Zet aan om de menu-pagina en het menu-item in de navigatie zichtbaar te maken voor
+              bezoekers. U kunt het menu hieronder alvast beheren terwijl het verborgen is.
+            </Text>
+          </Stack>
+          <Switch
+            checked={menuPageVisible}
+            onChange={(e) => toggleMenuVisibility(e.currentTarget.checked)}
+            disabled={savingVisibility}
+            color="navy"
+            size="md"
+            label={menuPageVisible ? 'Zichtbaar' : 'Verborgen'}
+            aria-label="Menukaart op website tonen"
+          />
+        </Group>
+      </Card>
+
       <AdminPageHeader
         eyebrow="Menu beheer"
         title="Menu categorieën"

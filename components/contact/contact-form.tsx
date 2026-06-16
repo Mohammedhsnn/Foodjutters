@@ -15,6 +15,7 @@ import type { ContentPage } from '@/lib/admin/types'
 import type { SiteSettingsProps } from '@/components/site-chrome'
 import { GroupReservationForm } from '@/components/group-reservation-form'
 import { blockValue } from '@/lib/cms/blocks'
+import { resolveHeroMeta } from '@/lib/site/hours'
 
 const CONTACT_FORM_DEFAULTS = {
   title: 'Contact opnemen',
@@ -111,12 +112,15 @@ export function ContactForm({
         title={hero?.title ?? 'Contact'}
         subtitle={
           hero?.subtitle ??
-          'Stel een vraag, geef feedback of vraag een groepsreservering aan voor organisaties en gezelschappen vanaf 10 personen.'
+          'Stel een vraag, geef feedback of vraag een groepsreservering aan voor organisaties en gezelschappen vanaf 8 personen.'
         }
         pattern="WELKOM"
         meta={
           hero?.meta?.length
-            ? hero.meta
+            ? resolveHeroMeta(hero.meta, settings.hoursDisplay, {
+                phone: settings.phone,
+                addressShort: settings.addressShort,
+              })
             : [
                 { label: 'Adres', value: settings.addressShort },
                 { label: 'Geopend', value: settings.hoursDisplay },
@@ -203,6 +207,9 @@ export function ContactForm({
                   )
                 })}
               </ul>
+              <p className="text-xs text-muted-foreground mt-3 pt-3 border-t border-border/50">
+                {settings.kitchenHours}
+              </p>
             </div>
 
             <div className="rounded-xl overflow-hidden border border-border shadow-sm h-32 sm:h-40 bg-wood-3 flex flex-col items-center justify-center gap-2">
@@ -287,7 +294,7 @@ export function ContactForm({
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
-                        placeholder="+31 6 00 00 00 00"
+                        placeholder="+31 6 13449728"
                         className={inputClass}
                       />
                     </div>
@@ -335,7 +342,7 @@ export function ContactForm({
               Groepsreservering aanvragen
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-lg mx-auto">
-              Voor organisaties en gezelschappen vanaf 10 personen. Kleinere groepen zijn welkom zonder
+              Voor organisaties en gezelschappen vanaf 8 personen. Kleinere groepen zijn welkom zonder
               reservering — loop gerust binnen.
             </p>
           </div>

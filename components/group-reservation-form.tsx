@@ -17,13 +17,13 @@ import {
 import { cn } from '@/lib/utils'
 
 const TIME_SLOTS = [
-  '12:00', '12:30', '13:00', '13:30',
+  '11:00', '11:30', '12:00', '12:30', '13:00', '13:30',
   '14:00', '14:30', '15:00', '17:00', '17:30',
   '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00',
 ]
 
 const GUEST_OPTIONS = [
-  '10', '12', '15', '18', '20', '25', '30', '40', '50+',
+  '8', '10', '12', '15', '18', '20', '25', '30', '40', '50+',
 ]
 
 const inputCls =
@@ -53,7 +53,7 @@ export function GroupReservationForm() {
     phone: '',
     date: '',
     time: '',
-    guests: '10',
+    guests: '8',
     notes: '',
   })
 
@@ -75,8 +75,8 @@ export function GroupReservationForm() {
     }
     if (!data.date) next.date = 'Kies een datum.'
     if (!data.time) next.time = 'Kies een tijdstip.'
-    if (!org && (Number.isNaN(guestNum) || guestNum < 10)) {
-      next.guests = 'Groepsreserveringen zijn vanaf 10 personen, of vul een organisatie in.'
+    if (!org && (Number.isNaN(guestNum) || guestNum < 8)) {
+      next.guests = 'Groepsreserveringen zijn vanaf 8 personen, of vul een organisatie in.'
     }
 
     setErrors(next)
@@ -141,7 +141,7 @@ export function GroupReservationForm() {
               phone: '',
               date: '',
               time: '',
-              guests: '10',
+              guests: '8',
               notes: '',
             })
           }}
@@ -157,7 +157,7 @@ export function GroupReservationForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6" noValidate>
       <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3.5 text-sm text-brand-navy/80 leading-relaxed">
         Reserveren is alleen nodig voor <strong className="text-brand-navy">organisaties</strong> of{' '}
-        <strong className="text-brand-navy">groepen vanaf 10 personen</strong>. Kleinere gezelschappen
+        <strong className="text-brand-navy">groepen vanaf 8 personen</strong>. Kleinere gezelschappen
         zijn welkom zonder reservering — loop gerust binnen.
       </div>
 
@@ -175,7 +175,7 @@ export function GroupReservationForm() {
             type="text"
             value={data.organisation}
             onChange={(e) => update('organisation', e.target.value)}
-            placeholder="Optioneel — verplicht voor organisatiereserveringen onder 10 personen"
+            placeholder="Optioneel — verplicht voor organisatiereserveringen onder 8 personen"
             className={cn(inputCls, 'pl-10')}
           />
         </div>
@@ -213,7 +213,7 @@ export function GroupReservationForm() {
           autoComplete="tel"
           value={data.phone}
           onChange={(e) => update('phone', e.target.value)}
-          placeholder="+31 6 00 00 00 00"
+          placeholder="+31 6 13449728"
           className={inputCls}
         />
       </Field>

@@ -24,10 +24,6 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'nl_NL',
   },
-  icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }, { url: '/logo-mark.png', type: 'image/png' }],
-    apple: '/logo-mark.png',
-  },
 }
 
 export default async function RootLayout({

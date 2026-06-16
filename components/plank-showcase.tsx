@@ -15,7 +15,13 @@ const plankItems = [
 ] as const
 
 /** Social-stijl plank-sectie — volledig gecodeerd (geen post-afbeeldingen) */
-export function PlankShowcase() {
+export function PlankShowcase({
+  menuPageVisible = false,
+  hoursRangeLabel = 'Di – zo',
+}: {
+  menuPageVisible?: boolean
+  hoursRangeLabel?: string
+}) {
   return (
     <BrandSurface variant="navy" pattern="PLANK" className="py-14 sm:py-16 md:py-20 px-4 sm:px-6 text-white">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
@@ -28,9 +34,11 @@ export function PlankShowcase() {
             Onze borrelplank vol kaas, charcuterie, hapjes en dips — om te delen aan het water.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/menu" className="btn-brand bg-primary text-white hover:bg-brand-blue-dark">
-              Bekijk het menu
-            </Link>
+            {menuPageVisible ? (
+              <Link href="/menu" className="btn-brand bg-primary text-white hover:bg-brand-blue-dark">
+                Bekijk het menu
+              </Link>
+            ) : null}
             <a
               href="https://www.instagram.com/foodjutters"
               target="_blank"
@@ -46,7 +54,7 @@ export function PlankShowcase() {
         {/* 2×2 card grid — use max-w to cap size on wide single-column layouts */}
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full overflow-visible">
           <PlankCard variant="sky">
-            <p className="label-vintage text-brand-navy/70 text-xs mb-1.5 sm:mb-2">Wo – zo</p>
+            <p className="label-vintage text-brand-navy/70 text-xs mb-1.5 sm:mb-2">{hoursRangeLabel}</p>
             <p className="heading-typewriter text-lg sm:text-2xl text-brand-navy">Kom smullen</p>
           </PlankCard>
 

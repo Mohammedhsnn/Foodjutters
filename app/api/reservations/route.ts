@@ -22,14 +22,14 @@ export async function POST(request: Request) {
   }
 
   const organisation = body.organisation?.trim() ?? ''
-  const guests = body.guests ?? '10'
+  const guests = body.guests ?? '8'
   const guestCount = parseInt(guests.replace('+', ''), 10)
 
-  if (!organisation && (Number.isNaN(guestCount) || guestCount < 10)) {
+  if (!organisation && (Number.isNaN(guestCount) || guestCount < 8)) {
     return NextResponse.json(
       {
         error:
-          'Reserveren is alleen mogelijk voor organisaties of groepen vanaf 10 personen.',
+          'Reserveren is alleen mogelijk voor organisaties of groepen vanaf 8 personen.',
       },
       { status: 400 },
     )

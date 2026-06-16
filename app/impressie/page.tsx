@@ -3,7 +3,11 @@ import Link from 'next/link'
 import { BrandName } from '@/components/brand-name'
 import { IconArrowRight, IconStar, IconStarFilled, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
-import { blockJson, blockValue } from '@/lib/cms/blocks'
+import { GalleryTile } from '@/components/impressie/gallery-tile'
+import { blockJson, blockValue, usableCmsImageUrl } from '@/lib/cms/blocks'
+import { resolveGalleryItems, SITE_GALLERY } from '@/lib/site/images'
+import { loadSiteSettings } from '@/lib/cms/settings'
+import { resolveHeroMeta } from '@/lib/site/hours'
 import { getContentPage } from '@/lib/db/repository'
 
 export const metadata: Metadata = {
@@ -14,6 +18,8 @@ export const metadata: Metadata = {
 
 type GalleryItem = { src: string; alt: string; caption: string }
 type Review = { name: string; rating: number; text: string }
+
+const FALLBACK_GALLERY = SITE_GALLERY
 
 function StarRating({ count }: { count: number }) {
   return (
@@ -30,9 +36,13 @@ function StarRating({ count }: { count: number }) {
 }
 
 export default async function ImpressiePage() {
-  const page = await getContentPage('impressie')
+  const [page, settings] = await Promise.all([getContentPage('impressie'), loadSiteSettings()])
   const hero = page?.hero
-  const gallery = blockJson<GalleryItem[]>(page, 'gallery', [])
+  const rawGallery = blockJson<GalleryItem[]>(page, 'gallery', FALLBACK_GALLERY)
+  const gallery = resolveGalleryItems(rawGallery).map((item) => ({
+    ...item,
+    src: usableCmsImageUrl(item.src) || item.src,
+  }))
   const reviews = blockJson<Review[]>(page, 'reviews', [])
   const paddedGallery =
     gallery.length >= 8
@@ -49,7 +59,10 @@ export default async function ImpressiePage() {
           'Een blik in onze wereld — het terras bij zonsondergang, de warmte van de houtkachel en het uitzicht over het water.'
         }
         pattern="BELEVING"
-        meta={hero?.meta}
+        meta={resolveHeroMeta(hero?.meta, settings.hoursDisplay, {
+          phone: settings.phone,
+          addressShort: settings.addressShort,
+        })}
         ctas={[
           { href: '#impressie-fotos', label: 'Bekijk de fotos' },
           { href: '/contact', label: 'Contact', variant: 'secondary' },
@@ -60,19 +73,13 @@ export default async function ImpressiePage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:hidden">
             {paddedGallery.map((item, i) => (
-              <div key={i} className="aspect-[4/3] rounded-xl overflow-hidden relative group">
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
-                <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <span className="bg-white/90 text-brand-dark text-[10px] font-medium px-2 py-0.5 rounded-full shadow-sm">
-                    {item.caption}
-                  </span>
-                </div>
-              </div>
+              <GalleryTile
+                key={i}
+                src={item.src}
+                alt={item.alt}
+                caption={item.caption}
+                className="aspect-[4/3] group"
+              />
             ))}
           </div>
 
@@ -87,19 +94,13 @@ export default async function ImpressiePage() {
               { ...paddedGallery[6], span: 'col-span-1 row-span-1' },
               { ...paddedGallery[7], span: 'col-span-1 row-span-1' },
             ].map((item, i) => (
-              <div key={i} className={`${item.span} rounded-xl overflow-hidden relative group`}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
-                <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  <span className="bg-white/90 text-brand-dark text-xs font-medium px-2.5 py-1 rounded-full shadow-sm">
-                    {item.caption}
-                  </span>
-                </div>
-              </div>
+              <GalleryTile
+                key={i}
+                src={item.src}
+                alt={item.alt}
+                caption={item.caption}
+                className={`${item.span} group`}
+              />
             ))}
           </div>
         </div>

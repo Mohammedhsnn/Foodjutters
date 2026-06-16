@@ -9,9 +9,41 @@ import { WhyHighlightsSection } from '@/components/home/why-highlights-section'
 import { HeroAmbience } from '@/components/hero-ambience'
 import { SmullenTicker } from '@/components/smullen-ticker'
 import { blockJson, blockValue } from '@/lib/cms/blocks'
+import {
+  HOME_STORY_IMAGE,
+  HOME_STORY_IMAGE_ALT,
+  resolveStoryImage,
+} from '@/lib/site/images'
 import { resolveIcon } from '@/lib/cms/icons'
+import { cn } from '@/lib/utils'
 import type { ContentPage } from '@/lib/admin/types'
-import type { SiteSettingsProps } from '@/components/site-chrome'
+import type { SiteSettingsProps } from '@/lib/cms/settings'
+
+import {
+  DEFAULT_BANNER_EYEBROW,
+  DEFAULT_CTA_BANNER_TEXT,
+  DEFAULT_HOURS_RANGE_LABEL,
+  normalizeBannerEyebrow,
+  normalizeCtaBannerText,
+} from '@/lib/site/hours'
+
+const HOME_BANNER_DEFAULTS = {
+  eyebrow: DEFAULT_BANNER_EYEBROW,
+  title: 'Kom gezellig binnen',
+} as const
+
+function homeBannerEyebrow(page: ContentPage | null) {
+  const fromCms = blockValue(page, 'banner_eyebrow', '')
+  if (!fromCms) return HOME_BANNER_DEFAULTS.eyebrow
+  return normalizeBannerEyebrow(fromCms)
+}
+
+function homeBannerTitle(page: ContentPage | null) {
+  const fromCms = blockValue(page, 'banner_title', '')
+  if (!fromCms || /tafel/i.test(fromCms)) return HOME_BANNER_DEFAULTS.title
+  return fromCms
+}
+
 type Highlight = { icon: string; title: string; description: string }
 type Feature = { icon: string; title: string; text: string }
 
@@ -53,16 +85,21 @@ export function HomePage({
               {blockValue(page, 'tagline', 'Smullen, borrelen & genieten aan het water')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-[300px] sm:max-w-none mx-auto">
-              <Link
-                href="/menu"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-[0.1em] text-sm px-8 py-3.5 sm:py-4 rounded-full shadow-xl shadow-brand-navy/20 hover:bg-primary hover:shadow-primary/25 transition-all duration-200"
-              >
-                Bekijk ons menu
-                <IconArrowRight {...tablerProps(16)} />
-              </Link>
+              {settings.menuPageVisible ? (
+                <Link
+                  href="/menu"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-navy text-white font-display uppercase tracking-[0.1em] text-sm px-8 py-3.5 sm:py-4 rounded-full shadow-xl shadow-brand-navy/20 hover:bg-primary hover:shadow-primary/25 transition-all duration-200"
+                >
+                  Bekijk ons menu
+                  <IconArrowRight {...tablerProps(16)} />
+                </Link>
+              ) : null}
               <Link
                 href="/contact"
-                className="hidden sm:inline-flex items-center justify-center gap-2 bg-white/85 backdrop-blur-sm text-brand-navy font-display uppercase tracking-wide text-sm px-8 py-4 rounded-full border border-brand-navy/15 shadow-md hover:bg-white hover:border-brand-navy/35 transition-all duration-200"
+                className={cn(
+                  'inline-flex items-center justify-center gap-2 bg-white/85 backdrop-blur-sm text-brand-navy font-display uppercase tracking-wide text-sm px-8 py-3.5 sm:py-4 rounded-full border border-brand-navy/15 shadow-md hover:bg-white hover:border-brand-navy/35 transition-all duration-200',
+                  settings.menuPageVisible ? 'hidden sm:inline-flex' : 'w-full sm:w-auto bg-brand-navy text-white border-transparent shadow-xl shadow-brand-navy/20 hover:bg-primary hover:shadow-primary/25',
+                )}
               >
                 Contact
               </Link>
@@ -109,17 +146,20 @@ export function HomePage({
             <div className="w-1 h-10 bg-primary rounded-full shrink-0" aria-hidden />
             <div>
               <p className="label-vintage text-brand-navy/55 text-[11px] tracking-[0.2em] uppercase mb-0.5">
-                {blockValue(page, 'banner_eyebrow', 'Woensdag t/m zondag')}
+                {homeBannerEyebrow(page)}
               </p>
               <h2 className="section-heading-typewriter">
-                {blockValue(page, 'banner_title', 'Kom gezellig tafelen')}
+                {homeBannerTitle(page)}
               </h2>
             </div>
           </div>
           <div className="flex items-center gap-4 sm:gap-5 md:gap-8 pl-5 sm:pl-0">
             <div className="text-center">
-              <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-primary leading-none">12–22</p>
+              <p className="heading-display text-3xl sm:text-4xl md:text-5xl text-primary leading-none">
+                {settings.hoursShort}
+              </p>
               <p className="label-vintage text-brand-navy/45 text-[10px] tracking-[0.18em] mt-1">Openingstijden</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">{settings.kitchenHours}</p>
             </div>
           </div>
         </div>
@@ -133,16 +173,8 @@ export function HomePage({
           'welcome_story_text',
           'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer.\n\nWat begon als een bescheiden terrasrestaurant groeide uit tot een geliefde plek aan de Schelde — met houten terras, houtoven en een warme, gastvrije sfeer.',
         )}
-        storyImage={blockValue(
-          page,
-          'welcome_story_image',
-          'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_0091.JPG-AMp6yqfKtGnflTqhpghBFBhZIZu1SY.jpeg',
-        )}
-        storyImageAlt={blockValue(
-          page,
-          'welcome_story_image_alt',
-          'Terras van FoodJutters aan het water bij zonsondergang',
-        )}
+        storyImage={resolveStoryImage(blockValue(page, 'welcome_story_image', ''), HOME_STORY_IMAGE)}
+        storyImageAlt={blockValue(page, 'welcome_story_image_alt', HOME_STORY_IMAGE_ALT)}
       >
         <p className="label-vintage text-primary mb-3 text-[11px] tracking-[0.25em] uppercase">
           {blockValue(page, 'welcome_eyebrow', 'Welkom bij')}
@@ -173,12 +205,14 @@ export function HomePage({
           })}
         </div>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mt-6 sm:mt-8">
-          <Link
-            href="/menu"
-            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
-          >
-            Bekijk het menu <IconArrowRight {...tablerProps(16)} />
-          </Link>
+          {settings.menuPageVisible ? (
+            <Link
+              href="/menu"
+              className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 sm:px-7 sm:py-3.5 rounded-full hover:bg-brand-blue-dark transition-colors shadow-sm text-sm"
+            >
+              Bekijk het menu <IconArrowRight {...tablerProps(16)} />
+            </Link>
+          ) : null}
           <Link
             href="/over-ons"
             className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all"
@@ -190,7 +224,10 @@ export function HomePage({
 
       <WhyHighlightsSection highlights={highlights} />
 
-      <PlankShowcase />
+      <PlankShowcase
+        menuPageVisible={settings.menuPageVisible}
+        hoursRangeLabel={DEFAULT_HOURS_RANGE_LABEL}
+      />
 
       <BrandSurface variant="sky" pattern="SMULLEN" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-brand-navy">
         <div className="max-w-2xl mx-auto text-center">
@@ -198,7 +235,7 @@ export function HomePage({
             {blockValue(page, 'cta_banner_title', 'Open!')}
           </h2>
           <p className="text-brand-navy/70 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
-            {blockValue(page, 'cta_banner_text', settings.hoursDisplay)}
+            {normalizeCtaBannerText(blockValue(page, 'cta_banner_text', DEFAULT_CTA_BANNER_TEXT))}
           </p>
           <Link href="/contact#groepsreservering" className="btn-brand bg-brand-navy text-white hover:bg-primary shadow-lg shadow-brand-navy/20">
             Groepsreservering aanvragen <IconArrowRight {...tablerProps(16)} />

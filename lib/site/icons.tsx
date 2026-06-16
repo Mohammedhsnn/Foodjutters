@@ -24,6 +24,7 @@ export {
   IconMenu2,
   IconMessage,
   IconPhone,
+  IconPhoto,
   IconSend,
   IconStar,
   IconStarFilled,

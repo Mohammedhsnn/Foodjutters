@@ -1,6 +1,7 @@
 export {
   getSiteSettings,
   getSiteSetting,
+  saveSiteSetting,
   getContentPages,
   getContentPagesSummary,
   getContentPage,

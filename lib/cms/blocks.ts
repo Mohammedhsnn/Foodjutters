@@ -14,3 +14,11 @@ export function blockJson<T>(page: ContentPage | null, key: string, fallback: T)
     return fallback
   }
 }
+
+/** CMS image URLs — leeg of onbereikbare legacy-seed links → placeholder tonen */
+export function usableCmsImageUrl(url: string | undefined | null): string {
+  const trimmed = (url ?? '').trim()
+  if (!trimmed) return ''
+  if (/hebbkx1anhila5yf|public\.blob\.vercel-storage\.com\/IMG_0091/i.test(trimmed)) return ''
+  return trimmed
+}

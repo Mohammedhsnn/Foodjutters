@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import { blockValue } from '@/lib/cms/blocks'
+import { resolveHeroMeta } from '@/lib/site/hours'
+import { loadSiteSettings } from '@/lib/cms/settings'
 import { getContentPage, getMenuSections } from '@/lib/db/repository'
 
 export const metadata: Metadata = {
@@ -12,6 +15,11 @@ export const metadata: Metadata = {
 }
 
 export default async function MenuPage() {
+  const settings = await loadSiteSettings()
+  if (!settings.menuPageVisible) {
+    redirect('/')
+  }
+
   const [page, menuSections] = await Promise.all([
     getContentPage('menu'),
     getMenuSections(),
@@ -40,11 +48,14 @@ export default async function MenuPage() {
         pattern="SMULLEN"
         meta={
           hero?.meta?.length
-            ? hero.meta
+            ? resolveHeroMeta(hero.meta, settings.hoursDisplay, {
+                phone: settings.phone,
+                addressShort: settings.addressShort,
+              })
             : [
                 { label: 'Categorieën', value: `${categoryCount} categorieën` },
                 { label: 'Gerechten', value: `${itemCount} items` },
-                { label: 'Geopend', value: 'Wo – Zo 12–22' },
+                { label: 'Geopend', value: settings.hoursDisplay },
               ]
         }
         ctas={[
@@ -127,7 +138,7 @@ export default async function MenuPage() {
             {blockValue(
               page,
               'cta_text',
-              'Kom langs wanneer het u uitkomt. Voor organisaties of groepen vanaf 10 personen kunt u een reservering aanvragen.',
+              'Kom langs wanneer het u uitkomt. Voor organisaties of groepen vanaf 8 personen kunt u een reservering aanvragen.',
             )}
           </p>
           <Link
