@@ -14,6 +14,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const navLinks = getPublicNavLinks(settings.menuPageVisible)
+  const desktopNavLinks = navLinks.filter((link) => link.href !== '/contact')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -36,6 +37,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
   const atHomeTop = isHome && !scrolled
   const mobileShell = atHomeTop || menuOpen
   const solidHeader = scrolled || (menuOpen && !atHomeTop)
+  const desktopFloating = atHomeTop
 
   return (
     <>
@@ -53,6 +55,8 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           mobileShell && 'max-md:pt-[max(0.5rem,env(safe-area-inset-top))] max-md:px-3',
           solidHeader && 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_0_var(--color-border)]',
+          !solidHeader && !isHome && 'md:bg-white/92 md:backdrop-blur-md md:border-b md:border-border/50 md:shadow-sm',
+          desktopFloating && 'md:bg-transparent md:shadow-none md:border-none',
         )}
       >
         <div
@@ -61,47 +65,71 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
             mobileShell &&
               'max-md:rounded-2xl max-md:bg-white/95 max-md:backdrop-blur-xl max-md:shadow-[0_8px_28px_rgba(27,67,100,0.12)] max-md:ring-1 max-md:ring-white/80 max-md:overflow-hidden',
             !mobileShell && 'px-5 sm:px-8',
+            desktopFloating && 'md:px-6 lg:px-8 md:pt-5',
+            scrolled && 'md:pt-0 md:px-6 lg:px-8',
+            !isHome && !scrolled && 'md:px-6 lg:px-8',
           )}
         >
           <div
             className={cn(
               'flex items-center justify-between gap-4',
               mobileShell ? 'h-11 px-3' : 'h-14 sm:h-[68px]',
+              desktopFloating &&
+                'md:h-[4.25rem] md:px-5 md:rounded-2xl md:bg-white/88 md:backdrop-blur-xl md:border md:border-white/75 md:shadow-[0_14px_44px_rgba(27,67,100,0.12)]',
+              scrolled && 'md:h-[4.5rem] md:px-0 md:rounded-none md:bg-transparent md:border-0 md:shadow-none md:backdrop-blur-none',
+              !isHome && !scrolled && 'md:h-[4.5rem] md:px-0 md:rounded-none md:bg-transparent md:border-0 md:shadow-none',
             )}
           >
             <Link
               href="/"
-              className="flex items-center shrink-0 min-w-0"
+              className="flex items-center shrink-0 min-w-0 md:pr-2"
               aria-label="FoodJutters – naar de homepage"
             >
               <Logo
                 size="sm"
                 layout="row"
-                className={cn(mobileShell && 'max-md:[&_img]:h-8 max-md:[&_span]:text-[0.95rem]')}
+                className={cn(
+                  mobileShell && 'max-md:[&_img]:h-8 max-md:[&_span]:text-[0.95rem]',
+                  'md:[&_img]:h-10 md:[&_img]:max-w-[6.75rem] md:[&_span]:text-[1.05rem]',
+                )}
               />
             </Link>
 
-            <nav className="hidden md:flex items-center gap-0.5" aria-label="Hoofdnavigatie">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    'relative px-3.5 py-2 text-[13px] font-medium tracking-wide rounded-lg transition-all duration-200',
-                    pathname === link.href
-                      ? 'text-primary'
-                      : 'text-foreground/65 hover:text-primary hover:bg-primary/5',
-                  )}
-                >
-                  {link.label}
-                  {pathname === link.href && (
-                    <span
-                      className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
-                      aria-hidden
-                    />
-                  )}
-                </Link>
-              ))}
+            <nav className="hidden md:flex items-center gap-3 lg:gap-4" aria-label="Hoofdnavigatie">
+              <div className="flex items-center gap-0.5 rounded-full bg-brand-navy/[0.05] p-1 ring-1 ring-brand-navy/10">
+                {desktopNavLinks.map((link) => {
+                  const active = pathname === link.href
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={cn(
+                        'relative rounded-full px-4 py-2 font-display text-[11px] uppercase tracking-[0.14em] transition-all duration-200',
+                        active
+                          ? 'bg-white text-brand-navy shadow-sm ring-1 ring-brand-navy/10'
+                          : 'text-brand-navy/60 hover:bg-white/70 hover:text-brand-navy',
+                      )}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  )
+                })}
+              </div>
+
+              <Link
+                href="/contact"
+                className={cn(
+                  'inline-flex items-center justify-center rounded-full px-5 py-2.5',
+                  'font-display text-[11px] uppercase tracking-[0.14em] font-semibold',
+                  'bg-brand-navy text-white shadow-md shadow-brand-navy/20',
+                  'hover:bg-primary hover:shadow-primary/25 transition-all duration-200',
+                  pathname === '/contact' && 'ring-2 ring-primary/30 ring-offset-2 ring-offset-white/80',
+                )}
+                aria-current={pathname === '/contact' ? 'page' : undefined}
+              >
+                Contact
+              </Link>
             </nav>
 
             <button

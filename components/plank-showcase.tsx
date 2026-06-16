@@ -55,7 +55,7 @@ export function PlankShowcase({
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full overflow-visible">
           <PlankCard variant="sky">
             <p className="label-vintage text-brand-navy/70 text-xs mb-1.5 sm:mb-2">{hoursRangeLabel}</p>
-            <p className="heading-typewriter text-lg sm:text-2xl text-brand-navy">Kom smullen</p>
+            <p className="heading-typewriter text-lg sm:text-2xl text-brand-navy">Kom langs!</p>
           </PlankCard>
 
           <PlankCard variant="photo">
