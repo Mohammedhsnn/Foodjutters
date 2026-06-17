@@ -158,7 +158,7 @@ export function GroupReservationForm() {
       <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3.5 text-sm text-brand-navy/80 leading-relaxed">
         Reserveren is alleen nodig voor <strong className="text-brand-navy">organisaties</strong> of{' '}
         <strong className="text-brand-navy">groepen vanaf 8 personen</strong>. Kleinere gezelschappen
-        zijn welkom zonder reservering — loop gerust binnen.
+        zijn welkom zonder reservering. Loop gerust binnen.
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -175,7 +175,7 @@ export function GroupReservationForm() {
             type="text"
             value={data.organisation}
             onChange={(e) => update('organisation', e.target.value)}
-            placeholder="Optioneel — verplicht voor organisatiereserveringen onder 8 personen"
+            placeholder="Optioneel. Verplicht voor organisatiereserveringen onder 8 personen"
             className={cn(inputCls, 'pl-10')}
           />
         </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { IconArrowRight, tablerProps } from '@/lib/site/icons'
+import { sanitizeVisibleCopy } from '@/lib/site/copy'
 
 interface PageHeroMeta {
   label: string
@@ -32,6 +33,15 @@ export function PageHero({
   meta,
   ctas,
 }: PageHeroProps) {
+  const safeEyebrow = sanitizeVisibleCopy(eyebrow)
+  const safeTitle = sanitizeVisibleCopy(title)
+  const safeSubtitle = sanitizeVisibleCopy(subtitle)
+  const safeMeta = meta?.map((item) => ({
+    ...item,
+    label: sanitizeVisibleCopy(item.label),
+    value: sanitizeVisibleCopy(item.value),
+  }))
+
   return (
     <div className="relative bg-background overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6">
 
@@ -50,25 +60,25 @@ export function PageHero({
         <div className="flex items-center justify-center gap-3 mb-5 sm:mb-6">
           <div className="h-px w-8 bg-primary/40" aria-hidden />
           <span className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.28em] sm:tracking-[0.3em] uppercase">
-            {eyebrow}
+            {safeEyebrow}
           </span>
           <div className="h-px w-8 bg-primary/40" aria-hidden />
         </div>
 
         {/* Title */}
         <h1 className="heading-display text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl text-brand-navy text-balance leading-[0.9] mb-4 sm:mb-6">
-          {title}
+          {safeTitle}
         </h1>
 
         {/* Subtitle */}
         <p className="text-foreground/60 text-sm sm:text-base md:text-lg leading-relaxed max-w-sm sm:max-w-md mx-auto text-pretty px-2 sm:px-0">
-          {subtitle}
+          {safeSubtitle}
         </p>
 
         {/* Meta chips */}
-        {meta && meta.length > 0 && (
+        {safeMeta && safeMeta.length > 0 && (
           <div className="flex flex-wrap items-center justify-center gap-2 mt-6 sm:mt-8 px-2 sm:px-0">
-            {meta.map((m, i) => (
+            {safeMeta.map((m, i) => (
               <div key={m.label} className="flex items-center gap-0">
                 <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white border border-border shadow-sm">
                   <span className="label-vintage text-brand-navy/45 text-[9px] sm:text-[10px] tracking-[0.18em] sm:tracking-[0.2em] uppercase whitespace-nowrap">
@@ -80,7 +90,7 @@ export function PageHero({
                   </span>
                 </div>
                 {/* Dot separator between chips — hidden on very small screens to prevent overflow */}
-                {i < meta.length - 1 && (
+                {i < safeMeta.length - 1 && (
                   <div className="hidden sm:block w-1 h-1 rounded-full bg-border mx-1.5" aria-hidden />
                 )}
               </div>

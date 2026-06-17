@@ -11,7 +11,7 @@ function companyBlock(): string {
     `E-mail: ${LEGAL_COMPANY.email}`,
     `Telefoon: ${LEGAL_COMPANY.phone}`,
   ].filter(Boolean) as string[]
-  return lines.join(' · ')
+  return lines.join(', ')
 }
 
 export function getTermsSections(): LegalSection[] {
@@ -161,7 +161,7 @@ export function getTermsSections(): LegalSection[] {
       blocks: [
         {
           type: 'p',
-          text: 'Bent u niet tevreden over onze dienstverlening? Laat het ons zo snel mogelijk weten — bij voorkeur ter plaatse, zodat wij direct kunnen helpen. U kunt ook schriftelijk klagen via onze contactgegevens.',
+          text: 'Bent u niet tevreden over onze dienstverlening? Laat het ons zo snel mogelijk weten, bij voorkeur ter plaatse, zodat wij direct kunnen helpen. U kunt ook schriftelijk klagen via onze contactgegevens.',
         },
         {
           type: 'p',
@@ -175,7 +175,7 @@ export function getTermsSections(): LegalSection[] {
       blocks: [
         {
           type: 'p',
-          text: 'Alle content op deze website — waaronder teksten, logo’s, foto’s en vormgeving — is eigendom van FoodJutters of wordt met toestemming gebruikt. Het is niet toegestaan deze zonder voorafgaande schriftelijke toestemming te kopiëren of commercieel te gebruiken.',
+          text: 'Alle content op deze website, waaronder teksten, logo’s, foto’s en vormgeving, is eigendom van FoodJutters of wordt met toestemming gebruikt. Het is niet toegestaan deze zonder voorafgaande schriftelijke toestemming te kopiëren of commercieel te gebruiken.',
         },
       ],
     },

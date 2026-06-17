@@ -84,7 +84,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
             <Link
               href="/"
               className="flex items-center shrink-0 min-w-0 md:pr-2"
-              aria-label="FoodJutters – naar de homepage"
+              aria-label="FoodJutters, naar de homepage"
               onClick={() => handleNavLinkClick('/', pathname)}
             >
               <Logo

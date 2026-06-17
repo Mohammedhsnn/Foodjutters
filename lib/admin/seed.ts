@@ -1,4 +1,5 @@
 import type { ContentPage, MenuSection } from './types'
+import { DEFAULT_HOURS_DISPLAY } from '@/lib/site/hours'
 
 function now() {
   return new Date().toISOString()
@@ -20,7 +21,7 @@ export const SEED_CONTENT: ContentPage[] = [
       meta: [
         { label: 'Terras', value: 'Waterfront' },
         { label: 'Keuken', value: 'Houtoven' },
-        { label: 'Geopend', value: 'Di – Zo 11–22' },
+        { label: 'Geopend', value: DEFAULT_HOURS_DISPLAY },
       ],
     },
     blocks: [
@@ -79,7 +80,7 @@ export const SEED_CONTENT: ContentPage[] = [
       subtitle: 'Een kijkje in ons restaurant, terras en keuken. Elke avond een beleving.',
       meta: [
         { label: 'Terras', value: 'Waterfront' },
-        { label: 'Binnen', value: 'Knus & warm' },
+        { label: 'Binnen', value: 'Warm & sfeervol' },
         { label: 'Keuken', value: 'Open vuur' },
       ],
     },
@@ -105,7 +106,7 @@ export const SEED_CONTENT: ContentPage[] = [
       meta: [
         { label: 'Categorieën', value: '5 gerechten' },
         { label: 'Houtoven', value: "Pizza's" },
-        { label: 'Geopend', value: 'Di – Zo 11–22' },
+        { label: 'Geopend', value: DEFAULT_HOURS_DISPLAY },
       ],
     },
     blocks: [
@@ -140,7 +141,8 @@ export const SEED_CONTENT: ContentPage[] = [
         key: 'opening_hours',
         label: 'Openingstijden',
         type: 'textarea',
-        value: 'Dinsdag – zondag: 11:00 – 22:00\nMaandag: gesloten\nKeuken open tot 20:00',
+        value:
+          'Maandag: gesloten\nDinsdag t/m donderdag: 11:00 tot 21:00\nVrijdag, zaterdag en zondag: 11:00 tot 22:00\nKeuken sluit om 20:00',
       },
     ],
     updatedAt: now(),

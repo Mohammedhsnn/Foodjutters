@@ -20,7 +20,7 @@ import { resolveHeroMeta } from '@/lib/site/hours'
 const CONTACT_FORM_DEFAULTS = {
   title: 'Contact opnemen',
   description:
-    'Heeft u een vraag, feedback of wilt u iets weten? Vul het formulier in — wij nemen zo snel mogelijk contact met u op.',
+    'Heeft u een vraag, feedback of wilt u iets weten? Vul het formulier in. Wij nemen zo snel mogelijk contact met u op.',
   success: 'Bedankt voor uw bericht. We nemen zo snel mogelijk contact met u op.',
 } as const
 
@@ -343,7 +343,7 @@ export function ContactForm({
             </h2>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-lg mx-auto">
               Voor organisaties en gezelschappen vanaf 8 personen. Kleinere groepen zijn welkom zonder
-              reservering — loop gerust binnen.
+              reservering. Loop gerust binnen.
             </p>
           </div>
           <div className="rounded-2xl border border-border bg-card shadow-sm p-5 sm:p-8 md:p-10">

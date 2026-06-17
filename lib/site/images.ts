@@ -36,7 +36,7 @@ export const SITE_GALLERY: SiteGalleryItem[] = [
   {
     src: '/images/impressie/bar-sfeer.png',
     alt: 'Bar met houten counter en nautische details',
-    caption: 'Knus aan de bar',
+    caption: 'Gezellig aan de bar',
   },
   {
     src: '/images/impressie/terras-haven.png',
@@ -55,6 +55,12 @@ export const SITE_GALLERY: SiteGalleryItem[] = [
   },
 ]
 
+function normalizeGalleryCaption(caption: string): string {
+  return caption
+    .replace(/^Knus aan de bar$/i, 'Gezellig aan de bar')
+    .replace(/^Knus & warm$/i, 'Warm & sfeervol')
+}
+
 export function resolveGalleryItems(
   items: SiteGalleryItem[] | undefined | null,
 ): SiteGalleryItem[] {
@@ -64,7 +70,7 @@ export function resolveGalleryItems(
     return {
       src,
       alt: (fromCms?.alt ?? '').trim() || fallback.alt,
-      caption: (fromCms?.caption ?? '').trim() || fallback.caption,
+      caption: normalizeGalleryCaption((fromCms?.caption ?? '').trim() || fallback.caption),
     }
   })
 }

@@ -1,8 +1,10 @@
 import type { ContentBlock, ContentPage } from '@/lib/admin/types'
+import { sanitizeVisibleCopy } from '@/lib/site/copy'
 
 export function blockValue(page: ContentPage | null, key: string, fallback = ''): string {
-  if (!page) return fallback
-  return page.blocks.find((b) => b.key === key)?.value ?? fallback
+  if (!page) return sanitizeVisibleCopy(fallback)
+  const value = page.blocks.find((b) => b.key === key)?.value ?? fallback
+  return sanitizeVisibleCopy(value)
 }
 
 export function blockJson<T>(page: ContentPage | null, key: string, fallback: T): T {

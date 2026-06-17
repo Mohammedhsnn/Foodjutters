@@ -18,7 +18,8 @@ export const SITE_KEYWORDS = [
   'restaurant Zeeland',
 ]
 
-const DEFAULT_OG_IMAGE = '/images/impressie/terras-haven.png'
+export const DEFAULT_OG_IMAGE = '/images/og-foodjutters.jpg'
+export const DEFAULT_OG_IMAGE_ALT = 'FoodJutters logo op houten achtergrond'
 
 export function siteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '')
@@ -49,7 +50,14 @@ export function pageMetadata({ title, description, path = '', noIndex }: PageSeo
       locale: 'nl_NL',
       siteName: SITE_NAME,
       url: canonical,
-      images: [{ url: DEFAULT_OG_IMAGE, alt: 'Terras van FoodJutters aan de Schelde in Terneuzen' }],
+      images: [
+        {
+          url: DEFAULT_OG_IMAGE,
+          alt: DEFAULT_OG_IMAGE_ALT,
+          width: 1022,
+          height: 1024,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -79,7 +87,14 @@ export const ROOT_METADATA: Metadata = {
     locale: 'nl_NL',
     siteName: SITE_NAME,
     url: siteUrl(),
-    images: [{ url: DEFAULT_OG_IMAGE, alt: 'Terras van FoodJutters aan de Schelde in Terneuzen' }],
+    images: [
+      {
+        url: DEFAULT_OG_IMAGE,
+        alt: DEFAULT_OG_IMAGE_ALT,
+        width: 1022,
+        height: 1024,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',

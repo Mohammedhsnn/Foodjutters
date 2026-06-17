@@ -5,11 +5,14 @@ import {
   DEFAULT_HOURS_DISPLAY,
   DEFAULT_HOURS_SHORT,
   DEFAULT_KITCHEN_HOURS,
+  normalizeHoursShort,
   normalizeHoursText,
+  normalizeKitchenHours,
   normalizeOpeningHours,
   type OpeningHourRow,
 } from '@/lib/site/hours'
 import { SITE_TAGLINE } from '@/lib/site/seo'
+import { sanitizeVisibleCopy } from '@/lib/site/copy'
 
 export type { OpeningHourRow }
 
@@ -29,12 +32,12 @@ export async function loadSiteSettings() {
     addressLine2: raw.address_line2 ?? '',
     addressShort: raw.address_short ?? '',
     mapsUrl: raw.maps_url ?? '',
-    footerTagline: raw.footer_tagline?.trim() || SITE_TAGLINE,
+    footerTagline: sanitizeVisibleCopy(raw.footer_tagline?.trim() || SITE_TAGLINE),
     instagramUrl: raw.instagram_url ?? '',
     facebookUrl: raw.facebook_url ?? '',
-    hoursDisplay: normalizeHoursText(raw.hours_display ?? '', DEFAULT_HOURS_DISPLAY),
-    hoursShort: normalizeHoursText(raw.hours_short ?? '', DEFAULT_HOURS_SHORT),
-    kitchenHours: raw.kitchen_hours?.trim() || DEFAULT_KITCHEN_HOURS,
+    hoursDisplay: sanitizeVisibleCopy(normalizeHoursText(raw.hours_display ?? '', DEFAULT_HOURS_DISPLAY)),
+    hoursShort: sanitizeVisibleCopy(normalizeHoursShort(raw.hours_short ?? '')),
+    kitchenHours: sanitizeVisibleCopy(normalizeKitchenHours(raw.kitchen_hours ?? '')),
     openingHours,
     menuPageVisible: parseMenuPageVisible(raw.menu_page_visible),
   }

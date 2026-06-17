@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
+import { sanitizeVisibleCopy } from '@/lib/site/copy'
 import { cn } from '@/lib/utils'
 
 export type LegalBlock =
@@ -16,13 +17,13 @@ export type LegalSection = {
 
 function LegalBlockView({ block }: { block: LegalBlock }) {
   if (block.type === 'p') {
-    return <p className="text-sm sm:text-[15px] text-foreground/70 leading-relaxed">{block.text}</p>
+    return <p className="text-sm sm:text-[15px] text-foreground/70 leading-relaxed">{sanitizeVisibleCopy(block.text)}</p>
   }
   if (block.type === 'ul') {
     return (
       <ul className="list-disc pl-5 space-y-2 text-sm sm:text-[15px] text-foreground/70 leading-relaxed">
         {block.items.map((item) => (
-          <li key={item}>{item}</li>
+          <li key={item}>{sanitizeVisibleCopy(item)}</li>
         ))}
       </ul>
     )
@@ -30,7 +31,7 @@ function LegalBlockView({ block }: { block: LegalBlock }) {
   return (
     <ol className="list-decimal pl-5 space-y-2 text-sm sm:text-[15px] text-foreground/70 leading-relaxed">
       {block.items.map((item) => (
-        <li key={item}>{item}</li>
+        <li key={item}>{sanitizeVisibleCopy(item)}</li>
       ))}
     </ol>
   )

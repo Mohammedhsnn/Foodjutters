@@ -22,7 +22,7 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
           <div className="flex flex-col gap-4 sm:col-span-2 md:col-span-1">
-            <Link href="/" className="inline-flex w-fit" aria-label="FoodJutters – naar de homepage">
+            <Link href="/" className="inline-flex w-fit" aria-label="FoodJutters, naar de homepage">
               <Logo size="sm" layout="row" variant="light" />
             </Link>
             <p className="text-white/55 leading-relaxed text-sm max-w-xs">{settings.footerTagline}</p>

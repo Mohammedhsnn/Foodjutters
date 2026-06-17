@@ -10,6 +10,7 @@ import {
   DEFAULT_BANNER_EYEBROW,
   DEFAULT_CTA_BANNER_TEXT,
   DEFAULT_HOURS_DISPLAY,
+  DEFAULT_KITCHEN_HOURS,
 } from '@/lib/site/hours'
 
 function jsonBlock(
@@ -99,7 +100,7 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
   reserveren: [
     jsonBlock('res-info', 'info_items', 'Info items', [
       { icon: 'Calendar', title: 'Openingsdagen', body: 'Dinsdag t/m zondag' },
-      { icon: 'Clock', title: 'Openingstijden', body: 'Di – zo 11:00 – 22:00 · Keuken tot 20:00' },
+      { icon: 'Clock', title: 'Openingstijden', body: `${DEFAULT_HOURS_DISPLAY}. ${DEFAULT_KITCHEN_HOURS}` },
       { icon: 'Utensils', title: 'Groepen', body: 'Grotere gezelschappen? Neem contact op via onze contactpagina.' },
     ]),
     { id: 'res-note', key: 'payment_note_title', label: 'Betaalnotitie titel', type: 'text', value: 'Geen betaling vereist' },

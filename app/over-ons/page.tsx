@@ -160,7 +160,7 @@ export default async function OverOnsPage() {
           <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
             <div className="flex-1 h-px bg-border" />
             <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">De eigenaren</p>
+              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Ons team</p>
               <h2 className="section-heading text-brand-dark text-balance">
                 De mensen achter <BrandName className="text-inherit tracking-normal" />
               </h2>

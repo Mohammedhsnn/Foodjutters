@@ -17,7 +17,7 @@ const plankItems = [
 /** Social-stijl plank-sectie — volledig gecodeerd (geen post-afbeeldingen) */
 export function PlankShowcase({
   menuPageVisible = false,
-  hoursRangeLabel = 'Di – zo',
+  hoursRangeLabel = 'Di t/m zo',
 }: {
   menuPageVisible?: boolean
   hoursRangeLabel?: string
@@ -31,7 +31,7 @@ export function PlankShowcase({
             <span>Plank</span>
           </h2>
           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-5 sm:mb-6 max-w-md">
-            Onze borrelplank vol kaas, charcuterie, hapjes en dips — om te delen aan het water.
+            Onze borrelplank vol kaas, charcuterie, hapjes en dips om te delen aan het water.
           </p>
           <div className="flex flex-wrap gap-3">
             {menuPageVisible ? (
