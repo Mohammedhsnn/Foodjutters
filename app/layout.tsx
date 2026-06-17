@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import { SiteChrome } from '@/components/site-chrome'
 import { loadSiteSettings } from '@/lib/cms/settings'
@@ -31,6 +32,7 @@ export default async function RootLayout({
     >
       <body className="font-sans antialiased" suppressHydrationWarning>
         <SiteChrome settings={settings}>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   )
