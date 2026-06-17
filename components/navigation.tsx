@@ -7,6 +7,7 @@ import { IconMenu2, IconX, tablerProps } from '@/lib/site/icons'
 import { cn } from '@/lib/utils'
 import { Logo } from '@/components/logo'
 import { getPublicNavLinks } from '@/lib/site/nav'
+import { handleNavLinkClick } from '@/lib/site/scroll'
 import type { SiteSettingsProps } from '@/lib/cms/settings'
 
 export function Navigation({ settings }: { settings: SiteSettingsProps }) {
@@ -84,6 +85,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
               href="/"
               className="flex items-center shrink-0 min-w-0 md:pr-2"
               aria-label="FoodJutters – naar de homepage"
+              onClick={() => handleNavLinkClick('/', pathname)}
             >
               <Logo
                 size="sm"
@@ -103,6 +105,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
                     <Link
                       key={link.href}
                       href={link.href}
+                      onClick={() => handleNavLinkClick(link.href, pathname)}
                       className={cn(
                         'relative rounded-full px-4 py-2 font-display text-[11px] uppercase tracking-[0.14em] transition-all duration-200',
                         active
@@ -119,6 +122,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
 
               <Link
                 href="/contact"
+                onClick={() => handleNavLinkClick('/contact', pathname)}
                 className={cn(
                   'inline-flex items-center justify-center rounded-full px-5 py-2.5',
                   'font-display text-[11px] uppercase tracking-[0.14em] font-semibold',
@@ -156,6 +160,7 @@ export function Navigation({ settings }: { settings: SiteSettingsProps }) {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => handleNavLinkClick(link.href, pathname)}
                   className={cn(
                     'block rounded-xl px-3 py-2.5 text-[15px] font-medium transition-colors',
                     pathname === link.href
