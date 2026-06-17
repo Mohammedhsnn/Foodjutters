@@ -9,6 +9,8 @@ const plankItems = [
   'Jonge kaas',
   'Bayonne ham',
   'Salami',
+  'Brood',
+  'Snacks',
   'Olijven & druiven',
   'Calamariringen',
   'Mosterd & dips',
@@ -31,7 +33,7 @@ export function PlankShowcase({
             <span>Plank</span>
           </h2>
           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-5 sm:mb-6 max-w-md">
-            Onze borrelplank vol kaas, charcuterie, hapjes en dips om te delen aan het water.
+            Onze borrelplank vol kaas, charcuterie, brood, snacks en dips om te delen aan het water.
           </p>
           <div className="flex flex-wrap gap-3">
             {menuPageVisible ? (
@@ -79,9 +81,9 @@ export function PlankShowcase({
           </PlankCard>
 
           <PlankCard variant="price">
-            <p className="label-vintage text-white/70 text-xs mb-1">Vanaf</p>
-            <p className="heading-display text-4xl sm:text-5xl text-white">€34</p>
-            <p className="heading-display text-base sm:text-lg text-primary mt-1">Plank</p>
+            <p className="label-vintage text-white/70 text-xs mb-1.5">Diverse planken</p>
+            <p className="heading-display text-3xl sm:text-4xl text-white leading-none">Klein</p>
+            <p className="heading-display text-3xl sm:text-4xl text-primary leading-none">& groot</p>
           </PlankCard>
         </div>
       </div>
