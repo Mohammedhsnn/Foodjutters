@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
-import { GalleryTile } from '@/components/impressie/gallery-tile'
+import { GalleryShowcase } from '@/components/impressie/gallery-showcase'
 import { blockJson, blockValue, usableCmsImageUrl } from '@/lib/cms/blocks'
 import { resolveGalleryItems, SITE_GALLERY } from '@/lib/site/images'
 import { loadSiteSettings } from '@/lib/cms/settings'
@@ -13,7 +13,7 @@ import { pageMetadata } from '@/lib/site/seo'
 export const metadata: Metadata = pageMetadata({
   title: 'Impressie',
   description:
-    'Bekijk de sfeer van FoodJutters in Terneuzen. Foto\'s van het terras aan de Schelde, de binnenruimte en de keuken.',
+    'Bekijk de sfeer van FoodJutters in Terneuzen. Foto\'s van het terras aan de Schelde, gerechten uit de keuken en de binnenruimte.',
   path: '/impressie',
 })
 
@@ -29,10 +29,11 @@ export default async function ImpressiePage() {
     ...item,
     src: usableCmsImageUrl(item.src) || item.src,
   }))
-  const paddedGallery =
-    gallery.length >= 8
-      ? gallery.slice(0, 8)
-      : [...gallery, ...gallery].slice(0, Math.max(gallery.length, 8))
+  const galleryIntro = blockValue(
+    page,
+    'gallery_intro',
+    'Van het terras aan de Schelde tot gerechten uit onze keuken. Een rustige indruk in beeld.',
+  )
 
   return (
     <>
@@ -54,40 +55,9 @@ export default async function ImpressiePage() {
         ]}
       />
 
-      <section id="impressie-fotos" className="py-8 sm:py-10 md:py-12 px-4 sm:px-6 bg-background">
+      <section id="impressie-fotos" className="py-10 sm:py-14 md:py-16 px-4 sm:px-6 bg-background">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:hidden">
-            {paddedGallery.map((item, i) => (
-              <GalleryTile
-                key={i}
-                src={item.src}
-                alt={item.alt}
-                caption={item.caption}
-                className="aspect-[4/3] group"
-              />
-            ))}
-          </div>
-
-          <div className="hidden md:grid grid-cols-4 gap-3 auto-rows-[200px]">
-            {[
-              { ...paddedGallery[0], span: 'col-span-2 row-span-2' },
-              { ...paddedGallery[1], span: 'col-span-1 row-span-1' },
-              { ...paddedGallery[2], span: 'col-span-1 row-span-1' },
-              { ...paddedGallery[3], span: 'col-span-1 row-span-1' },
-              { ...paddedGallery[4], span: 'col-span-1 row-span-1' },
-              { ...paddedGallery[5], span: 'col-span-2 row-span-2' },
-              { ...paddedGallery[6], span: 'col-span-1 row-span-1' },
-              { ...paddedGallery[7], span: 'col-span-1 row-span-1' },
-            ].map((item, i) => (
-              <GalleryTile
-                key={i}
-                src={item.src}
-                alt={item.alt}
-                caption={item.caption}
-                className={`${item.span} group`}
-              />
-            ))}
-          </div>
+          <GalleryShowcase items={gallery} intro={galleryIntro} />
         </div>
       </section>
 

@@ -4,45 +4,44 @@ import { cn } from '@/lib/utils'
 type Props = {
   src: string
   alt?: string
-  caption?: string
   className?: string
+  index?: number
+  onSelect?: () => void
 }
 
-export function GalleryTile({ src, alt, caption, className }: Props) {
+export function GalleryTile({ src, alt, className, index = 0, onSelect }: Props) {
   const hasImage = Boolean(src)
+  const interactive = Boolean(onSelect && hasImage)
+  const label = alt || 'FoodJutters impressie'
 
   return (
     <div
       className={cn(
-        'relative overflow-hidden rounded-xl bg-brand-blue-light/30 border border-border/50',
+        'gallery-tile-rise group relative block w-full min-h-[120px] overflow-hidden rounded-lg bg-muted/40',
         className,
       )}
+      style={{ animationDelay: `${Math.min(index, 12) * 40}ms` }}
     >
       {hasImage ? (
         <>
           <img
             src={src}
-            alt={alt || caption || 'FoodJutters impressie'}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            alt={label}
+            loading="lazy"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
-          <div
-            className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300"
-            aria-hidden
-          />
-          {caption ? (
-            <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <span className="bg-white/90 text-brand-dark text-[10px] sm:text-xs font-medium px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-sm">
-                {caption}
-              </span>
-            </div>
+          {interactive ? (
+            <button
+              type="button"
+              onClick={onSelect}
+              className="absolute inset-0 z-10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
+              aria-label={`${label}. Vergroten`}
+            />
           ) : null}
         </>
       ) : (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-wood-3/55 text-brand-navy/40 p-4">
-          <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-white/70 ring-1 ring-brand-navy/10">
-            <IconPhoto {...tablerProps(22)} className="text-primary/60" />
-          </div>
-          <p className="font-serif text-[10px] sm:text-[11px] tracking-[0.16em] uppercase">Afbeelding volgt</p>
+        <div className="flex min-h-[120px] flex-col items-center justify-center gap-2 p-4 text-brand-navy/35">
+          <IconPhoto {...tablerProps(20)} className="text-primary/40" />
         </div>
       )}
     </div>

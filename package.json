@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "db:push": "drizzle-kit push",
     "db:sync-hours": "tsx scripts/sync-opening-hours.ts",
+    "db:sync-images": "tsx scripts/sync-site-images.ts",
     "db:clear-demo-reservations": "tsx scripts/clear-demo-reservations.ts"
   },
   "dependencies": {

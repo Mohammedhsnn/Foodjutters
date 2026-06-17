@@ -34,4 +34,5 @@ export {
   IconUsers,
   IconWaveSine,
   IconX,
+  IconZoomIn,
 } from '@tabler/icons-react'
