@@ -1,5 +1,8 @@
 import { cn } from '@/lib/utils'
 
+/** Genoeg tegels om ook na rotatie en op smalle schermen volledig te bedekken */
+const WATERMARK_TILE_COUNT = 96
+
 type BrandSurfaceProps = {
   children: React.ReactNode
   variant?: 'sky' | 'navy'
@@ -24,7 +27,7 @@ export function BrandSurface({
     >
       {pattern && (
         <div className="brand-watermark text-current" aria-hidden>
-          {Array.from({ length: 12 }).map((_, i) => (
+          {Array.from({ length: WATERMARK_TILE_COUNT }).map((_, i) => (
             <span key={i}>{pattern}</span>
           ))}
         </div>

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BrandName } from '@/components/brand-name'
-import { IconArrowRight, IconStar, IconStarFilled, tablerProps } from '@/lib/site/icons'
+import { IconArrowRight, tablerProps } from '@/lib/site/icons'
 import { PageHero } from '@/components/page-hero'
 import { GalleryTile } from '@/components/impressie/gallery-tile'
 import { blockJson, blockValue, usableCmsImageUrl } from '@/lib/cms/blocks'
@@ -9,31 +8,18 @@ import { resolveGalleryItems, SITE_GALLERY } from '@/lib/site/images'
 import { loadSiteSettings } from '@/lib/cms/settings'
 import { resolveHeroMeta } from '@/lib/site/hours'
 import { getContentPage } from '@/lib/db/repository'
+import { pageMetadata } from '@/lib/site/seo'
 
-export const metadata: Metadata = {
-  title: 'Impressie – FoodJutters',
+export const metadata: Metadata = pageMetadata({
+  title: 'Impressie',
   description:
-    'Een blik in de sfeer van FoodJutters — het terras, de binnenruimte en het waterfront restaurant.',
-}
+    'Bekijk de sfeer van FoodJutters in Terneuzen. Foto\'s van het terras aan de Schelde, de binnenruimte en de keuken.',
+  path: '/impressie',
+})
 
 type GalleryItem = { src: string; alt: string; caption: string }
-type Review = { name: string; rating: number; text: string }
 
 const FALLBACK_GALLERY = SITE_GALLERY
-
-function StarRating({ count }: { count: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`${count} sterren`}>
-      {Array.from({ length: 5 }).map((_, i) =>
-        i < count ? (
-          <IconStarFilled key={i} {...tablerProps(14)} className="text-primary" />
-        ) : (
-          <IconStar key={i} {...tablerProps(14)} className="text-border" />
-        ),
-      )}
-    </div>
-  )
-}
 
 export default async function ImpressiePage() {
   const [page, settings] = await Promise.all([getContentPage('impressie'), loadSiteSettings()])
@@ -43,7 +29,6 @@ export default async function ImpressiePage() {
     ...item,
     src: usableCmsImageUrl(item.src) || item.src,
   }))
-  const reviews = blockJson<Review[]>(page, 'reviews', [])
   const paddedGallery =
     gallery.length >= 8
       ? gallery.slice(0, 8)
@@ -56,7 +41,7 @@ export default async function ImpressiePage() {
         title={hero?.title ?? 'Impressie'}
         subtitle={
           hero?.subtitle ??
-          'Een blik in onze wereld — het terras bij zonsondergang, de warmte van de houtkachel en het uitzicht over het water.'
+          'Een blik in onze wereld. Het terras bij zonsondergang, de warmte van de houtkachel en het uitzicht over het water.'
         }
         pattern="BELEVING"
         meta={resolveHeroMeta(hero?.meta, settings.hoursDisplay, {
@@ -117,42 +102,9 @@ export default async function ImpressiePage() {
             {blockValue(
               page,
               'quote',
-              'Waar het water fluistert en de geur van de houtoven de lucht vult — dat is FoodJutters.',
+              'Waar het water fluistert en de geur van de houtoven de lucht vult. Dat is FoodJutters.',
             )}
           </blockquote>
-        </div>
-      </section>
-
-      <section className="py-12 sm:py-14 md:py-16 px-4 sm:px-6 bg-background">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
-            <div className="flex-1 h-px bg-border" />
-            <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">
-                Ervaringen
-              </p>
-              <h2 className="section-heading text-brand-dark">
-                Wat onze gasten zeggen
-              </h2>
-            </div>
-            <div className="flex-1 h-px bg-border" />
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            {reviews.map((review) => (
-              <div
-                key={review.name}
-                className="bg-card border border-border/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-3"
-              >
-                <StarRating count={review.rating} />
-                <p className="text-foreground/65 leading-relaxed text-sm italic flex-1">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-                <div className="pt-3 border-t border-border/50">
-                  <p className="font-semibold text-brand-dark text-sm">{review.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -162,7 +114,11 @@ export default async function ImpressiePage() {
             {blockValue(page, 'cta_title', 'Ervaar het zelf')}
           </h2>
           <p className="text-white/65 text-sm leading-relaxed mb-6 sm:mb-8 max-w-sm mx-auto">
-            {blockValue(page, 'cta_text', '')}
+            {blockValue(
+              page,
+              'cta_text',
+              'Kom langs en ontdek het vernieuwde FoodJutters aan het water. Heropend in 2026.',
+            )}
           </p>
           <Link
             href="/contact#groepsreservering"

@@ -4,6 +4,7 @@ import './globals.css'
 import { SiteChrome } from '@/components/site-chrome'
 import { loadSiteSettings } from '@/lib/cms/settings'
 import { gestard, specialElite, steelworksVintage } from '@/lib/fonts'
+import { ROOT_METADATA } from '@/lib/site/seo'
 
 const lato = Lato({
   subsets: ['latin'],
@@ -13,18 +14,7 @@ const lato = Lato({
 
 export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: 'FoodJutters – Restaurant aan het water',
-  description:
-    'FoodJutters is een uniek waterfront restaurant met een ruim terras, sfeervolle binnenruimte en heerlijke gerechten. Gelegen aan het water, voor een onvergetelijke beleving.',
-  keywords: ['restaurant', 'FoodJutters', 'terras', 'water', 'pizza', 'eten', 'drinken'],
-  openGraph: {
-    title: 'FoodJutters – Restaurant aan het water',
-    description: 'Een uniek waterfront restaurant met terras, sfeervolle binnenruimte en heerlijke gerechten.',
-    type: 'website',
-    locale: 'nl_NL',
-  },
-}
+export const metadata: Metadata = ROOT_METADATA
 
 export default async function RootLayout({
   children,

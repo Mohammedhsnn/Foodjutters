@@ -15,7 +15,7 @@ export const SEED_SITE_SETTINGS: Record<string, string> = {
   address_short: 'Scheldeboulevard 7, Terneuzen',
   maps_url: 'https://maps.google.com/?q=Scheldeboulevard+7+Terneuzen',
   footer_tagline:
-    'Een uniek waterfront restaurant met een sfeervolle binnenruimte, ruim terras en heerlijke gerechten.',
+    'Brasserie aan de Schelde in Terneuzen. Terras, houtovenpizza en een warme sfeer aan het water.',
   instagram_url: 'https://www.instagram.com/foodjutters',
   facebook_url: 'https://www.facebook.com/foodjutters',
   opening_hours: JSON.stringify(DEFAULT_OPENING_HOURS),

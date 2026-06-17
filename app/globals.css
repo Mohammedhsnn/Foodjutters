@@ -307,11 +307,11 @@
 
   .brand-watermark {
     position: absolute;
-    inset: -15% -10%;
+    inset: -45%;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    gap: 1.25rem 2rem;
+    gap: clamp(0.35rem, 1.5vw, 1.25rem) clamp(0.5rem, 2.5vw, 2rem);
     opacity: 0.11;
     font-family: var(--font-gestard), sans-serif;
     font-size: clamp(2.5rem, 9vw, 5.5rem);
@@ -320,6 +320,25 @@
     transform: rotate(-10deg);
     pointer-events: none;
     user-select: none;
+  }
+
+  .brand-watermark > span {
+    flex: 1 0 calc(16.666% - clamp(0.5rem, 2.5vw, 2rem));
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 767px) {
+    .brand-watermark {
+      inset: -55%;
+      gap: 0.25rem 0.45rem;
+      font-size: clamp(2.35rem, 12.5vw, 4rem);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-watermark > span {
+      flex: 1 0 calc(25% - 0.45rem);
+    }
   }
 
   .brand-surface-navy .brand-watermark {

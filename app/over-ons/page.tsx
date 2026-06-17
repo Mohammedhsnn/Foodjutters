@@ -15,19 +15,28 @@ import {
   OVER_ONS_STORY_IMAGE_ALT,
   resolveStoryImage,
 } from '@/lib/site/images'
+import { pageMetadata } from '@/lib/site/seo'
 
-export const metadata: Metadata = {
-  title: 'Over ons – FoodJutters',
+export const metadata: Metadata = pageMetadata({
+  title: 'Over ons',
   description:
-    'Ontdek het verhaal achter FoodJutters. Een waterfront restaurant met passie voor eten, sfeer en gastvrijheid.',
-}
+    'Ontdek het verhaal van FoodJutters aan de Schelde in Terneuzen. Heropend in 2026 onder Rolinda en Jimmy, met het vertrouwde terras en de houtoven.',
+  path: '/over-ons',
+})
 
 type ValueItem = { icon: string; title: string; description: string }
+
+const DEFAULT_STORY_P1 =
+  'FoodJutters ontstond als een droom aan het water: een plek waar mensen samenkomen om te genieten van eerlijk, lekker eten met uitzicht op de Schelde. In de loop der jaren groeide het uit tot een van de meest geliefde eetgelegenheden in de regio.'
+const DEFAULT_STORY_P2 =
+  'Op 31 mei 2024 sloot het restaurant definitief zijn deuren. Maar het verhaal eindigde daar niet: onder nieuw eigenmanschap is FoodJutters sinds 2026 weer open. Rolinda en Jimmy hebben de plek opgepakt met frisse energie en grote passie voor gastvrijheid.'
+const DEFAULT_STORY_P3 =
+  'Het vertrouwde terras, de houtgestookte pizza-oven en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.'
 
 const DEFAULT_TEAM_IMAGE = '/images/team-foodjutters.png'
 
 const FALLBACK_VALUES: ValueItem[] = [
-  { icon: 'Heart', title: 'Gastvrijheid', description: 'Warme ontvangst — iedereen voelt zich welkom.' },
+  { icon: 'Heart', title: 'Gastvrijheid', description: 'Warme ontvangst. Iedereen voelt zich welkom.' },
   { icon: 'Leaf', title: 'Vers & lokaal', description: 'Seizoensproducten van leveranciers uit de regio.' },
   { icon: 'Star', title: 'Beleving', description: 'Uitzicht, sfeer en een knus thuisgevoel aan het water.' },
 ]
@@ -40,7 +49,7 @@ export default async function OverOnsPage() {
   const storyImageAlt = blockValue(page, 'story_image_alt', OVER_ONS_STORY_IMAGE_ALT)
   const teamImage =
     usableCmsImageUrl(blockValue(page, 'team_image', DEFAULT_TEAM_IMAGE)) || DEFAULT_TEAM_IMAGE
-  const teamImageAlt = blockValue(page, 'team_image_alt', 'Het team van FoodJutters')
+  const teamImageAlt = blockValue(page, 'team_image_alt', 'Rolinda en Jimmy, de nieuwe eigenaren van FoodJutters')
   const heroCtas = settings.menuPageVisible
     ? [
         { href: '/menu', label: 'Bekijk ons menu' },
@@ -55,7 +64,7 @@ export default async function OverOnsPage() {
         title={hero?.title ?? 'Over ons'}
         subtitle={
           hero?.subtitle ??
-          'Hoe een passie voor goed eten en gastvrijheid uitgroeide tot een uniek waterfront restaurant aan de Schelde.'
+          'Een geliefde plek aan de Schelde, na een periode van sluiting weer open onder nieuw eigenmanschap.'
         }
         meta={resolveHeroMeta(hero?.meta, settings.hoursDisplay, {
           phone: settings.phone,
@@ -91,14 +100,14 @@ export default async function OverOnsPage() {
           <div>
             <div className="flex items-center gap-3 mb-4 sm:mb-5">
               <div className="h-px w-8 bg-primary/40" />
-              <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase">Hoe het begon</p>
+              <p className="label-vintage text-primary text-[11px] tracking-[0.25em] uppercase">Een nieuw hoofdstuk</p>
             </div>
             <h2 className="section-heading-lg text-brand-dark mb-4 sm:mb-6">
-              {blockValue(page, 'story_title', 'Een droom aan het water')}
+              {blockValue(page, 'story_title', 'Terug aan het water')}
             </h2>
-            <p className="text-foreground/65 leading-relaxed mb-4 text-sm">{blockValue(page, 'story_p1', '')}</p>
-            <p className="text-foreground/65 leading-relaxed mb-4 text-sm">{blockValue(page, 'story_p2', '')}</p>
-            <p className="text-foreground/65 leading-relaxed mb-6 sm:mb-8 text-sm">{blockValue(page, 'story_p3', '')}</p>
+            <p className="text-foreground/65 leading-relaxed mb-4 text-sm">{blockValue(page, 'story_p1', DEFAULT_STORY_P1)}</p>
+            <p className="text-foreground/65 leading-relaxed mb-4 text-sm">{blockValue(page, 'story_p2', DEFAULT_STORY_P2)}</p>
+            <p className="text-foreground/65 leading-relaxed mb-6 sm:mb-8 text-sm">{blockValue(page, 'story_p3', DEFAULT_STORY_P3)}</p>
             {settings.menuPageVisible ? (
               <Link
                 href="/menu"
@@ -151,7 +160,7 @@ export default async function OverOnsPage() {
           <div className="flex items-center gap-3 sm:gap-5 mb-8 sm:mb-10">
             <div className="flex-1 h-px bg-border" />
             <div className="text-center shrink-0 px-1">
-              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">Ons team</p>
+              <p className="label-vintage text-primary text-[10px] sm:text-[11px] tracking-[0.25em] uppercase mb-1">De eigenaren</p>
               <h2 className="section-heading text-brand-dark text-balance">
                 De mensen achter <BrandName className="text-inherit tracking-normal" />
               </h2>

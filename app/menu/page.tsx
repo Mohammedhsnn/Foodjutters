@@ -7,12 +7,14 @@ import { blockValue } from '@/lib/cms/blocks'
 import { resolveHeroMeta } from '@/lib/site/hours'
 import { loadSiteSettings } from '@/lib/cms/settings'
 import { getContentPage, getMenuSections } from '@/lib/db/repository'
+import { pageMetadata } from '@/lib/site/seo'
 
-export const metadata: Metadata = {
-  title: 'Menu – FoodJutters',
+export const metadata: Metadata = pageMetadata({
+  title: 'Menu',
   description:
-    "Ontdek het menu van FoodJutters. Verse gerechten, pizza's uit de houtoven en seizoensgebonden specialiteiten.",
-}
+    'Bekijk het menu van FoodJutters in Terneuzen. Verse gerechten, pizza uit de houtoven en seizoenspecialiteiten aan de Schelde.',
+  path: '/menu',
+})
 
 export default async function MenuPage() {
   const settings = await loadSiteSettings()

@@ -9,6 +9,7 @@ import {
   normalizeOpeningHours,
   type OpeningHourRow,
 } from '@/lib/site/hours'
+import { SITE_TAGLINE } from '@/lib/site/seo'
 
 export type { OpeningHourRow }
 
@@ -28,7 +29,7 @@ export async function loadSiteSettings() {
     addressLine2: raw.address_line2 ?? '',
     addressShort: raw.address_short ?? '',
     mapsUrl: raw.maps_url ?? '',
-    footerTagline: raw.footer_tagline ?? '',
+    footerTagline: raw.footer_tagline?.trim() || SITE_TAGLINE,
     instagramUrl: raw.instagram_url ?? '',
     facebookUrl: raw.facebook_url ?? '',
     hoursDisplay: normalizeHoursText(raw.hours_display ?? '', DEFAULT_HOURS_DISPLAY),

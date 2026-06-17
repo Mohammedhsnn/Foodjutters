@@ -122,10 +122,10 @@ export function Footer({ settings }: { settings: SiteSettingsProps }) {
             </a>
           </p>
           <div className="flex shrink-0 gap-4 sm:gap-5 sm:ml-auto">
-            <Link href="/contact" className="text-white/35 hover:text-primary transition-colors whitespace-nowrap">
+            <Link href="/privacybeleid" className="text-white/35 hover:text-primary transition-colors whitespace-nowrap">
               Privacybeleid
             </Link>
-            <Link href="/contact" className="text-white/35 hover:text-primary transition-colors whitespace-nowrap">
+            <Link href="/algemene-voorwaarden" className="text-white/35 hover:text-primary transition-colors whitespace-nowrap">
               Algemene voorwaarden
             </Link>
           </div>

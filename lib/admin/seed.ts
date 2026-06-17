@@ -30,7 +30,7 @@ export const SEED_CONTENT: ContentPage[] = [
         label: 'Introductietekst',
         type: 'textarea',
         value:
-          'FoodJutters is uw adres voor een ontspannen avond aan het water — met verse gerechten, pizza uit de houtoven en een warme, gastvrije sfeer.',
+          'FoodJutters is uw adres voor een ontspannen avond aan het water, heropend met verse gerechten, pizza uit de houtoven en een warme, gastvrije sfeer.',
       },
       {
         id: 'home-cta',
@@ -50,10 +50,10 @@ export const SEED_CONTENT: ContentPage[] = [
       eyebrow: 'Ons verhaal',
       title: 'Over ons',
       subtitle:
-        'Hoe een passie voor goed eten en gastvrijheid uitgroeide tot een uniek waterfront restaurant aan de Schelde.',
+        'Een geliefde plek aan de Schelde na een periode van sluiting weer open onder nieuw eigenmanschap.',
       meta: [
-        { label: 'Opgericht', value: '2012' },
-        { label: 'Ervaring', value: '10+ jaar' },
+        { label: 'Heropend', value: '2026' },
+        { label: 'Eigenaars', value: 'Rolinda & Jimmy' },
         { label: 'Gastoordeel', value: '5.0 ★' },
       ],
     },
@@ -64,7 +64,7 @@ export const SEED_CONTENT: ContentPage[] = [
         label: 'Verhaal (lead)',
         type: 'textarea',
         value:
-          'FoodJutters ontstond uit de wens om een plek te creëren waar mensen samenkomen, genieten van goed eten en de rust van het water ervaren.',
+          'FoodJutters is al jarenlang een geliefde plek aan de Schelde. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw met het vertrouwde terras, de houtoven en een warme, gastvrije sfeer.',
       },
     ],
     updatedAt: now(),
@@ -76,7 +76,7 @@ export const SEED_CONTENT: ContentPage[] = [
     hero: {
       eyebrow: 'Sfeer & ambiance',
       title: 'Impressie',
-      subtitle: 'Een kijkje in ons restaurant, terras en keuken — waar elke avond een beleving wordt.',
+      subtitle: 'Een kijkje in ons restaurant, terras en keuken. Elke avond een beleving.',
       meta: [
         { label: 'Terras', value: 'Waterfront' },
         { label: 'Binnen', value: 'Knus & warm' },
@@ -89,7 +89,7 @@ export const SEED_CONTENT: ContentPage[] = [
         key: 'gallery_intro',
         label: 'Galerij intro',
         type: 'textarea',
-        value: 'Ontdek de sfeer van FoodJutters — van zonsondergang op het terras tot de gezellige binnenruimte.',
+        value: 'Ontdek de sfeer van FoodJutters, van zonsondergang op het terras tot de gezellige binnenruimte.',
       },
     ],
     updatedAt: now(),
@@ -152,7 +152,7 @@ export const SEED_CONTENT: ContentPage[] = [
     hero: {
       eyebrow: 'Tafel reserveren',
       title: 'Reserveren',
-      subtitle: 'Kies datum, tijd en gezelschap — wij bevestigen uw reservering zo snel mogelijk.',
+      subtitle: 'Kies datum, tijd en gezelschap. Wij bevestigen uw reservering zo snel mogelijk.',
       meta: [
         { label: 'Groepen', value: '8+ op aanvraag' },
         { label: 'Terras', value: 'Op verzoek' },

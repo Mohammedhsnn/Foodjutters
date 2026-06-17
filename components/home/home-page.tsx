@@ -74,7 +74,7 @@ export function HomePage({
         <div className="relative z-10 flex flex-1 min-h-0 flex-col max-sm:justify-between sm:justify-center px-5 sm:px-8 pt-[3.75rem] sm:pt-32 pb-[max(1rem,env(safe-area-inset-bottom))] sm:pb-10">
           <div className="flex flex-1 min-h-0 flex-col items-center justify-center text-center w-full max-w-xl mx-auto">
             <h1 className="sr-only">
-              FoodJutters — {blockValue(page, 'tagline', 'smullen, borrelen & genieten aan het water')}
+              {blockValue(page, 'tagline', 'Smullen, borrelen en genieten aan het water')}
             </h1>
             <Logo
               layout="stack"
@@ -167,11 +167,11 @@ export function HomePage({
 
       <WelcomeSection
         storyEyebrow={blockValue(page, 'welcome_story_eyebrow', 'Ons verhaal')}
-        storyTitle={blockValue(page, 'welcome_story_title', 'Een droom aan het water')}
+        storyTitle={blockValue(page, 'welcome_story_title', 'Terug aan het water')}
         storyText={blockValue(
           page,
           'welcome_story_text',
-          'FoodJutters ontstond uit een eenvoudige droom: een plek aan het water waar mensen kunnen genieten van eerlijk, lekker eten in een ontspannen sfeer.\n\nWat begon als een bescheiden terrasrestaurant groeide uit tot een geliefde plek aan de Schelde — met houten terras, houtoven en een warme, gastvrije sfeer.',
+          'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras, houtoven en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant onder nieuw eigenmanschap heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze unieke plek.',
         )}
         storyImage={resolveStoryImage(blockValue(page, 'welcome_story_image', ''), HOME_STORY_IMAGE)}
         storyImageAlt={blockValue(page, 'welcome_story_image_alt', HOME_STORY_IMAGE_ALT)}
