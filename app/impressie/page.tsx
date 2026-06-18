@@ -72,7 +72,7 @@ export default async function ImpressiePage() {
             {blockValue(
               page,
               'quote',
-              'Waar het water fluistert en de geur van de houtoven de lucht vult. Dat is FoodJutters.',
+              'Waar het water fluistert en de geur van pizza uit de houtoven de lucht vult. Dat is FoodJutters.',
             )}
           </blockquote>
         </div>

@@ -22,9 +22,14 @@ const STORY_BLOCK_KEYS = new Set([
   'team_image_alt',
   'cta_text',
   'story',
+  'features',
+  'highlights',
+  'contact_form_description',
+  'quote',
+  'gallery_intro',
 ])
 
-const HERO_PAGES = new Set(['over-ons'])
+const HERO_PAGES = new Set(['home', 'over-ons', 'impressie'])
 
 async function syncPage(slug: string) {
   const page = await getContentPage(slug)

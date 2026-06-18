@@ -33,7 +33,7 @@ export function PlankShowcase({
             <span>Plank</span>
           </h2>
           <p className="text-white/80 text-sm md:text-base leading-relaxed mb-5 sm:mb-6 max-w-md">
-            Onze borrelplank vol kaas, charcuterie, brood, snacks en dips om te delen aan het water.
+            Onze borrelplank vol kaas, vleeswaren, brood, snacks en dips om te delen aan het water.
           </p>
           <div className="flex flex-wrap gap-3">
             {menuPageVisible ? (
@@ -64,7 +64,7 @@ export function PlankShowcase({
             <div className="absolute inset-[-20%] sm:inset-[-24%] md:inset-[-28%]">
               <Image
                 src="/tapas-plank.png"
-                alt="FoodJutters borrelplank met kaas, charcuterie en hapjes"
+                alt="FoodJutters borrelplank met kaas, vleeswaren en hapjes"
                 fill
                 sizes="(max-width: 640px) 55vw, (max-width: 1024px) 320px, 380px"
                 className="object-contain"

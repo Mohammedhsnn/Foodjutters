@@ -171,7 +171,7 @@ export function HomePage({
         storyText={blockValue(
           page,
           'welcome_story_text',
-          'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras, houtoven en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant onder nieuw eigenmanschap heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze unieke plek.',
+          'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras, pizza uit de houtoven en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant door nieuwe eigenaren heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze bijzondere plek.',
         )}
         storyImage={resolveStoryImage(blockValue(page, 'welcome_story_image', ''), HOME_STORY_IMAGE)}
         storyImageAlt={blockValue(page, 'welcome_story_image_alt', HOME_STORY_IMAGE_ALT)}

@@ -20,7 +20,7 @@ import { resolveHeroMeta } from '@/lib/site/hours'
 const CONTACT_FORM_DEFAULTS = {
   title: 'Contact opnemen',
   description:
-    'Heeft u een vraag, feedback of wilt u iets weten? Vul het formulier in. Wij nemen zo snel mogelijk contact met u op.',
+    'Heeft u een vraag, opmerking of wilt u iets weten? Vul het formulier in. Wij nemen zo snel mogelijk contact met u op.',
   success: 'Bedankt voor uw bericht. We nemen zo snel mogelijk contact met u op.',
 } as const
 
@@ -112,7 +112,7 @@ export function ContactForm({
         title={hero?.title ?? 'Contact'}
         subtitle={
           hero?.subtitle ??
-          'Stel een vraag, geef feedback of vraag een groepsreservering aan voor organisaties en gezelschappen vanaf 8 personen.'
+          'Stel een vraag, geef een reactie of vraag een groepsreservering aan voor organisaties en gezelschappen vanaf 8 personen.'
         }
         pattern="WELKOM"
         meta={

@@ -20,7 +20,7 @@ import { pageMetadata } from '@/lib/site/seo'
 export const metadata: Metadata = pageMetadata({
   title: 'Over ons',
   description:
-    'Ontdek het verhaal van FoodJutters aan de Schelde in Terneuzen. Heropend in 2026 onder Rolinda en Jimmy, met het vertrouwde terras en de houtoven.',
+    'Ontdek het verhaal van FoodJutters aan de Schelde in Terneuzen. Heropend in 2026 door Rolinda en Jimmy, met het vertrouwde terras en pizza uit de houtoven.',
   path: '/over-ons',
 })
 
@@ -29,16 +29,16 @@ type ValueItem = { icon: string; title: string; description: string }
 const DEFAULT_STORY_P1 =
   'FoodJutters ontstond als een droom aan het water: een plek waar mensen samenkomen om te genieten van eerlijk, lekker eten met uitzicht op de Schelde. In de loop der jaren groeide het uit tot een van de meest geliefde eetgelegenheden in de regio.'
 const DEFAULT_STORY_P2 =
-  'Op 31 mei 2024 sloot het restaurant definitief zijn deuren. Maar het verhaal eindigde daar niet: onder nieuw eigenmanschap is FoodJutters sinds 2026 weer open. Rolinda en Jimmy hebben de plek opgepakt met frisse energie en grote passie voor gastvrijheid.'
+  'Op 31 mei 2024 sloot het restaurant definitief zijn deuren. Maar het verhaal eindigde daar niet: door nieuwe eigenaren is FoodJutters sinds 2026 weer open. Rolinda en Jimmy hebben de plek opgepakt met frisse energie en grote passie voor gastvrijheid.'
 const DEFAULT_STORY_P3 =
-  'Het vertrouwde terras, de houtgestookte pizza-oven en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.'
+  'Het vertrouwde terras, pizza uit de houtoven en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.'
 
 const DEFAULT_TEAM_IMAGE = '/images/team-foodjutters.png'
 
 const FALLBACK_VALUES: ValueItem[] = [
   { icon: 'Heart', title: 'Gastvrijheid', description: 'Warme ontvangst. Iedereen voelt zich welkom.' },
   { icon: 'Leaf', title: 'Vers & lokaal', description: 'Seizoensproducten van leveranciers uit de regio.' },
-  { icon: 'Star', title: 'Beleving', description: 'Uitzicht, sfeer en een knus thuisgevoel aan het water.' },
+  { icon: 'Star', title: 'Beleving', description: 'Uitzicht, sfeer en een warm thuisgevoel aan het water.' },
 ]
 
 export default async function OverOnsPage() {
@@ -64,7 +64,7 @@ export default async function OverOnsPage() {
         title={hero?.title ?? 'Over ons'}
         subtitle={
           hero?.subtitle ??
-          'Een geliefde plek aan de Schelde, na een periode van sluiting weer open onder nieuw eigenmanschap.'
+          'Een geliefde plek aan de Schelde, na een periode van sluiting weer open door nieuwe eigenaren.'
         }
         meta={resolveHeroMeta(hero?.meta, settings.hoursDisplay, {
           phone: settings.phone,

@@ -13,7 +13,7 @@ export const SITE_KEYWORDS = [
   'brasserie Terneuzen',
   'terras Schelde',
   'eten aan het water',
-  'pizza houtoven',
+  'pizza uit de houtoven',
   'groepsreservering Terneuzen',
   'restaurant Zeeland',
 ]

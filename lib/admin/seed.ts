@@ -19,7 +19,7 @@ export const SEED_CONTENT: ContentPage[] = [
       title: 'FoodJutters',
       subtitle: 'Smullen, borrelen & genieten aan het water',
       meta: [
-        { label: 'Terras', value: 'Waterfront' },
+        { label: 'Terras', value: 'Aan het water' },
         { label: 'Keuken', value: 'Houtoven' },
         { label: 'Geopend', value: DEFAULT_HOURS_DISPLAY },
       ],
@@ -51,10 +51,10 @@ export const SEED_CONTENT: ContentPage[] = [
       eyebrow: 'Ons verhaal',
       title: 'Over ons',
       subtitle:
-        'Een geliefde plek aan de Schelde na een periode van sluiting weer open onder nieuw eigenmanschap.',
+        'Een geliefde plek aan de Schelde, na een periode van sluiting weer open door nieuwe eigenaren.',
       meta: [
         { label: 'Heropend', value: '2026' },
-        { label: 'Eigenaars', value: 'Rolinda & Jimmy' },
+        { label: 'Eigenaren', value: 'Rolinda & Jimmy' },
         { label: 'Gastoordeel', value: '5.0 ★' },
       ],
     },
@@ -65,7 +65,7 @@ export const SEED_CONTENT: ContentPage[] = [
         label: 'Verhaal (lead)',
         type: 'textarea',
         value:
-          'FoodJutters is al jarenlang een geliefde plek aan de Schelde. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw met het vertrouwde terras, de houtoven en een warme, gastvrije sfeer.',
+          'FoodJutters is al jarenlang een geliefde plek aan de Schelde. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw met het vertrouwde terras, pizza uit de houtoven en een warme, gastvrije sfeer.',
       },
     ],
     updatedAt: now(),
@@ -75,13 +75,13 @@ export const SEED_CONTENT: ContentPage[] = [
     name: 'Impressie',
     path: '/impressie',
     hero: {
-      eyebrow: 'Sfeer & ambiance',
+      eyebrow: 'Sfeer & beleving',
       title: 'Impressie',
       subtitle: 'Een kijkje in ons restaurant, terras en keuken. Elke avond een beleving.',
       meta: [
-        { label: 'Terras', value: 'Waterfront' },
+        { label: 'Terras', value: 'Aan het water' },
         { label: 'Binnen', value: 'Warm & sfeervol' },
-        { label: 'Keuken', value: 'Open vuur' },
+        { label: 'Keuken', value: 'Houtoven' },
       ],
     },
     blocks: [
@@ -128,7 +128,7 @@ export const SEED_CONTENT: ContentPage[] = [
     hero: {
       eyebrow: 'Neem contact op',
       title: 'Contact',
-      subtitle: 'Vragen, groepsreserveringen of feedback? Wij horen graag van u.',
+      subtitle: 'Vragen, groepsreserveringen of een reactie? Wij horen graag van u.',
       meta: [
         { label: 'Telefoon', value: '+31 6 13449728' },
         { label: 'E-mail', value: 'info@foodjutters.nl' },

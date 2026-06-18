@@ -73,7 +73,7 @@ export const SITE_GALLERY: SiteGalleryItem[] = [
   {
     src: '/images/impressie/terras-water.png',
     alt: 'Buitenterras met uitzicht over het water',
-    caption: 'Waterfront terras',
+    caption: 'Terras aan het water',
     category: 'terras',
   },
   {
