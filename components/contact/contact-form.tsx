@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
-  IconCheck,
   IconClock,
   IconMail,
   IconMapPin,
@@ -41,12 +41,6 @@ function contactFormDescription(page: ContentPage | null) {
   return fromCms
 }
 
-function contactFormSuccess(page: ContentPage | null) {
-  const fromCms = blockValue(page, 'contact_form_success', '') || blockValue(page, 'form_success', '')
-  if (!fromCms || isReservationFormCopy(fromCms)) return CONTACT_FORM_DEFAULTS.success
-  return fromCms
-}
-
 const dayNames = ['Zondag', 'Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag']
 
 const inputClass =
@@ -59,6 +53,7 @@ export function ContactForm({
   page: ContentPage | null
   settings: SiteSettingsProps
 }) {
+  const router = useRouter()
   const hero = page?.hero
   const [form, setForm] = useState({
     name: '',
@@ -66,7 +61,6 @@ export function ContactForm({
     phone: '',
     message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const todayName = dayNames[new Date().getDay()]
@@ -97,7 +91,7 @@ export function ContactForm({
         setError(data.error ?? 'Verzenden mislukt')
         return
       }
-      setSubmitted(true)
+      router.push('/contact/bedankt')
     } catch {
       setError('Verbinding mislukt. Probeer het later opnieuw.')
     } finally {
@@ -228,30 +222,19 @@ export function ContactForm({
 
           <div className="lg:col-span-3">
             <div className="bg-card border border-border rounded-xl p-5 sm:p-7 shadow-sm">
-              {submitted ? (
-                <div className="flex flex-col items-center justify-center text-center py-12 sm:py-16 gap-4">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-primary flex items-center justify-center">
-                    <IconCheck {...tablerProps(22)} className="text-white sm:w-6 sm:h-6" />
-                  </div>
-                  <h2 className="heading-display text-xl sm:text-2xl text-brand-dark">Bedankt!</h2>
-                  <p className="text-foreground/60 leading-relaxed max-w-xs text-sm">
-                    {contactFormSuccess(page)}
+              <>
+                <h2 className="heading-display text-lg sm:text-xl text-brand-dark mb-1">
+                  {contactFormTitle(page)}
+                </h2>
+                <p className="text-muted-foreground text-sm mb-5 sm:mb-6">
+                  {contactFormDescription(page)}
+                </p>
+                {error ? (
+                  <p className="text-sm text-destructive mb-4" role="alert">
+                    {error}
                   </p>
-                </div>
-              ) : (
-                <>
-                  <h2 className="heading-display text-lg sm:text-xl text-brand-dark mb-1">
-                    {contactFormTitle(page)}
-                  </h2>
-                  <p className="text-muted-foreground text-sm mb-5 sm:mb-6">
-                    {contactFormDescription(page)}
-                  </p>
-                  {error ? (
-                    <p className="text-sm text-destructive mb-4" role="alert">
-                      {error}
-                    </p>
-                  ) : null}
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4" noValidate>
+                ) : null}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3.5 sm:gap-4" noValidate>
                     <div className="grid sm:grid-cols-2 gap-3.5 sm:gap-4">
                       <div className="flex flex-col gap-1.5">
                         <label htmlFor="name" className="text-xs font-semibold text-brand-dark uppercase tracking-wide">
@@ -322,8 +305,7 @@ export function ContactForm({
                       {loading ? 'Verzenden…' : 'Contact opnemen'}
                     </button>
                   </form>
-                </>
-              )}
+              </>
             </div>
           </div>
         </div>

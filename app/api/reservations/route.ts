@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
-import { newReservationId } from '@/lib/admin/ids'
-import { saveReservation } from '@/lib/db/repository'
+import { formspreeGroupFormId, submitToFormspree } from '@/lib/site/formspree'
 
 export async function POST(request: Request) {
   const body = (await request.json()) as {
@@ -35,25 +34,26 @@ export async function POST(request: Request) {
     )
   }
 
-  const notesParts: string[] = []
-  if (organisation) notesParts.push(`[Organisatie: ${organisation}]`)
-  if (body.notes?.trim()) notesParts.push(body.notes.trim())
-  const notes = notesParts.join('\n\n')
-
-  const now = new Date().toISOString()
-  const reservation = await saveReservation({
-    id: newReservationId(),
+  const email = body.email?.trim() ?? ''
+  const fields: Record<string, string> = {
+    _subject: 'Groepsreservering via foodjutters.nl',
+    form_type: 'groepsreservering',
+    organisation,
+    name: body.name.trim(),
+    email,
+    phone: body.phone?.trim() ?? '',
     date: body.date,
     time: body.time,
     guests,
-    name: body.name.trim(),
-    email: body.email?.trim() ?? '',
-    phone: body.phone?.trim() ?? '',
-    notes,
-    status: 'pending',
-    createdAt: now,
-    updatedAt: now,
-  })
+    notes: body.notes?.trim() ?? '',
+  }
+  if (email) fields._replyto = email
 
-  return NextResponse.json({ ok: true, reservation }, { status: 201 })
+  const result = await submitToFormspree(formspreeGroupFormId(), fields)
+
+  if (!result.ok) {
+    return NextResponse.json({ error: result.message }, { status: result.status })
+  }
+
+  return NextResponse.json({ ok: true }, { status: 201 })
 }

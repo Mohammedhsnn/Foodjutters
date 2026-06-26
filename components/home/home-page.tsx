@@ -3,6 +3,7 @@ import { IconArrowRight, IconWaveSine, tablerProps } from '@/lib/site/icons'
 import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
 import { Logo } from '@/components/logo'
+import { MenuCardSection } from '@/components/home/menu-card-section'
 import { PlankShowcase } from '@/components/plank-showcase'
 import { WelcomeSection } from '@/components/home/welcome-section'
 import { WhyHighlightsSection } from '@/components/home/why-highlights-section'
@@ -223,6 +224,8 @@ export function HomePage({
       </WelcomeSection>
 
       <WhyHighlightsSection highlights={highlights} />
+
+      <MenuCardSection />
 
       <PlankShowcase
         menuPageVisible={settings.menuPageVisible}

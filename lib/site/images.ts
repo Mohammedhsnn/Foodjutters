@@ -7,6 +7,25 @@ export type SiteGalleryItem = {
   category: GalleryCategory
 }
 
+export type MenuCardPage = {
+  src: string
+  alt: string
+  label: string
+}
+
+export const MENU_CARD_PAGES: MenuCardPage[] = [
+  {
+    src: '/images/menukaart-zomer-1.png',
+    alt: 'FoodJutters menukaart: warme en koude dranken, sterke drank en borrel',
+    label: 'Dranken & borrel',
+  },
+  {
+    src: '/images/menukaart-zomer-2.png',
+    alt: 'FoodJutters menukaart: lunch, diner, pizza en desserts',
+    label: 'Lunch, diner & pizza',
+  },
+]
+
 export const HOME_STORY_IMAGE = '/images/home-verhaal.png'
 export const HOME_STORY_IMAGE_ALT =
   'Overdekt terras van FoodJutters met uitzicht op de haven in Terneuzen'
