@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import {
   IconChevronLeft,
@@ -126,8 +127,89 @@ function MenuCardScroller({
   )
 }
 
+function MenuCardLightbox({
+  pages,
+  lightboxIndex,
+  onClose,
+  onPrev,
+  onNext,
+}: {
+  pages: MenuCardPage[]
+  lightboxIndex: number
+  onClose: () => void
+  onPrev: () => void
+  onNext: () => void
+}) {
+  const activePage = pages[lightboxIndex]
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] flex h-[100dvh] flex-col"
+      role="dialog"
+      aria-modal="true"
+      aria-label={activePage.alt}
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-brand-navy/92"
+        onClick={onClose}
+        aria-label="Sluiten"
+      />
+
+      <div className="relative z-10 flex shrink-0 items-center justify-between gap-4 px-4 pt-4 sm:px-6 sm:pt-5">
+        <p className="text-xs font-display uppercase tracking-[0.16em] text-white/60 truncate">
+          {activePage.label}
+        </p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 hover:border-white/40 hover:text-white transition-colors"
+          aria-label="Sluiten"
+        >
+          <IconX {...tablerProps(20)} />
+        </button>
+      </div>
+
+      <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-4 py-3 sm:px-6">
+        <img
+          src={activePage.src}
+          alt={activePage.alt}
+          className="max-h-[min(72dvh,900px)] w-full max-w-5xl object-contain"
+        />
+      </div>
+
+      {pages.length > 1 ? (
+        <div className="relative z-10 flex shrink-0 items-center justify-center gap-4 pb-5 pt-2 sm:pb-6">
+          <button
+            type="button"
+            onClick={onPrev}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 hover:border-white/40 hover:text-white transition-colors"
+            aria-label="Vorige pagina"
+          >
+            <IconChevronLeft {...tablerProps(20)} />
+          </button>
+          <span className="text-xs text-white/50 tabular-nums">
+            {lightboxIndex + 1} / {pages.length}
+          </span>
+          <button
+            type="button"
+            onClick={onNext}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 hover:border-white/40 hover:text-white transition-colors"
+            aria-label="Volgende pagina"
+          >
+            <IconChevronRight {...tablerProps(20)} />
+          </button>
+        </div>
+      ) : (
+        <div className="shrink-0 pb-5 sm:pb-6" aria-hidden />
+      )}
+    </div>
+  )
+}
+
 export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [portalReady, setPortalReady] = useState(false)
 
   const closeLightbox = useCallback(() => setLightboxIndex(null), [])
 
@@ -146,7 +228,13 @@ export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
   }, [pages.length])
 
   useEffect(() => {
+    setPortalReady(true)
+  }, [])
+
+  useEffect(() => {
     if (lightboxIndex === null) return
+
+    const scrollY = window.scrollY
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') closeLightbox()
@@ -154,15 +242,36 @@ export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
       if (event.key === 'ArrowRight') showNext()
     }
 
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeyDown)
     return () => {
+      document.body.style.position = ''
+      document.body.style.top = ''
+      document.body.style.left = ''
+      document.body.style.right = ''
       document.body.style.overflow = ''
+      window.scrollTo(0, scrollY)
       window.removeEventListener('keydown', onKeyDown)
     }
   }, [lightboxIndex, closeLightbox, showPrev, showNext])
 
-  const activePage = lightboxIndex !== null ? pages[lightboxIndex] : null
+  const lightbox =
+    portalReady && lightboxIndex !== null
+      ? createPortal(
+          <MenuCardLightbox
+            pages={pages}
+            lightboxIndex={lightboxIndex}
+            onClose={closeLightbox}
+            onPrev={showPrev}
+            onNext={showNext}
+          />,
+          document.body,
+        )
+      : null
 
   return (
     <>
@@ -184,65 +293,7 @@ export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
         </div>
       </section>
 
-      {activePage && lightboxIndex !== null ? (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label={activePage.alt}
-        >
-          <button
-            type="button"
-            className="absolute inset-0 bg-brand-navy/92"
-            onClick={closeLightbox}
-            aria-label="Sluiten"
-          />
-          <div className="relative z-10 flex w-full max-w-5xl flex-col items-center">
-            <button
-              type="button"
-              onClick={closeLightbox}
-              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full text-white/80 hover:text-white transition-colors"
-              aria-label="Sluiten"
-            >
-              <IconX {...tablerProps(20)} />
-            </button>
-
-            <img
-              src={activePage.src}
-              alt={activePage.alt}
-              className="max-h-[min(82vh,900px)] w-full rounded-lg object-contain"
-            />
-
-            <p className="mt-3 text-xs font-display uppercase tracking-[0.16em] text-white/60">
-              {activePage.label}
-            </p>
-
-            {pages.length > 1 ? (
-              <div className="mt-4 flex items-center gap-4">
-                <button
-                  type="button"
-                  onClick={showPrev}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition-colors"
-                  aria-label="Vorige pagina"
-                >
-                  <IconChevronLeft {...tablerProps(20)} />
-                </button>
-                <span className="text-xs text-white/50 tabular-nums">
-                  {lightboxIndex + 1} / {pages.length}
-                </span>
-                <button
-                  type="button"
-                  onClick={showNext}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 hover:text-white hover:border-white/40 transition-colors"
-                  aria-label="Volgende pagina"
-                >
-                  <IconChevronRight {...tablerProps(20)} />
-                </button>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      ) : null}
+      {lightbox}
     </>
   )
 }
