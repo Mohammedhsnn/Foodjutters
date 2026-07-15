@@ -1,5 +1,5 @@
-export const DEFAULT_PHONE = '+31 6 13449728'
-export const DEFAULT_PHONE_TEL = '+31613449728'
+export const DEFAULT_PHONE = '0644176995'
+export const DEFAULT_PHONE_TEL = '+31644176995'
 
 const STALE_PHONE_PATTERNS = [
   /\+31\s*\(0\)\s*320/,
@@ -7,6 +7,8 @@ const STALE_PHONE_PATTERNS = [
   /\+31\s*10\s*123\s*4567/,
   /31320000000/,
   /\+31320000000/,
+  /13449728/,
+  /\+31613449728/,
 ]
 
 export function normalizePhone(phone: string | undefined | null): string {

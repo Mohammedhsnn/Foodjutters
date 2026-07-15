@@ -139,7 +139,7 @@ export function ReservationForm({ value, onChange }: Props) {
               type="tel"
               value={value.phone}
               onChange={(e) => patch({ phone: e.currentTarget.value })}
-              placeholder="+31 6 13449728"
+              placeholder="0644176995"
             />
             {value.id ? (
               <Text size="xs" c="dimmed" pt="xs">

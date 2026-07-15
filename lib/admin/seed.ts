@@ -130,7 +130,7 @@ export const SEED_CONTENT: ContentPage[] = [
       title: 'Contact',
       subtitle: 'Vragen, groepsreserveringen of een reactie? Wij horen graag van u.',
       meta: [
-        { label: 'Telefoon', value: '+31 6 13449728' },
+        { label: 'Telefoon', value: '0644176995' },
         { label: 'E-mail', value: 'info@foodjutters.nl' },
         { label: 'Adres', value: 'Havenkade 12' },
       ],

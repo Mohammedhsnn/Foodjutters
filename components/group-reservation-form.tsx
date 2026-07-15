@@ -213,7 +213,7 @@ export function GroupReservationForm() {
           autoComplete="tel"
           value={data.phone}
           onChange={(e) => update('phone', e.target.value)}
-          placeholder="+31 6 13449728"
+          placeholder="0644176995"
           className={inputCls}
         />
       </Field>

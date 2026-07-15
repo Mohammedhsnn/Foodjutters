@@ -7,7 +7,7 @@ export const LEGAL_COMPANY = {
   city: 'Terneuzen',
   country: 'Nederland',
   email: 'info@foodjutters.nl',
-  phone: '+31 6 13449728',
+  phone: '0644176995',
   /** Optioneel — wordt op de pagina alleen getoond indien ingevuld */
   kvk: '',
   btw: '',

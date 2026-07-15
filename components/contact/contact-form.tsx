@@ -277,7 +277,7 @@ export function ContactForm({
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
-                        placeholder="+31 6 13449728"
+                        placeholder="0644176995"
                         className={inputClass}
                       />
                     </div>
