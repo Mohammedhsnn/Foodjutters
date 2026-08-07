@@ -15,14 +15,19 @@ export type MenuCardPage = {
 
 export const MENU_CARD_PAGES: MenuCardPage[] = [
   {
-    src: '/images/menukaart-zomer-1.png',
-    alt: 'FoodJutters menukaart: warme en koude dranken, sterke drank en borrel',
-    label: 'Dranken & borrel',
+    src: '/images/menukaart-eten.png',
+    alt: 'FoodJutters menukaart: lunch, diner, kids, pizza en all day',
+    label: 'Lunch & diner',
   },
   {
-    src: '/images/menukaart-zomer-2.png',
-    alt: 'FoodJutters menukaart: lunch, diner, pizza en desserts',
-    label: 'Lunch, diner & pizza',
+    src: '/images/menukaart-dranken.png',
+    alt: 'FoodJutters drinks: bieren, wijn, koude en warme dranken',
+    label: 'Dranken',
+  },
+  {
+    src: '/images/menukaart-cocktails-bites.png',
+    alt: 'FoodJutters menukaart: cocktails, bites, sweets en ijs',
+    label: 'Cocktails & bites',
   },
 ]
 

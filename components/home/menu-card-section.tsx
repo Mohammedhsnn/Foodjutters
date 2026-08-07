@@ -41,7 +41,7 @@ function MenuCardScroller({
   }, [pages.length])
 
   return (
-    <div className="w-full max-w-sm sm:max-w-md mx-auto lg:mx-0">
+    <div className="w-full max-w-[280px] sm:max-w-[320px] mx-auto lg:mx-0">
       <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-[#f8f4ec] shadow-lg shadow-brand-navy/10">
         <div
           ref={scrollerRef}
@@ -56,13 +56,13 @@ function MenuCardScroller({
               className="group relative min-w-full shrink-0 snap-center text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset"
               aria-label={`${page.alt}. Klik om groter te bekijken`}
             >
-              <div className="relative aspect-[5/3] w-full">
+              <div className="relative aspect-[9/16] w-full">
                 <Image
                   src={page.src}
                   alt={page.alt}
                   fill
                   unoptimized
-                  sizes="(max-width: 1024px) 90vw, 448px"
+                  sizes="(max-width: 1024px) 80vw, 320px"
                   className="object-contain transition-transform duration-500 group-hover:scale-[1.01]"
                 />
                 <div
@@ -174,7 +174,7 @@ function MenuCardLightbox({
         <img
           src={activePage.src}
           alt={activePage.alt}
-          className="max-h-[min(72dvh,900px)] w-full max-w-5xl object-contain"
+          className="max-h-[min(78dvh,920px)] w-auto max-w-full object-contain"
         />
       </div>
 
