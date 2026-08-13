@@ -17,6 +17,7 @@ export {
   IconChevronRight,
   IconCircleCheck,
   IconClock,
+  IconDownload,
   IconHeart,
   IconInfinity,
   IconMail,

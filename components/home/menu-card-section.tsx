@@ -6,14 +6,16 @@ import Image from 'next/image'
 import {
   IconChevronLeft,
   IconChevronRight,
+  IconDownload,
   IconX,
   IconZoomIn,
   tablerProps,
 } from '@/lib/site/icons'
-import { MENU_CARD_PAGES, type MenuCardPage } from '@/lib/site/images'
+import { MENU_CARD_PAGES, MENU_CARD_PDF, type MenuCardPage } from '@/lib/site/images'
 
 type Props = {
   pages?: MenuCardPage[]
+  pdfHref?: string
 }
 
 function MenuCardScroller({
@@ -130,12 +132,14 @@ function MenuCardScroller({
 function MenuCardLightbox({
   pages,
   lightboxIndex,
+  pdfHref,
   onClose,
   onPrev,
   onNext,
 }: {
   pages: MenuCardPage[]
   lightboxIndex: number
+  pdfHref?: string
   onClose: () => void
   onPrev: () => void
   onNext: () => void
@@ -156,18 +160,31 @@ function MenuCardLightbox({
         aria-label="Sluiten"
       />
 
-      <div className="relative z-10 flex shrink-0 items-center justify-between gap-4 px-4 pt-4 sm:px-6 sm:pt-5">
+      <div className="relative z-10 flex shrink-0 items-center justify-between gap-3 px-4 pt-4 sm:px-6 sm:pt-5">
         <p className="text-xs font-display uppercase tracking-[0.16em] text-white/60 truncate">
           {activePage.label}
         </p>
-        <button
-          type="button"
-          onClick={onClose}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white/80 hover:border-white/40 hover:text-white transition-colors"
-          aria-label="Sluiten"
-        >
-          <IconX {...tablerProps(20)} />
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          {pdfHref ? (
+            <a
+              href={pdfHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-10 items-center gap-1.5 rounded-full border border-white/20 px-3 text-xs text-white/80 hover:border-white/40 hover:text-white transition-colors"
+            >
+              <IconDownload {...tablerProps(16)} />
+              PDF
+            </a>
+          ) : null}
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 hover:border-white/40 hover:text-white transition-colors"
+            aria-label="Sluiten"
+          >
+            <IconX {...tablerProps(20)} />
+          </button>
+        </div>
       </div>
 
       <div className="relative z-10 flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-4 py-3 sm:px-6">
@@ -207,7 +224,10 @@ function MenuCardLightbox({
   )
 }
 
-export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
+export function MenuCardSection({
+  pages = MENU_CARD_PAGES,
+  pdfHref = MENU_CARD_PDF,
+}: Props) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [portalReady, setPortalReady] = useState(false)
 
@@ -265,6 +285,7 @@ export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
           <MenuCardLightbox
             pages={pages}
             lightboxIndex={lightboxIndex}
+            pdfHref={pdfHref}
             onClose={closeLightbox}
             onPrev={showPrev}
             onNext={showNext}
@@ -289,6 +310,17 @@ export function MenuCardSection({ pages = MENU_CARD_PAGES }: Props) {
             <p className="text-sm sm:text-base text-muted-foreground leading-relaxed text-pretty max-w-md mx-auto lg:mx-0">
               Blader door onze menukaart of tik om groter te bekijken.
             </p>
+            {pdfHref ? (
+              <a
+                href={pdfHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+              >
+                <IconDownload {...tablerProps(16)} />
+                Open menukaart als PDF
+              </a>
+            ) : null}
           </div>
         </div>
       </section>

@@ -13,19 +13,22 @@ export type MenuCardPage = {
   label: string
 }
 
+/** Originele menukaart-PDF (3 pagina's) */
+export const MENU_CARD_PDF = '/files/menukaart-foodjutters.pdf'
+
 export const MENU_CARD_PAGES: MenuCardPage[] = [
   {
-    src: '/images/menukaart-eten.png',
+    src: '/images/menukaart-eten.jpg',
     alt: 'FoodJutters menukaart: lunch, diner, kids, pizza en all day',
     label: 'Lunch & diner',
   },
   {
-    src: '/images/menukaart-dranken.png',
+    src: '/images/menukaart-dranken.jpg',
     alt: 'FoodJutters drinks: bieren, wijn, koude en warme dranken',
     label: 'Dranken',
   },
   {
-    src: '/images/menukaart-cocktails-bites.png',
+    src: '/images/menukaart-cocktails-bites.jpg',
     alt: 'FoodJutters menukaart: cocktails, bites, sweets en ijs',
     label: 'Cocktails & bites',
   },
