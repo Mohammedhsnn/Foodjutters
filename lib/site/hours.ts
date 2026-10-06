@@ -3,24 +3,23 @@ import { sanitizeVisibleCopy } from '@/lib/site/copy'
 export type OpeningHourRow = { day: string; hours: string }
 
 export const DEFAULT_OPENING_HOURS: OpeningHourRow[] = [
-  { day: 'Maandag', hours: 'Gesloten' },
-  { day: 'Dinsdag', hours: '11:00 tot 21:00' },
-  { day: 'Woensdag', hours: '11:00 tot 21:00' },
+  { day: 'Maandag', hours: '11:00 tot 21:00' },
+  { day: 'Dinsdag', hours: 'Gesloten' },
+  { day: 'Woensdag', hours: 'Gesloten' },
   { day: 'Donderdag', hours: '11:00 tot 21:00' },
-  { day: 'Vrijdag', hours: '11:00 tot 22:00' },
-  { day: 'Zaterdag', hours: '11:00 tot 22:00' },
-  { day: 'Zondag', hours: '11:00 tot 22:00' },
+  { day: 'Vrijdag', hours: '11:00 tot 21:00' },
+  { day: 'Zaterdag', hours: '11:00 tot 21:00' },
+  { day: 'Zondag', hours: '11:00 tot 21:00' },
 ]
 
-export const DEFAULT_HOURS_DISPLAY =
-  'Di t/m do 11:00 tot 21:00, vr t/m zo 11:00 tot 22:00'
-export const DEFAULT_HOURS_SHORT = 'Di t/m zo'
+export const DEFAULT_HOURS_DISPLAY = 'Do t/m ma 11:00 tot 21:00'
+export const DEFAULT_HOURS_SHORT = 'Do t/m ma'
 export const DEFAULT_HOURS_META = DEFAULT_HOURS_DISPLAY
 export const DEFAULT_KITCHEN_HOURS = 'Keuken sluit om 20:00'
-export const DEFAULT_BANNER_EYEBROW = 'Dinsdag t/m zondag'
-export const DEFAULT_HOURS_RANGE_LABEL = 'Di t/m zo'
+export const DEFAULT_BANNER_EYEBROW = 'Donderdag t/m maandag'
+export const DEFAULT_HOURS_RANGE_LABEL = 'Do t/m ma'
 export const DEFAULT_CTA_BANNER_TEXT =
-  'Di t/m do 11:00 tot 21:00, vr t/m zo 11:00 tot 22:00. Keuken sluit om 20:00. Terras aan de Schelde.'
+  'Do t/m ma 11:00 tot 21:00. Dinsdag en woensdag gesloten. Keuken sluit om 20:00. Terras aan de Schelde.'
 
 const STALE_HOURS_PATTERNS = [
   /12[:\-–]22/,
@@ -36,6 +35,8 @@ const STALE_HOURS_PATTERNS = [
   /\b11 tot 21\b/i,
   /\b11 tot 22\b/i,
   /vr t\/m zo tot 22:00/i,
+  /di t\/m do/i,
+  /dinsdag t\/m zondag/i,
 ]
 
 function scheduleMatchesDefault(rows: OpeningHourRow[]): boolean {
@@ -54,11 +55,9 @@ function isCanonicalHoursDisplay(text: string): boolean {
   if (trimmed === DEFAULT_HOURS_DISPLAY) return true
   const normalized = trimmed.toLowerCase()
   return (
-    normalized.includes('di t/m do') &&
+    normalized.includes('do t/m ma') &&
     normalized.includes('11:00') &&
-    normalized.includes('21:00') &&
-    normalized.includes('vr t/m zo') &&
-    normalized.includes('22:00')
+    normalized.includes('21:00')
   )
 }
 

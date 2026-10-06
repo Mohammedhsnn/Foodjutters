@@ -142,7 +142,7 @@ export const SEED_CONTENT: ContentPage[] = [
         label: 'Openingstijden',
         type: 'textarea',
         value:
-          'Maandag: gesloten\nDinsdag t/m donderdag: 11:00 tot 21:00\nVrijdag, zaterdag en zondag: 11:00 tot 22:00\nKeuken sluit om 20:00',
+          'Dinsdag en woensdag: gesloten\nDonderdag t/m maandag: 11:00 tot 21:00\nKeuken sluit om 20:00',
       },
     ],
     updatedAt: now(),

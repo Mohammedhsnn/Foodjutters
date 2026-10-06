@@ -99,7 +99,7 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
   ],
   reserveren: [
     jsonBlock('res-info', 'info_items', 'Info items', [
-      { icon: 'Calendar', title: 'Openingsdagen', body: 'Dinsdag t/m zondag' },
+      { icon: 'Calendar', title: 'Openingsdagen', body: 'Donderdag t/m maandag' },
       { icon: 'Clock', title: 'Openingstijden', body: `${DEFAULT_HOURS_DISPLAY}. ${DEFAULT_KITCHEN_HOURS}` },
       { icon: 'Utensils', title: 'Groepen', body: 'Grotere gezelschappen? Neem contact op via onze contactpagina.' },
     ]),

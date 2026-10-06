@@ -13,24 +13,29 @@ export type MenuCardPage = {
   label: string
 }
 
-/** Originele menukaart-PDF (3 pagina's) */
+/** Originele menukaart-PDF (4 pagina's: Lunch en Diner + Borrel en dranken) */
 export const MENU_CARD_PDF = '/files/menukaart-foodjutters.pdf'
 
 export const MENU_CARD_PAGES: MenuCardPage[] = [
   {
-    src: '/images/menukaart-eten.jpg',
-    alt: 'FoodJutters menukaart: lunch, diner, kids, pizza en all day',
-    label: 'Lunch & diner',
+    src: '/images/menukaart-lunch.jpg',
+    alt: 'FoodJutters menukaart: belegde broodjes, tosti’s, uitsmijters, all day gerechten en kids',
+    label: 'Lunch',
+  },
+  {
+    src: '/images/menukaart-diner.jpg',
+    alt: 'FoodJutters menukaart: voorgerechten, hoofdgerechten en sweets',
+    label: 'Diner',
   },
   {
     src: '/images/menukaart-dranken.jpg',
-    alt: 'FoodJutters drinks: bieren, wijn, koude en warme dranken',
+    alt: 'FoodJutters drankenkaart: bieren, wijnen, koude en warme dranken',
     label: 'Dranken',
   },
   {
-    src: '/images/menukaart-cocktails-bites.jpg',
-    alt: 'FoodJutters menukaart: cocktails, bites, sweets en ijs',
-    label: 'Cocktails & bites',
+    src: '/images/menukaart-borrel-bites.jpg',
+    alt: 'FoodJutters menukaart: bites, cocktails, sterke dranken en sweets',
+    label: 'Borrel & bites',
   },
 ]
 

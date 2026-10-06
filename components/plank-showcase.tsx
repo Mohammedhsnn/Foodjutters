@@ -19,7 +19,7 @@ const plankItems = [
 /** Social-stijl plank-sectie — volledig gecodeerd (geen post-afbeeldingen) */
 export function PlankShowcase({
   menuPageVisible = false,
-  hoursRangeLabel = 'Di t/m zo',
+  hoursRangeLabel = 'Do t/m ma',
 }: {
   menuPageVisible?: boolean
   hoursRangeLabel?: string

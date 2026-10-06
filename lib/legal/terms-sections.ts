@@ -41,7 +41,7 @@ export function getTermsSections(): LegalSection[] {
         },
         {
           type: 'p',
-          text: `Onze openingstijden zijn: ${DEFAULT_HOURS_DISPLAY}. Maandag zijn wij gesloten. ${DEFAULT_KITCHEN_HOURS}. Wijzigingen in openingstijden (bijvoorbeeld op feestdagen) kunnen wij op onze website of ter plaatse kenbaar maken.`,
+          text: `Onze openingstijden zijn: ${DEFAULT_HOURS_DISPLAY}. Dinsdag en woensdag zijn wij gesloten. ${DEFAULT_KITCHEN_HOURS}. Wijzigingen in openingstijden (bijvoorbeeld op feestdagen) kunnen wij op onze website of ter plaatse kenbaar maken.`,
         },
         {
           type: 'p',
