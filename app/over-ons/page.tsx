@@ -20,7 +20,7 @@ import { pageMetadata } from '@/lib/site/seo'
 export const metadata: Metadata = pageMetadata({
   title: 'Over ons',
   description:
-    'Ontdek het verhaal van FoodJutters aan de Schelde in Terneuzen. Heropend in 2026 door Rolinda en Jimmy, met het vertrouwde terras en pizza uit de houtoven.',
+    'Ontdek het verhaal van FoodJutters aan de Schelde in Terneuzen. Heropend in 2026 door Rolinda en Jimmy, met het vertrouwde terras aan het water.',
   path: '/over-ons',
 })
 
@@ -31,7 +31,7 @@ const DEFAULT_STORY_P1 =
 const DEFAULT_STORY_P2 =
   'Op 31 mei 2024 sloot het restaurant definitief zijn deuren. Maar het verhaal eindigde daar niet: door nieuwe eigenaren is FoodJutters sinds 2026 weer open. Rolinda en Jimmy hebben de plek opgepakt met frisse energie en grote passie voor gastvrijheid.'
 const DEFAULT_STORY_P3 =
-  'Het vertrouwde terras, pizza uit de houtoven en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.'
+  'Het vertrouwde terras en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.'
 
 const DEFAULT_TEAM_IMAGE = '/images/team-foodjutters.png'
 

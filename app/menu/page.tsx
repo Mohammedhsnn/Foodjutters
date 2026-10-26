@@ -12,7 +12,7 @@ import { pageMetadata } from '@/lib/site/seo'
 export const metadata: Metadata = pageMetadata({
   title: 'Menu',
   description:
-    'Bekijk het menu van FoodJutters in Terneuzen. Verse gerechten, pizza uit de houtoven en seizoenspecialiteiten aan de Schelde.',
+    'Bekijk het menu van FoodJutters in Terneuzen. Verse gerechten en seizoenspecialiteiten aan de Schelde.',
   path: '/menu',
 })
 
@@ -45,7 +45,7 @@ export default async function MenuPage() {
         title={hero?.title ?? 'Menu'}
         subtitle={
           hero?.subtitle ??
-          'Vers, seizoensgebonden en met liefde bereid. Van pizza uit de houtoven tot gegrilde specialiteiten.'
+          'Vers, seizoensgebonden en met liefde bereid. Van kleine gerechten tot gegrilde specialiteiten.'
         }
         pattern="SMULLEN"
         meta={

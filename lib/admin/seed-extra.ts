@@ -35,12 +35,12 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
     { id: 'home-welcome-text', key: 'welcome_text', label: 'Welkom tekst', type: 'textarea', value: 'Brasserie aan het water met terras, open keuken en een warme sfeer voor lunch en diner.' },
     jsonBlock('home-features', 'features', 'Feature pills', [
       { icon: 'Waves', title: 'Aan het water', text: 'Terras met uitzicht over de Schelde' },
-      { icon: 'Utensils', title: 'Verse keuken', text: 'Seizoensgerechten en pizza uit de houtoven' },
+      { icon: 'Utensils', title: 'Verse keuken', text: 'Seizoensgerechten met verse producten' },
       { icon: 'Sparkles', title: 'Gezellige sfeer', text: 'Gezellig binnen en buiten' },
     ]),
     jsonBlock('home-highlights', 'highlights', 'Highlights', [
       { icon: 'Sunset', title: 'Uitzicht over het water', description: 'Panorama op terras of binnen.' },
-      { icon: 'Utensils', title: 'Verse gerechten', description: 'Seizoensmenu en pizza uit de houtoven.' },
+      { icon: 'Utensils', title: 'Verse gerechten', description: 'Seizoensmenu met verse producten.' },
       { icon: 'Flame', title: 'Warm en sfeervol', description: 'Houtkachel en sfeervol licht.' },
       { icon: 'Users', title: 'Ruimte voor iedereen', description: 'Van duo tot groepsreservering.' },
     ]),
@@ -52,7 +52,7 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
       label: 'Welkom — verhaal tekst',
       type: 'textarea',
       value:
-        'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras, pizza uit de houtoven en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant door nieuwe eigenaren heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze bijzondere plek.',
+        'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant door nieuwe eigenaren heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze bijzondere plek.',
     },
     { id: 'home-story-image', key: 'welcome_story_image', label: 'Welkom — verhaal afbeelding URL', type: 'text', value: HOME_STORY_IMAGE },
     { id: 'home-story-image-alt', key: 'welcome_story_image_alt', label: 'Welkom — afbeelding alt-tekst', type: 'text', value: HOME_STORY_IMAGE_ALT },
@@ -66,7 +66,7 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
     { id: 'over-story-title', key: 'story_title', label: 'Verhaal titel', type: 'text', value: 'Terug aan het water' },
     { id: 'over-p1', key: 'story_p1', label: 'Verhaal alinea 1', type: 'textarea', value: 'FoodJutters ontstond als een droom aan het water: een plek waar mensen samenkomen om te genieten van eerlijk, lekker eten met uitzicht op de Schelde. In de loop der jaren groeide het uit tot een van de meest geliefde eetgelegenheden in de regio.' },
     { id: 'over-p2', key: 'story_p2', label: 'Verhaal alinea 2', type: 'textarea', value: 'Op 31 mei 2024 sloot het restaurant definitief zijn deuren. Maar het verhaal eindigde daar niet: door nieuwe eigenaren is FoodJutters sinds 2026 weer open. Rolinda en Jimmy hebben de plek opgepakt met frisse energie en grote passie voor gastvrijheid.' },
-    { id: 'over-p3', key: 'story_p3', label: 'Verhaal alinea 3', type: 'textarea', value: 'Het vertrouwde terras, pizza uit de houtoven en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.' },
+    { id: 'over-p3', key: 'story_p3', label: 'Verhaal alinea 3', type: 'textarea', value: 'Het vertrouwde terras en de sfeervolle binnenruimte zijn terug, klaar om u opnieuw te verwelkomen. Wij geloven dat goed eten mensen samenbrengt, en elk bezoek moet voelen als thuiskomen.' },
     { id: 'over-founded', key: 'founded_year', label: 'Heropend sinds', type: 'text', value: '2026' },
     { id: 'over-cta-title', key: 'cta_title', label: 'CTA titel', type: 'text', value: 'Kom langs' },
     { id: 'over-cta-text', key: 'cta_text', label: 'CTA tekst', type: 'textarea', value: 'U vindt ons op een mooie locatie aan het water. Kom proeven, genieten en geniet van het uitzicht.' },
@@ -89,7 +89,7 @@ export const SEED_EXTRA_BLOCKS: Record<string, ContentBlock[]> = {
       label: 'Quote',
       type: 'textarea',
       value:
-        'Waar het water fluistert en de geur van pizza uit de houtoven de lucht vult. Dat is FoodJutters.',
+        'Waar het water fluistert en de geur van de keuken de lucht vult. Dat is FoodJutters.',
     },
   ],
   contact: [

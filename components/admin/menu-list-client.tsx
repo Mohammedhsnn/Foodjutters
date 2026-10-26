@@ -143,7 +143,7 @@ export function MenuListClient({
       <TextInput
         label="Zoeken"
         description="Zoek op categorienaam"
-        placeholder="Bijv. pizza, borrel, dessert…"
+        placeholder="Bijv. voorgerecht, borrel, dessert…"
         value={query}
         onChange={(e) => setQuery(e.currentTarget.value)}
         maw={{ base: '100%', sm: 420 }}

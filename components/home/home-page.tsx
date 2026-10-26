@@ -4,7 +4,6 @@ import { BrandSurface } from '@/components/brand-surface'
 import { BrandWordmark } from '@/components/brand-wordmark'
 import { Logo } from '@/components/logo'
 import { MenuCardSection } from '@/components/home/menu-card-section'
-import { PlankShowcase } from '@/components/plank-showcase'
 import { WelcomeSection } from '@/components/home/welcome-section'
 import { WhyHighlightsSection } from '@/components/home/why-highlights-section'
 import { HeroAmbience } from '@/components/hero-ambience'
@@ -23,7 +22,6 @@ import type { SiteSettingsProps } from '@/lib/cms/settings'
 import {
   DEFAULT_BANNER_EYEBROW,
   DEFAULT_CTA_BANNER_TEXT,
-  DEFAULT_HOURS_RANGE_LABEL,
   normalizeBannerEyebrow,
   normalizeCtaBannerText,
 } from '@/lib/site/hours'
@@ -172,7 +170,7 @@ export function HomePage({
         storyText={blockValue(
           page,
           'welcome_story_text',
-          'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras, pizza uit de houtoven en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant door nieuwe eigenaren heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze bijzondere plek.',
+          'FoodJutters is al jarenlang een geliefde brasserie aan de Schelde, met terras en een warme sfeer.\n\nNa de definitieve sluiting op 31 mei 2024 is het restaurant door nieuwe eigenaren heropend. Sinds 2026 verwelkomen Rolinda en Jimmy u opnieuw op deze bijzondere plek.',
         )}
         storyImage={resolveStoryImage(blockValue(page, 'welcome_story_image', ''), HOME_STORY_IMAGE)}
         storyImageAlt={blockValue(page, 'welcome_story_image_alt', HOME_STORY_IMAGE_ALT)}
@@ -226,11 +224,6 @@ export function HomePage({
       <WhyHighlightsSection highlights={highlights} />
 
       <MenuCardSection />
-
-      <PlankShowcase
-        menuPageVisible={settings.menuPageVisible}
-        hoursRangeLabel={DEFAULT_HOURS_RANGE_LABEL}
-      />
 
       <BrandSurface variant="sky" pattern="SMULLEN" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 text-brand-navy">
         <div className="max-w-2xl mx-auto text-center">
