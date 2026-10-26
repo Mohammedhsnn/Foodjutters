@@ -42,7 +42,7 @@ export function ReservationForm({ value, onChange }: Props) {
   }
 
   return (
-    <Grid gutter="lg">
+    <Grid gap="lg">
       <Grid.Col span={{ base: 12, lg: 6 }}>
         <Card padding="lg" radius="lg" withBorder shadow="sm" h="100%">
           <Title order={3} c="navy.5" mb={4}>

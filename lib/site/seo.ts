@@ -5,7 +5,7 @@ export const SITE_NAME = 'FoodJutters'
 export const SITE_TAGLINE = 'Brasserie aan de Schelde in Terneuzen'
 
 export const SITE_DESCRIPTION =
-  'FoodJutters is een brasserie aan het water in Terneuzen. Terras aan de Schelde, pizza uit de houtoven en een warme sfeer. Heropend in 2026 door Rolinda en Jimmy.'
+  'FoodJutters is een brasserie aan het water in Terneuzen. Terras aan de Schelde en een warme sfeer. Heropend in 2026 door Rolinda en Jimmy.'
 
 export const SITE_KEYWORDS = [
   'FoodJutters',
@@ -13,7 +13,6 @@ export const SITE_KEYWORDS = [
   'brasserie Terneuzen',
   'terras Schelde',
   'eten aan het water',
-  'pizza uit de houtoven',
   'groepsreservering Terneuzen',
   'restaurant Zeeland',
 ]

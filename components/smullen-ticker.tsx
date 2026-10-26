@@ -2,7 +2,6 @@
 const PHRASES = [
   'Terras aan de Schelde',
   'Verse keuken',
-  'Houtoven pizza\'s',
   'Gezellig tafelen',
   'Open di t/m zo',
   'Borrelen & genieten',
