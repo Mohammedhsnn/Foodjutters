@@ -129,7 +129,7 @@ function normalizeGalleryCaption(caption: string): string {
 }
 
 export function resolveGalleryItems(
-  items: SiteGalleryItem[] | undefined | null,
+  items: readonly Partial<SiteGalleryItem>[] | undefined | null,
 ): SiteGalleryItem[] {
   return SITE_GALLERY.map((fallback) => {
     const fromCms = items?.find((item) => {

@@ -26,16 +26,17 @@ import {
   IconX,
   TablerIconSection,
 } from '@/lib/admin/icons'
-import { ADMIN_NAV } from '@/lib/admin/page-meta'
+import { ADMIN_NAV, type AdminSection } from '@/lib/admin/page-meta'
 import { Logo } from '@/components/logo'
 import { adminFetch } from '@/lib/admin/api'
 
-const NAV_ICONS = {
+const NAV_ICONS: Record<AdminSection, typeof IconLayoutDashboard> = {
   dashboard: IconLayoutDashboard,
   content: IconFileText,
   menu: IconToolsKitchen2,
   reservations: IconCalendar,
-} as const
+  login: IconLogout,
+}
 
 function isActive(pathname: string, href: string, exact?: boolean) {
   if (exact) return pathname === href
@@ -75,7 +76,6 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         label={label}
         description={hint}
         leftSection={<TablerIconSection icon={Icon} size={18} />}
-        chevron={null}
         active={active}
         variant="light"
         color="navy"

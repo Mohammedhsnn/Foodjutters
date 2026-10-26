@@ -23,7 +23,6 @@ export const adminTheme = createTheme({
   headings: {
     fontFamily: 'var(--font-gestard), sans-serif',
     fontWeight: '400',
-    textTransform: 'uppercase',
     sizes: {
       h1: { fontSize: 'clamp(1.5rem, 4vw, 1.85rem)', lineHeight: '1.1' },
       h2: { fontSize: 'clamp(1.2rem, 3vw, 1.45rem)', lineHeight: '1.15' },
@@ -71,7 +70,6 @@ export const adminTheme = createTheme({
   components: {
     NavLink: NavLink.extend({
       defaultProps: {
-        chevron: null,
         className: 'admin-nav-link',
       },
     }),

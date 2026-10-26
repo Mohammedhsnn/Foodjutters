@@ -24,7 +24,7 @@ import { AdminStatCard } from '@/components/admin/admin-stat-card'
 import { AdminEmpty } from '@/components/admin/admin-states'
 import { ReservationStatusBadge } from '@/components/admin/reservation-status-badge'
 import { ReservationStatusLegend } from '@/components/admin/reservation-status-legend'
-import { ADMIN_MODULES, type AdminSection } from '@/lib/admin/page-meta'
+import { ADMIN_MODULES, type AdminSection as AdminSectionKey } from '@/lib/admin/page-meta'
 import {
   getContentPagesSummary,
   getMenuSectionsSummary,
@@ -38,7 +38,7 @@ const MODULE_ICONS = {
 } as const
 
 function moduleStat(
-  section: AdminSection,
+  section: AdminSectionKey,
   pageCount: number,
   sectionCount: number,
   itemCount: number,
